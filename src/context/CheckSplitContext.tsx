@@ -246,6 +246,7 @@ export function CheckSplitProvider({ children }: { children: ReactNode }) {
 }
 
 // Custom hook for consuming context
+// eslint-disable-next-line react-refresh/only-export-components
 export function useCheckSplit() {
   const context = useContext(CheckSplitContext);
   if (!context) {
