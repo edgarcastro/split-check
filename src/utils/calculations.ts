@@ -1,4 +1,4 @@
-import { CheckItem, Person, CheckState, SplitSummary, PersonTotal } from '../types';
+import { CheckState, SplitSummary, PersonTotal } from "../types";
 
 /**
  * Calculate total split amounts for all people
@@ -9,7 +9,7 @@ export function calculateSplit(state: CheckState): SplitSummary {
   // Calculate subtotal for each person
   const personSubtotals = people.map((person) => {
     const assignedItems = items.filter((item) =>
-      item.assignedTo.includes(person.id)
+      item.assignedTo.includes(person.id),
     );
 
     const subtotal = assignedItems.reduce((sum, item) => {
@@ -24,7 +24,7 @@ export function calculateSplit(state: CheckState): SplitSummary {
 
   const totalBeforeTaxAndTip = personSubtotals.reduce(
     (sum, p) => sum + p.subtotal,
-    0
+    0,
   );
 
   // Calculate proportional tax, tip, and service charges
@@ -47,7 +47,7 @@ export function calculateSplit(state: CheckState): SplitSummary {
         serviceCharge,
         total: subtotal + tax + tip + serviceCharge,
       };
-    }
+    },
   );
 
   const totalTax = personTotals.reduce((sum, p) => sum + p.tax, 0);
@@ -92,19 +92,26 @@ export function validateItemName(name: string): boolean {
 /**
  * Validate person name
  */
-export function validatePersonName(name: string, existingNames: string[]): { valid: boolean; error?: string } {
+export function validatePersonName(
+  name: string,
+  existingNames: string[],
+): { valid: boolean; error?: string } {
   const trimmedName = name.trim();
 
   if (trimmedName.length === 0) {
-    return { valid: false, error: 'Name is required' };
+    return { valid: false, error: "Name is required" };
   }
 
   if (trimmedName.length > 50) {
-    return { valid: false, error: 'Name must be 50 characters or less' };
+    return { valid: false, error: "Name must be 50 characters or less" };
   }
 
-  if (existingNames.map(n => n.toLowerCase()).includes(trimmedName.toLowerCase())) {
-    return { valid: false, error: 'This name is already taken' };
+  if (
+    existingNames
+      .map((n) => n.toLowerCase())
+      .includes(trimmedName.toLowerCase())
+  ) {
+    return { valid: false, error: "This name is already taken" };
   }
 
   return { valid: true };

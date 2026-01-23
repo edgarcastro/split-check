@@ -1,9 +1,8 @@
-import { useState, useRef, DragEvent, ChangeEvent } from 'react';
-import { useCheckSplit } from '../../context/CheckSplitContext';
-import { Card } from '../shared/Card';
-import { Button } from '../shared/Button';
-import { mockReceiptOCR, validateImageFile } from '../../utils/mockOCR';
-import { motion } from 'motion/react';
+import { useState, useRef, DragEvent, ChangeEvent } from "react";
+import { useCheckSplit } from "../../context/CheckSplitContext";
+import { Card } from "../shared/Card";
+import { mockReceiptOCR, validateImageFile } from "../../utils/mockOCR";
+import { motion } from "motion/react";
 
 export function ImageUpload() {
   const { addItem } = useCheckSplit();
@@ -18,7 +17,7 @@ export function ImageUpload() {
 
     const validation = validateImageFile(file);
     if (!validation.valid) {
-      setError(validation.error || 'Invalid file');
+      setError(validation.error || "Invalid file");
       return;
     }
 
@@ -38,7 +37,7 @@ export function ImageUpload() {
       });
       setPreview(null);
     } catch (err) {
-      setError('Failed to process image. Please try again.');
+      setError("Failed to process image. Please try again.");
     } finally {
       setIsProcessing(false);
     }
@@ -81,8 +80,8 @@ export function ImageUpload() {
         Upload Receipt Image
       </h3>
       <p className="text-sm text-gray-600 mb-4">
-        Upload a photo of your receipt and we'll extract the items
-        automatically (mock OCR for demo purposes)
+        Upload a photo of your receipt and we'll extract the items automatically
+        (mock OCR for demo purposes)
       </p>
 
       <motion.div
@@ -93,15 +92,15 @@ export function ImageUpload() {
         onClick={handleClick}
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
           isDragging
-            ? 'border-primary-500 bg-primary-50'
-            : 'border-gray-300 hover:border-primary-400 hover:bg-gray-50'
+            ? "border-primary-500 bg-primary-50"
+            : "border-gray-300 hover:border-primary-400 hover:bg-gray-50"
         }`}
       >
         {isProcessing ? (
           <div className="flex flex-col items-center">
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
               className="text-4xl mb-2"
             >
               ⏳
@@ -130,9 +129,7 @@ export function ImageUpload() {
         )}
       </motion.div>
 
-      {error && (
-        <p className="mt-2 text-sm text-red-600">{error}</p>
-      )}
+      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
 
       <input
         ref={fileInputRef}

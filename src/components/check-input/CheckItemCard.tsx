@@ -1,8 +1,7 @@
-import { CheckItem } from '../../types';
-import { Card } from '../shared/Card';
-import { Button } from '../shared/Button';
-import { formatCurrency } from '../../utils/formatters';
-import { motion } from 'motion/react';
+import { CheckItem } from "../../types";
+import { Card } from "../shared/Card";
+import { formatCurrency } from "../../utils/formatters";
+import { motion } from "motion/react";
 
 interface CheckItemCardProps {
   item: CheckItem;
