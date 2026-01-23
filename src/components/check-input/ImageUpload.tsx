@@ -36,7 +36,7 @@ export function ImageUpload() {
         addItem(item);
       });
       setPreview(null);
-    } catch (err) {
+    } catch {
       setError("Failed to process image. Please try again.");
     } finally {
       setIsProcessing(false);
