@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { SplitSummary } from '../../types';
 import { Card } from '../shared/Card';
 import { Input } from '../shared/Input';
@@ -10,17 +11,18 @@ interface TotalBreakdownProps {
 }
 
 export function TotalBreakdown({ summary }: TotalBreakdownProps) {
+  const { t } = useTranslation();
   const { state, setTaxRate, setTipRate, setServiceCharges } = useCheckSplit();
 
   return (
     <Card>
-      <h3 className="text-xl font-bold text-gray-900 mb-6">Overall Breakdown</h3>
+      <h3 className="text-xl font-bold text-gray-900 mb-6">{t('summary.overallBreakdown')}</h3>
 
       <div className="space-y-6">
         {/* Adjustable rates */}
         <div className="space-y-4 pb-4 border-b border-gray-200">
           <Input
-            label="Tax Rate (%)"
+            label={t('summary.taxRate')}
             type="number"
             step="0.1"
             min="0"
@@ -31,7 +33,7 @@ export function TotalBreakdown({ summary }: TotalBreakdownProps) {
           />
 
           <Input
-            label="Tip Rate (%)"
+            label={t('summary.tipRate')}
             type="number"
             step="0.1"
             min="0"
@@ -42,7 +44,7 @@ export function TotalBreakdown({ summary }: TotalBreakdownProps) {
           />
 
           <Input
-            label="Service Charges ($)"
+            label={t('summary.serviceCharges')}
             type="number"
             step="0.01"
             min="0"
@@ -55,7 +57,7 @@ export function TotalBreakdown({ summary }: TotalBreakdownProps) {
         {/* Totals */}
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Subtotal</span>
+            <span className="text-gray-600">{t('common.subtotal')}</span>
             <span className="font-medium text-gray-900">
               {formatCurrency(summary.totalBeforeTaxAndTip)}
             </span>
@@ -64,7 +66,7 @@ export function TotalBreakdown({ summary }: TotalBreakdownProps) {
           {summary.totalTax > 0 && (
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">
-                Total Tax ({state.taxRate}%)
+                {t('summary.totalTax', { rate: state.taxRate })}
               </span>
               <span className="font-medium text-gray-900">
                 {formatCurrency(summary.totalTax)}
@@ -75,7 +77,7 @@ export function TotalBreakdown({ summary }: TotalBreakdownProps) {
           {summary.totalTip > 0 && (
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">
-                Total Tip ({state.tipRate}%)
+                {t('summary.totalTip', { rate: state.tipRate })}
               </span>
               <span className="font-medium text-gray-900">
                 {formatCurrency(summary.totalTip)}
@@ -85,7 +87,7 @@ export function TotalBreakdown({ summary }: TotalBreakdownProps) {
 
           {summary.totalServiceCharges > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Service Charges</span>
+              <span className="text-gray-600">{t('summary.serviceCharge')}</span>
               <span className="font-medium text-gray-900">
                 {formatCurrency(summary.totalServiceCharges)}
               </span>
@@ -95,7 +97,7 @@ export function TotalBreakdown({ summary }: TotalBreakdownProps) {
           <div className="pt-3 border-t-2 border-gray-200">
             <div className="flex justify-between items-center">
               <span className="font-bold text-lg text-gray-900">
-                Grand Total
+                {t('summary.grandTotal')}
               </span>
               <motion.span
                 key={summary.grandTotal}

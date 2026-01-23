@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { PersonTotal as PersonTotalType } from '../../types';
 import { Card } from '../shared/Card';
 import { formatCurrency } from '../../utils/formatters';
@@ -9,6 +10,8 @@ interface PersonTotalProps {
 }
 
 export function PersonTotal({ personTotal, color }: PersonTotalProps) {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,13 +30,13 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
             <h3 className="text-lg font-semibold text-gray-900">
               {personTotal.personName}
             </h3>
-            <p className="text-sm text-gray-600">Total breakdown</p>
+            <p className="text-sm text-gray-600">{t('summary.totalBreakdown')}</p>
           </div>
         </div>
 
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Subtotal</span>
+            <span className="text-gray-600">{t('common.subtotal')}</span>
             <span className="font-medium text-gray-900">
               {formatCurrency(personTotal.subtotal)}
             </span>
@@ -41,7 +44,7 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
 
           {personTotal.tax > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Tax</span>
+              <span className="text-gray-600">{t('summary.tax')}</span>
               <span className="font-medium text-gray-900">
                 {formatCurrency(personTotal.tax)}
               </span>
@@ -50,7 +53,7 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
 
           {personTotal.tip > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Tip</span>
+              <span className="text-gray-600">{t('summary.tip')}</span>
               <span className="font-medium text-gray-900">
                 {formatCurrency(personTotal.tip)}
               </span>
@@ -59,7 +62,7 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
 
           {personTotal.serviceCharge > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Service Charge</span>
+              <span className="text-gray-600">{t('summary.serviceCharge')}</span>
               <span className="font-medium text-gray-900">
                 {formatCurrency(personTotal.serviceCharge)}
               </span>
@@ -68,7 +71,7 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
 
           <div className="pt-2 border-t-2 border-gray-200">
             <div className="flex justify-between">
-              <span className="font-semibold text-gray-900">Total</span>
+              <span className="font-semibold text-gray-900">{t('common.total')}</span>
               <motion.span
                 key={personTotal.total}
                 initial={{ scale: 1.2, color: color }}

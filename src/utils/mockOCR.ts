@@ -40,7 +40,7 @@ export async function mockReceiptOCR(imageFile: File): Promise<MockOCRResult> {
  */
 export function validateImageFile(file: File): {
   valid: boolean;
-  error?: string;
+  errorType?: 'invalidFileType' | 'fileTooLarge';
 } {
   const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/heic"];
   const maxSize = 10 * 1024 * 1024; // 10MB
@@ -48,12 +48,12 @@ export function validateImageFile(file: File): {
   if (!validTypes.includes(file.type)) {
     return {
       valid: false,
-      error: "Please upload a valid image file (JPEG, PNG, HEIC)",
+      errorType: 'invalidFileType',
     };
   }
 
   if (file.size > maxSize) {
-    return { valid: false, error: "Image size must be less than 10MB" };
+    return { valid: false, errorType: 'fileTooLarge' };
   }
 
   return { valid: true };

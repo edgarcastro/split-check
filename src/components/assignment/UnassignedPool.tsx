@@ -1,4 +1,5 @@
 import { useDroppable } from '@dnd-kit/core';
+import { useTranslation } from 'react-i18next';
 import { CheckItem } from '../../types';
 import { DraggableItem } from './DraggableItem';
 import { EmptyState } from '../shared/EmptyState';
@@ -8,6 +9,7 @@ interface UnassignedPoolProps {
 }
 
 export function UnassignedPool({ items }: UnassignedPoolProps) {
+  const { t } = useTranslation();
   const { setNodeRef, isOver } = useDroppable({
     id: 'unassigned',
   });
@@ -24,10 +26,10 @@ export function UnassignedPool({ items }: UnassignedPoolProps) {
       <div className="flex items-center gap-2 mb-4">
         <div className="text-2xl">📋</div>
         <h3 className="text-lg font-semibold text-gray-900">
-          Unassigned Items
+          {t('assignment.unassignedItems')}
         </h3>
         <span className="ml-auto text-sm text-gray-600">
-          {items.length} {items.length === 1 ? 'item' : 'items'}
+          {items.length} {items.length === 1 ? t('common.item') : t('common.items')}
         </span>
       </div>
 
@@ -35,8 +37,8 @@ export function UnassignedPool({ items }: UnassignedPoolProps) {
         {items.length === 0 ? (
           <EmptyState
             icon={<div className="text-4xl">✓</div>}
-            title="All items assigned"
-            description="Great! All items have been assigned to people"
+            title={t('assignment.allItemsAssigned')}
+            description={t('assignment.allItemsAssignedDescription')}
           />
         ) : (
           items.map((item) => <DraggableItem key={item.id} item={item} />)

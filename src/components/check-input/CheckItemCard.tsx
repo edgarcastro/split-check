@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { CheckItem } from "../../types";
 import { Card } from "../shared/Card";
 import { formatCurrency } from "../../utils/formatters";
@@ -10,6 +11,7 @@ interface CheckItemCardProps {
 }
 
 export function CheckItemCard({ item, onRemove }: CheckItemCardProps) {
+  const { t } = useTranslation();
   const itemTotal = item.price * item.quantity;
 
   return (
@@ -36,7 +38,7 @@ export function CheckItemCard({ item, onRemove }: CheckItemCardProps) {
           <button
             onClick={() => onRemove(item.id)}
             className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
-            aria-label="Remove item"
+            aria-label={t('checkInput.removeItem')}
           >
 <TrashIcon className="w-5 h-5" />
           </button>
