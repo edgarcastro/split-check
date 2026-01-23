@@ -1,0 +1,67 @@
+{
+  "common": {
+    "appName": "Split Check",
+    "startOver": "Start Over",
+    "next": "Next",
+    "back": "Back",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "add": "Add",
+    "total": "Total"
+  },
+  "confirmations": {
+    "startOver": "Are you sure you want to start over? This will clear all your data."
+  },
+  "stepper": {
+    "addItems": "Add Items",
+    "addPeople": "Add People",
+    "assignItems": "Assign Items",
+    "summary": "Summary"
+  },
+  "checkInput": {
+    "title": "Add Your Check Items",
+    "subtitle": "Start by adding items manually or upload a receipt image",
+    "nextButton": "Next: Add People →",
+    "itemName": "Item Name",
+    "itemPrice": "Price",
+    "addItem": "Add Item",
+    "uploadReceipt": "Upload Receipt",
+    "uploadDescription": "Drag and drop or click to upload",
+    "noItems": "No items added yet",
+    "noItemsDescription": "Add items manually or upload a receipt to get started"
+  },
+  "people": {
+    "title": "Add People",
+    "subtitle": "Add at least 2 people who are splitting the check",
+    "nextButton": "Next: Assign Items →",
+    "personName": "Person Name",
+    "addPerson": "Add Person",
+    "noPeople": "No people added yet",
+    "noPeopleDescription": "Add the people who are splitting the check",
+    "minPeopleWarning": "Please add at least 2 people to continue"
+  },
+  "assignment": {
+    "title": "Assign Items to People",
+    "subtitle": "Drag items to assign them. You can assign items to multiple people to split the cost.",
+    "nextButton": "Next: View Summary →",
+    "unassigned": "Unassigned Items",
+    "assignedTo": "Assigned to",
+    "splitEqually": "Split Equally",
+    "noUnassignedItems": "All items have been assigned"
+  },
+  "summary": {
+    "title": "Split Summary",
+    "subtitle": "Here's how the check is split among everyone",
+    "resetButton": "Start New Check",
+    "personOwes": "owes",
+    "itemsAssigned": "Items Assigned",
+    "noItemsAssigned": "No items assigned to this person",
+    "totalAmount": "Total Amount",
+    "perPerson": "per person",
+    "unassignedWarningTitle": "item(s) not assigned",
+    "unassignedWarningMessage": "Some items haven't been assigned to anyone yet. They won't be included in the split calculation."
+  }
+}

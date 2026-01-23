@@ -1,0 +1,67 @@
+{
+  "common": {
+    "appName": "Dividir Cuenta",
+    "startOver": "Empezar de Nuevo",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "save": "Guardar",
+    "add": "Agregar",
+    "total": "Total"
+  },
+  "confirmations": {
+    "startOver": "¿Estás seguro de que quieres empezar de nuevo? Esto borrará todos tus datos."
+  },
+  "stepper": {
+    "addItems": "Agregar Artículos",
+    "addPeople": "Agregar Personas",
+    "assignItems": "Asignar Artículos",
+    "summary": "Resumen"
+  },
+  "checkInput": {
+    "title": "Agrega los Artículos de tu Cuenta",
+    "subtitle": "Comienza agregando artículos manualmente o sube una imagen del recibo",
+    "nextButton": "Siguiente: Agregar Personas →",
+    "itemName": "Nombre del Artículo",
+    "itemPrice": "Precio",
+    "addItem": "Agregar Artículo",
+    "uploadReceipt": "Subir Recibo",
+    "uploadDescription": "Arrastra y suelta o haz clic para subir",
+    "noItems": "No hay artículos agregados aún",
+    "noItemsDescription": "Agrega artículos manualmente o sube un recibo para comenzar"
+  },
+  "people": {
+    "title": "Agregar Personas",
+    "subtitle": "Agrega al menos 2 personas que van a dividir la cuenta",
+    "nextButton": "Siguiente: Asignar Artículos →",
+    "personName": "Nombre de la Persona",
+    "addPerson": "Agregar Persona",
+    "noPeople": "No hay personas agregadas aún",
+    "noPeopleDescription": "Agrega las personas que van a dividir la cuenta",
+    "minPeopleWarning": "Por favor agrega al menos 2 personas para continuar"
+  },
+  "assignment": {
+    "title": "Asignar Artículos a Personas",
+    "subtitle": "Arrastra los artículos para asignarlos. Puedes asignar artículos a múltiples personas para dividir el costo.",
+    "nextButton": "Siguiente: Ver Resumen →",
+    "unassigned": "Artículos Sin Asignar",
+    "assignedTo": "Asignado a",
+    "splitEqually": "Dividir Equitativamente",
+    "noUnassignedItems": "Todos los artículos han sido asignados"
+  },
+  "summary": {
+    "title": "Resumen de División",
+    "subtitle": "Así es como se divide la cuenta entre todos",
+    "resetButton": "Comenzar Nueva Cuenta",
+    "personOwes": "debe",
+    "itemsAssigned": "Artículos Asignados",
+    "noItemsAssigned": "No hay artículos asignados a esta persona",
+    "totalAmount": "Cantidad Total",
+    "perPerson": "por persona",
+    "unassignedWarningTitle": "artículo(s) sin asignar",
+    "unassignedWarningMessage": "Algunos artículos aún no han sido asignados a nadie. No se incluirán en el cálculo de división."
+  }
+}
