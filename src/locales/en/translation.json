@@ -10,7 +10,10 @@
     "edit": "Edit",
     "save": "Save",
     "add": "Add",
-    "total": "Total"
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "item": "item",
+    "items": "items"
   },
   "confirmations": {
     "startOver": "Are you sure you want to start over? This will clear all your data."
@@ -25,32 +28,49 @@
     "title": "Add Your Check Items",
     "subtitle": "Start by adding items manually or upload a receipt image",
     "nextButton": "Next: Add People →",
+    "addItemManually": "Add Item Manually",
     "itemName": "Item Name",
+    "itemNamePlaceholder": "e.g., Burger, Pizza",
     "itemPrice": "Price",
+    "quantity": "Quantity",
     "addItem": "Add Item",
     "uploadReceipt": "Upload Receipt",
+    "uploadReceiptImage": "Upload Receipt Image",
     "uploadDescription": "Drag and drop or click to upload",
-    "noItems": "No items added yet",
-    "noItemsDescription": "Add items manually or upload a receipt to get started"
+    "uploadInstructions": "Upload a photo of your receipt and we'll extract the items automatically (mock OCR for demo purposes)",
+    "clickToUpload": "Click to upload or drag and drop",
+    "fileTypes": "PNG, JPG, or HEIC up to 10MB",
+    "processingReceipt": "Processing receipt...",
+    "processing": "Processing...",
+    "noItems": "No items yet",
+    "noItemsDescription": "Add items manually or upload a receipt image to get started",
+    "removeItem": "Remove item"
   },
   "people": {
     "title": "Add People",
     "subtitle": "Add at least 2 people who are splitting the check",
     "nextButton": "Next: Assign Items →",
-    "personName": "Person Name",
     "addPerson": "Add Person",
-    "noPeople": "No people added yet",
-    "noPeopleDescription": "Add the people who are splitting the check",
-    "minPeopleWarning": "Please add at least 2 people to continue"
+    "personName": "Person Name",
+    "personNamePlaceholder": "e.g., John, Sarah",
+    "noPeople": "No people yet",
+    "noPeopleDescription": "Add people who are splitting the check",
+    "minPeopleWarning": "Please add at least 2 people to continue",
+    "removePerson": "Remove person"
   },
   "assignment": {
     "title": "Assign Items to People",
     "subtitle": "Drag items to assign them. You can assign items to multiple people to split the cost.",
     "nextButton": "Next: View Summary →",
     "unassigned": "Unassigned Items",
+    "unassignedItems": "Unassigned Items",
     "assignedTo": "Assigned to",
     "splitEqually": "Split Equally",
-    "noUnassignedItems": "All items have been assigned"
+    "allItemsAssigned": "All items assigned",
+    "allItemsAssignedDescription": "Great! All items have been assigned to people",
+    "noItemsYet": "No items yet",
+    "dragItemsHere": "Drag items here to assign them",
+    "tipMessage": "Tip: Drag items from the unassigned pool to assign them to people. You can assign the same item to multiple people to split the cost evenly between them."
   },
   "summary": {
     "title": "Split Summary",
@@ -62,6 +82,33 @@
     "totalAmount": "Total Amount",
     "perPerson": "per person",
     "unassignedWarningTitle": "item(s) not assigned",
-    "unassignedWarningMessage": "Some items haven't been assigned to anyone yet. They won't be included in the split calculation."
+    "unassignedWarningMessage": "Some items haven't been assigned to anyone yet. They won't be included in the split calculation.",
+    "noPeopleToSplit": "No people to split the check",
+    "noPeopleDescription": "Please add people in the previous step to see the split",
+    "individualTotals": "Individual Totals",
+    "checkDetails": "Check Details",
+    "totalBreakdown": "Total breakdown",
+    "overallBreakdown": "Overall Breakdown",
+    "tax": "Tax",
+    "tip": "Tip",
+    "serviceCharge": "Service Charge",
+    "taxRate": "Tax Rate (%)",
+    "tipRate": "Tip Rate (%)",
+    "serviceCharges": "Service Charges ($)",
+    "totalTax": "Total Tax ({{rate}}%)",
+    "totalTip": "Total Tip ({{rate}}%)",
+    "grandTotal": "Grand Total"
+  },
+  "errors": {
+    "itemNameRequired": "Item name is required (max 100 characters)",
+    "invalidPrice": "Please enter a valid price greater than 0",
+    "invalidQuantity": "Please enter a valid quantity (1-99)",
+    "invalidFile": "Invalid file",
+    "processingFailed": "Failed to process image. Please try again.",
+    "invalidFileType": "Please upload a valid image file (JPEG, PNG, HEIC)",
+    "fileTooLarge": "Image size must be less than 10MB"
+  },
+  "footer": {
+    "builtWith": "Built with React, TypeScript, Tailwind CSS, and Framer Motion"
   }
 }
