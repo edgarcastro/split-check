@@ -1,0 +1,24 @@
+name: Validate Firebase Functions on PR
+"on":
+  pull_request:
+    paths:
+      - "functions/**"
+jobs:
+  validate_functions:
+    if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          cd functions
+          pip install -r requirements.txt
+      - name: Lint with ruff
+        run: |
+          pip install ruff
+          cd functions
+          ruff check .

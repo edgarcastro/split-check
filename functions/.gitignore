@@ -1,12 +1,15 @@
-# Python
-__pycache__
-*.pyc
-*.pyo
-*.pyd
-*.pyw
-*.pyz
-*.pywz
-*.pyzw
-*.pyz
-*.pywz
-*.pyzw
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables (keep local)
+.env
+
+# IDE
+.idea/
+.vscode/

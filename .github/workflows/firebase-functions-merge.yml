@@ -1,0 +1,27 @@
+name: Deploy Firebase Functions on merge
+"on":
+  push:
+    branches:
+      - main
+    paths:
+      - "functions/**"
+jobs:
+  deploy_functions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          cd functions
+          pip install -r requirements.txt
+      - name: Deploy Functions
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions
+        env:
+          GCP_SA_KEY: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPLIT_CHECK_41CB9 }}"
+          PROJECT_ID: split-check-41cb9
