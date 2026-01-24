@@ -1,9 +1,9 @@
-import { useDroppable } from '@dnd-kit/core';
-import { useTranslation } from 'react-i18next';
-import { Person, CheckItem } from '../../types';
-import { DraggableUnit } from './DraggableUnit';
-import { formatCurrency } from '../../utils/formatters';
-import { EmptyState } from '../shared/EmptyState';
+import {useDroppable} from '@dnd-kit/core';
+import {useTranslation} from 'react-i18next';
+import {Person, CheckItem} from '../../types';
+import {DraggableUnit} from './DraggableUnit';
+import {formatCurrency} from '../../utils/formatters';
+import {EmptyState} from '../shared/EmptyState';
 
 interface PersonDropZoneProps {
   person: Person;
@@ -17,13 +17,9 @@ interface AssignedUnit {
   isShared: boolean;
 }
 
-export function PersonDropZone({
-  person,
-  items,
-  subtotal,
-}: PersonDropZoneProps) {
-  const { t } = useTranslation();
-  const { setNodeRef, isOver } = useDroppable({
+export function PersonDropZone({person, items, subtotal}: PersonDropZoneProps) {
+  const {t} = useTranslation();
+  const {setNodeRef, isOver} = useDroppable({
     id: person.id,
   });
 
@@ -54,7 +50,7 @@ export function PersonDropZone({
       <div className="flex items-center gap-2 mb-4">
         <div
           className="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold text-sm"
-          style={{ backgroundColor: person.color }}
+          style={{backgroundColor: person.color}}
         >
           {person.name.charAt(0).toUpperCase()}
         </div>
@@ -78,7 +74,7 @@ export function PersonDropZone({
             description={t('assignment.dragItemsHere')}
           />
         ) : (
-          assignedUnits.map(({ item, unitIndex, isShared }) => (
+          assignedUnits.map(({item, unitIndex, isShared}) => (
             <DraggableUnit
               key={`${item.id}:unit:${unitIndex}`}
               item={item}

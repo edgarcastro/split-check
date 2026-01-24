@@ -1,9 +1,9 @@
-import { useDraggable } from '@dnd-kit/core';
-import { useTranslation } from 'react-i18next';
-import { CheckItem } from '../../types';
-import { formatCurrency } from '../../utils/formatters';
-import { motion } from 'motion/react';
-import { Bars2Icon } from '@heroicons/react/24/outline';
+import {useDraggable} from '@dnd-kit/core';
+import {useTranslation} from 'react-i18next';
+import {CheckItem} from '../../types';
+import {formatCurrency} from '../../utils/formatters';
+import {motion} from 'motion/react';
+import {Bars2Icon} from '@heroicons/react/24/outline';
 
 interface DraggableUnitProps {
   item: CheckItem;
@@ -11,11 +11,11 @@ interface DraggableUnitProps {
   isShared?: boolean; // True if this unit is split among multiple people
 }
 
-export function DraggableUnit({ item, unitIndex, isShared }: DraggableUnitProps) {
-  const { t } = useTranslation();
+export function DraggableUnit({item, unitIndex, isShared}: DraggableUnitProps) {
+  const {t} = useTranslation();
   const dragId = `${item.id}:unit:${unitIndex}`;
 
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
+  const {attributes, listeners, setNodeRef, transform, isDragging} =
     useDraggable({
       id: dragId,
     });
@@ -34,7 +34,7 @@ export function DraggableUnit({ item, unitIndex, isShared }: DraggableUnitProps)
       style={style}
       {...listeners}
       {...attributes}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{scale: 1.02}}
       className={`bg-white rounded-lg shadow-md p-3 cursor-grab active:cursor-grabbing transition-all ${
         isDragging ? 'opacity-50 shadow-xl' : ''
       } ${isShared ? 'ring-2 ring-amber-400' : ''}`}

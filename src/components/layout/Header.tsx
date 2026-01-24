@@ -1,15 +1,15 @@
-import { useTranslation } from "react-i18next";
-import { useCheckSplit } from "../../context/CheckSplitContext";
-import { Button } from "../shared/Button";
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import {useTranslation} from 'react-i18next';
+import {useCheckSplit} from '../../context/CheckSplitContext';
+import {Button} from '../shared/Button';
+import {ArrowPathIcon} from '@heroicons/react/24/outline';
 
 export function Header() {
-  const { t } = useTranslation();
-  const { resetCheck, state } = useCheckSplit();
+  const {t} = useTranslation();
+  const {resetCheck, state} = useCheckSplit();
 
   const handleReset = () => {
     if (state.items.length > 0 || state.people.length > 0) {
-      if (window.confirm(t("confirmations.startOver"))) {
+      if (window.confirm(t('confirmations.startOver'))) {
         resetCheck();
       }
     }
@@ -21,13 +21,13 @@ export function Header() {
         <div className="flex items-center gap-3">
           <div className="text-3xl">🧾</div>
           <h1 className="text-2xl font-bold text-gray-900">
-            {t("common.appName")}
+            {t('common.appName')}
           </h1>
         </div>
         {(state.items.length > 0 || state.people.length > 0) && (
           <Button variant="secondary" onClick={handleReset}>
             <ArrowPathIcon className="size-4" />
-            {t("common.startOver")}
+            {t('common.startOver')}
           </Button>
         )}
       </div>

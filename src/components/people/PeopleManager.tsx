@@ -1,5 +1,5 @@
-import { AddPersonForm } from './AddPersonForm';
-import { PersonList } from './PersonList';
+import {AddPersonForm} from './AddPersonForm';
+import {PersonList} from './PersonList';
 
 export function PeopleManager() {
   return (

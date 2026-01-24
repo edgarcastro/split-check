@@ -1,15 +1,15 @@
-import { useDraggable } from '@dnd-kit/core';
-import { CheckItem } from '../../types';
-import { formatCurrency } from '../../utils/formatters';
-import { motion } from 'motion/react';
-import { Bars2Icon } from '@heroicons/react/24/outline';
+import {useDraggable} from '@dnd-kit/core';
+import {CheckItem} from '../../types';
+import {formatCurrency} from '../../utils/formatters';
+import {motion} from 'motion/react';
+import {Bars2Icon} from '@heroicons/react/24/outline';
 
 interface DraggableItemProps {
   item: CheckItem;
 }
 
-export function DraggableItem({ item }: DraggableItemProps) {
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
+export function DraggableItem({item}: DraggableItemProps) {
+  const {attributes, listeners, setNodeRef, transform, isDragging} =
     useDraggable({
       id: item.id,
     });
@@ -28,7 +28,7 @@ export function DraggableItem({ item }: DraggableItemProps) {
       style={style}
       {...listeners}
       {...attributes}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{scale: 1.02}}
       className={`bg-white rounded-lg shadow-md p-3 cursor-grab active:cursor-grabbing transition-all ${
         isDragging ? 'opacity-50 shadow-xl' : ''
       }`}
@@ -48,7 +48,7 @@ export function DraggableItem({ item }: DraggableItemProps) {
             </span>
           </div>
         </div>
-<Bars2Icon className="w-5 h-5 text-gray-400 flex-shrink-0" />
+        <Bars2Icon className="w-5 h-5 text-gray-400 flex-shrink-0" />
       </div>
     </motion.div>
   );

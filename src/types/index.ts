@@ -71,14 +71,24 @@ export interface PersonFormData {
 // Context types
 export interface CheckSplitContextType {
   state: CheckState;
-  addItem: (item: Omit<CheckItem, 'id' | 'unitAssignments' | 'createdAt'>) => void;
+  addItem: (
+    item: Omit<CheckItem, 'id' | 'unitAssignments' | 'createdAt'>,
+  ) => void;
   removeItem: (itemId: string) => void;
   updateItem: (itemId: string, updates: Partial<CheckItem>) => void;
   addPerson: (person: Omit<Person, 'id' | 'createdAt'>) => void;
   removePerson: (personId: string) => void;
   updatePerson: (personId: string, updates: Partial<Person>) => void;
-  assignUnitToPerson: (itemId: string, unitIndex: number, personId: string) => void;
-  unassignUnitFromPerson: (itemId: string, unitIndex: number, personId: string) => void;
+  assignUnitToPerson: (
+    itemId: string,
+    unitIndex: number,
+    personId: string,
+  ) => void;
+  unassignUnitFromPerson: (
+    itemId: string,
+    unitIndex: number,
+    personId: string,
+  ) => void;
   setTaxRate: (rate: number) => void;
   setTipRate: (rate: number) => void;
   setServiceCharges: (amount: number) => void;
@@ -96,6 +106,23 @@ export interface MockOCRResult {
   confidence: number;
 }
 
+// OCR API response type
+export interface OCRApiResponse {
+  success: boolean;
+  items: Array<{
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
+  summary: {
+    subtotal: number | null;
+    tax: number | null;
+    tip: number | null;
+    total: number | null;
+    service_charge: number | null;
+  };
+}
+
 // Workflow step enum
 export const WorkflowStep = {
   INPUT: 'input',
@@ -104,4 +131,4 @@ export const WorkflowStep = {
   SUMMARY: 'summary',
 } as const;
 
-export type WorkflowStep = typeof WorkflowStep[keyof typeof WorkflowStep];
+export type WorkflowStep = (typeof WorkflowStep)[keyof typeof WorkflowStep];

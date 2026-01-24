@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import {ReactNode} from 'react';
 
 interface BadgeProps {
   children: ReactNode;
@@ -6,8 +6,8 @@ interface BadgeProps {
   className?: string;
 }
 
-export function Badge({ children, color, className = '' }: BadgeProps) {
-  const style = color ? { backgroundColor: color } : {};
+export function Badge({children, color, className = ''}: BadgeProps) {
+  const style = color ? {backgroundColor: color} : {};
 
   return (
     <span

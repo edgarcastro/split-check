@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { PersonTotal as PersonTotalType } from '../../types';
-import { Card } from '../shared/Card';
-import { formatCurrency } from '../../utils/formatters';
-import { motion } from 'motion/react';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import {useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {PersonTotal as PersonTotalType} from '../../types';
+import {Card} from '../shared/Card';
+import {formatCurrency} from '../../utils/formatters';
+import {motion} from 'motion/react';
+import {ChevronDownIcon} from '@heroicons/react/24/outline';
 import {
   Collapsible,
   CollapsibleContent,
@@ -16,21 +16,21 @@ interface PersonTotalProps {
   color: string;
 }
 
-export function PersonTotal({ personTotal, color }: PersonTotalProps) {
-  const { t } = useTranslation();
+export function PersonTotal({personTotal, color}: PersonTotalProps) {
+  const {t} = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      initial={{opacity: 0, y: 20}}
+      animate={{opacity: 1, y: 0}}
+      transition={{duration: 0.3}}
     >
       <Card>
         <div className="flex items-center gap-3 mb-4">
           <div
             className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-lg"
-            style={{ backgroundColor: color }}
+            style={{backgroundColor: color}}
           >
             {personTotal.personName.charAt(0).toUpperCase()}
           </div>
@@ -38,7 +38,9 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
             <h3 className="text-lg font-semibold text-gray-900">
               {personTotal.personName}
             </h3>
-            <p className="text-sm text-gray-600">{t('summary.totalBreakdown')}</p>
+            <p className="text-sm text-gray-600">
+              {t('summary.totalBreakdown')}
+            </p>
           </div>
         </div>
 
@@ -78,9 +80,13 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
                       className="flex justify-between text-xs text-gray-600"
                     >
                       <div className="flex items-center gap-1.5">
-                        <span className="truncate max-w-[150px]">{item.itemName}</span>
+                        <span className="truncate max-w-[150px]">
+                          {item.itemName}
+                        </span>
                         {item.unitsAssigned > 1 && (
-                          <span className="text-gray-400">x{item.unitsAssigned}</span>
+                          <span className="text-gray-400">
+                            x{item.unitsAssigned}
+                          </span>
                         )}
                         {item.isShared && (
                           <span className="text-amber-600 text-[10px] font-medium">
@@ -118,7 +124,9 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
 
           {personTotal.serviceCharge > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">{t('summary.serviceCharge')}</span>
+              <span className="text-gray-600">
+                {t('summary.serviceCharge')}
+              </span>
               <span className="font-medium text-gray-900">
                 {formatCurrency(personTotal.serviceCharge)}
               </span>
@@ -127,11 +135,13 @@ export function PersonTotal({ personTotal, color }: PersonTotalProps) {
 
           <div className="pt-2 border-t-2 border-gray-200">
             <div className="flex justify-between">
-              <span className="font-semibold text-gray-900">{t('common.total')}</span>
+              <span className="font-semibold text-gray-900">
+                {t('common.total')}
+              </span>
               <motion.span
                 key={personTotal.total}
-                initial={{ scale: 1.2, color: color }}
-                animate={{ scale: 1, color: '#111827' }}
+                initial={{scale: 1.2, color: color}}
+                animate={{scale: 1, color: '#111827'}}
                 className="font-bold text-xl text-gray-900"
               >
                 {formatCurrency(personTotal.total)}

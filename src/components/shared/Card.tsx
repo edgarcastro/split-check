@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { motion } from 'motion/react';
+import {ReactNode} from 'react';
+import {motion} from 'motion/react';
 
 interface CardProps {
   children: ReactNode;
@@ -25,8 +25,8 @@ export function Card({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{opacity: 0, y: 10}}
+      animate={{opacity: 1, y: 0}}
       className={`bg-white rounded-xl shadow-md transition-shadow duration-200 ${paddingClasses[padding]} ${hoverClass} ${className}`}
     >
       {children}

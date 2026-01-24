@@ -1,24 +1,24 @@
-import { useTranslation } from "react-i18next";
-import { CheckItem } from "../../types";
-import { Card } from "../shared/Card";
-import { formatCurrency } from "../../utils/formatters";
-import { motion } from "motion/react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import {useTranslation} from 'react-i18next';
+import {CheckItem} from '../../types';
+import {Card} from '../shared/Card';
+import {formatCurrency} from '../../utils/formatters';
+import {motion} from 'motion/react';
+import {TrashIcon} from '@heroicons/react/24/outline';
 
 interface CheckItemCardProps {
   item: CheckItem;
   onRemove: (id: string) => void;
 }
 
-export function CheckItemCard({ item, onRemove }: CheckItemCardProps) {
-  const { t } = useTranslation();
+export function CheckItemCard({item, onRemove}: CheckItemCardProps) {
+  const {t} = useTranslation();
   const itemTotal = item.price * item.quantity;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
+      initial={{opacity: 0, scale: 0.9}}
+      animate={{opacity: 1, scale: 1}}
+      exit={{opacity: 0, scale: 0.9}}
       layout
     >
       <Card padding="small" hover={false}>
@@ -40,7 +40,7 @@ export function CheckItemCard({ item, onRemove }: CheckItemCardProps) {
             className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
             aria-label={t('checkInput.removeItem')}
           >
-<TrashIcon className="w-5 h-5" />
+            <TrashIcon className="w-5 h-5" />
           </button>
         </div>
       </Card>

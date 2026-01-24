@@ -132,7 +132,7 @@ Assignment view uses `@dnd-kit` library:
 Always use the provided wrapper functions, never dispatch directly:
 
 ```tsx
-const { state, addItem, assignItemToPerson } = useCheckSplit();
+const {state, addItem, assignItemToPerson} = useCheckSplit();
 ```
 
 ### Item Assignment Logic

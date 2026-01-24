@@ -1,16 +1,16 @@
-import { useDroppable } from '@dnd-kit/core';
-import { useTranslation } from 'react-i18next';
-import { CheckItem } from '../../types';
-import { DraggableItemCard } from './DraggableItemCard';
-import { EmptyState } from '../shared/EmptyState';
+import {useDroppable} from '@dnd-kit/core';
+import {useTranslation} from 'react-i18next';
+import {CheckItem} from '../../types';
+import {DraggableItemCard} from './DraggableItemCard';
+import {EmptyState} from '../shared/EmptyState';
 
 interface UnassignedPoolProps {
   items: CheckItem[];
 }
 
-export function UnassignedPool({ items }: UnassignedPoolProps) {
-  const { t } = useTranslation();
-  const { setNodeRef, isOver } = useDroppable({
+export function UnassignedPool({items}: UnassignedPoolProps) {
+  const {t} = useTranslation();
+  const {setNodeRef, isOver} = useDroppable({
     id: 'unassigned',
   });
 
@@ -20,7 +20,7 @@ export function UnassignedPool({ items }: UnassignedPoolProps) {
       const unassignedIndices = item.unitAssignments
         .map((ua, idx) => (ua.assignedTo.length === 0 ? idx : -1))
         .filter((idx) => idx !== -1);
-      return { item, unassignedIndices };
+      return {item, unassignedIndices};
     })
     .filter((group) => group.unassignedIndices.length > 0);
 
@@ -56,7 +56,7 @@ export function UnassignedPool({ items }: UnassignedPoolProps) {
             description={t('assignment.allItemsAssignedDescription')}
           />
         ) : (
-          groupedByItem.map(({ item, unassignedIndices }) => (
+          groupedByItem.map(({item, unassignedIndices}) => (
             <DraggableItemCard
               key={item.id}
               item={item}

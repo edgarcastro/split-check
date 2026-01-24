@@ -1,6 +1,6 @@
-import { ReactNode, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import {ReactNode, useEffect} from 'react';
+import {motion, AnimatePresence} from 'motion/react';
+import {XMarkIcon} from '@heroicons/react/24/outline';
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,7 +10,7 @@ interface ModalProps {
   footer?: ReactNode;
 }
 
-export function Modal({ isOpen, onClose, title, children, footer }: ModalProps) {
+export function Modal({isOpen, onClose, title, children, footer}: ModalProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -35,9 +35,9 @@ export function Modal({ isOpen, onClose, title, children, footer }: ModalProps) 
         <>
           {/* Backdrop */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
             onClick={onClose}
             className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
           />
@@ -45,16 +45,16 @@ export function Modal({ isOpen, onClose, title, children, footer }: ModalProps) 
           {/* Modal */}
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{opacity: 0, scale: 0.9, y: 20}}
+              animate={{opacity: 1, scale: 1, y: 0}}
+              exit={{opacity: 0, scale: 0.9, y: 20}}
               className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-<button
+                <button
                   onClick={onClose}
                   className="text-gray-400 hover:text-gray-600 transition-colors"
                   aria-label="Close modal"

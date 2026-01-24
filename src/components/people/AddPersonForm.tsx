@@ -1,15 +1,15 @@
-import { useState, FormEvent } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useCheckSplit } from '../../context/CheckSplitContext';
-import { Input } from '../shared/Input';
-import { Button } from '../shared/Button';
-import { Card } from '../shared/Card';
-import { validatePersonName } from '../../utils/calculations';
-import { getNextPersonColor } from '../../constants';
+import {useState, FormEvent} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useCheckSplit} from '../../context/CheckSplitContext';
+import {Input} from '../shared/Input';
+import {Button} from '../shared/Button';
+import {Card} from '../shared/Card';
+import {validatePersonName} from '../../utils/calculations';
+import {getNextPersonColor} from '../../constants';
 
 export function AddPersonForm() {
-  const { t } = useTranslation();
-  const { addPerson, state } = useCheckSplit();
+  const {t} = useTranslation();
+  const {addPerson, state} = useCheckSplit();
   const [name, setName] = useState('');
   const [error, setError] = useState<string | undefined>();
 
@@ -36,7 +36,9 @@ export function AddPersonForm() {
 
   return (
     <Card>
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('people.addPerson')}</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        {t('people.addPerson')}
+      </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           label={t('people.personName')}

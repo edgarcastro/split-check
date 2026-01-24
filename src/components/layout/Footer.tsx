@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 export function Footer() {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   return (
     <footer className="bg-white border-t border-gray-200 mt-12">

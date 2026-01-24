@@ -1,14 +1,14 @@
-import { DndContext, DragOverlay } from '@dnd-kit/core';
-import { useTranslation } from 'react-i18next';
-import { useCheckSplit } from '../../context/CheckSplitContext';
-import { useDragAndDrop } from '../../hooks/useDragAndDrop';
-import { UnassignedPool } from './UnassignedPool';
-import { PersonDropZone } from './PersonDropZone';
-import { DraggableUnit } from './DraggableUnit';
+import {DndContext, DragOverlay} from '@dnd-kit/core';
+import {useTranslation} from 'react-i18next';
+import {useCheckSplit} from '../../context/CheckSplitContext';
+import {useDragAndDrop} from '../../hooks/useDragAndDrop';
+import {UnassignedPool} from './UnassignedPool';
+import {PersonDropZone} from './PersonDropZone';
+import {DraggableUnit} from './DraggableUnit';
 
 export function AssignmentBoard() {
-  const { t } = useTranslation();
-  const { state, assignUnitToPerson, unassignUnitFromPerson } = useCheckSplit();
+  const {t} = useTranslation();
+  const {state, assignUnitToPerson, unassignUnitFromPerson} = useCheckSplit();
 
   const handleUnitMove = (
     itemId: string,
@@ -38,8 +38,8 @@ export function AssignmentBoard() {
     }
   };
 
-  const { sensors, activeId, handleDragStart, handleDragEnd, handleDragCancel } =
-    useDragAndDrop({ onUnitMove: handleUnitMove });
+  const {sensors, activeId, handleDragStart, handleDragEnd, handleDragCancel} =
+    useDragAndDrop({onUnitMove: handleUnitMove});
 
   // Parse active drag ID to get item and unit info
   const getActiveUnit = () => {

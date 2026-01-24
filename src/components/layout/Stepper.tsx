@@ -1,19 +1,19 @@
-import { useTranslation } from "react-i18next";
-import { WorkflowStep } from "../../types";
-import { motion } from "motion/react";
+import {useTranslation} from 'react-i18next';
+import {WorkflowStep} from '../../types';
+import {motion} from 'motion/react';
 
 interface StepperProps {
   currentStep: WorkflowStep;
 }
 
-export function Stepper({ currentStep }: StepperProps) {
-  const { t } = useTranslation();
+export function Stepper({currentStep}: StepperProps) {
+  const {t} = useTranslation();
 
   const steps = [
-    { key: WorkflowStep.INPUT, label: t("stepper.addItems"), icon: "📝" },
-    { key: WorkflowStep.PEOPLE, label: t("stepper.addPeople"), icon: "👥" },
-    { key: WorkflowStep.ASSIGN, label: t("stepper.assignItems"), icon: "🎯" },
-    { key: WorkflowStep.SUMMARY, label: t("stepper.summary"), icon: "💰" },
+    {key: WorkflowStep.INPUT, label: t('stepper.addItems'), icon: '📝'},
+    {key: WorkflowStep.PEOPLE, label: t('stepper.addPeople'), icon: '👥'},
+    {key: WorkflowStep.ASSIGN, label: t('stepper.assignItems'), icon: '🎯'},
+    {key: WorkflowStep.SUMMARY, label: t('stepper.summary'), icon: '💰'},
   ];
 
   const currentIndex = steps.findIndex((step) => step.key === currentStep);
@@ -36,26 +36,26 @@ export function Stepper({ currentStep }: StepperProps) {
                     animate={{
                       scale: isActive ? 1.1 : 1,
                       backgroundColor: isCompleted
-                        ? "#10b981"
+                        ? '#10b981'
                         : isActive
-                          ? "#0ea5e9"
-                          : "#e5e7eb",
+                          ? '#0ea5e9'
+                          : '#e5e7eb',
                     }}
                     className={`w-12 h-12 rounded-full flex items-center justify-center text-xl ${
-                      isCompleted || isActive ? "text-white" : "text-gray-400"
+                      isCompleted || isActive ? 'text-white' : 'text-gray-400'
                     } shadow-md`}
                   >
-                    {isCompleted ? "✓" : step.icon}
+                    {isCompleted ? '✓' : step.icon}
                   </motion.div>
 
                   {/* Label */}
                   <p
                     className={`mt-2 text-xs font-medium ${
                       isActive
-                        ? "text-primary-600"
+                        ? 'text-primary-600'
                         : isCompleted
-                          ? "text-green-600"
-                          : "text-gray-400"
+                          ? 'text-green-600'
+                          : 'text-gray-400'
                     }`}
                   >
                     {step.label}
@@ -69,9 +69,9 @@ export function Stepper({ currentStep }: StepperProps) {
                     <motion.div
                       initial={false}
                       animate={{
-                        width: isCompleted ? "100%" : "0%",
+                        width: isCompleted ? '100%' : '0%',
                       }}
-                      transition={{ duration: 0.3 }}
+                      transition={{duration: 0.3}}
                       className="absolute inset-0 bg-green-500 rounded-full"
                     />
                   </div>

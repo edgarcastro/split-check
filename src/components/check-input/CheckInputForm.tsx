@@ -1,9 +1,9 @@
-import { useState, FormEvent } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useCheckSplit } from '../../context/CheckSplitContext';
-import { Input } from '../shared/Input';
-import { Button } from '../shared/Button';
-import { Card } from '../shared/Card';
+import {useState, FormEvent} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useCheckSplit} from '../../context/CheckSplitContext';
+import {Input} from '../shared/Input';
+import {Button} from '../shared/Button';
+import {Card} from '../shared/Card';
 import {
   validatePrice,
   validateQuantity,
@@ -11,8 +11,8 @@ import {
 } from '../../utils/calculations';
 
 export function CheckInputForm() {
-  const { t } = useTranslation();
-  const { addItem } = useCheckSplit();
+  const {t} = useTranslation();
+  const {addItem} = useCheckSplit();
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('1');
@@ -70,7 +70,7 @@ export function CheckInputForm() {
           value={name}
           onChange={(e) => {
             setName(e.target.value);
-            if (errors.name) setErrors({ ...errors, name: undefined });
+            if (errors.name) setErrors({...errors, name: undefined});
           }}
           error={errors.name}
           fullWidth
@@ -87,7 +87,7 @@ export function CheckInputForm() {
             value={price}
             onChange={(e) => {
               setPrice(e.target.value);
-              if (errors.price) setErrors({ ...errors, price: undefined });
+              if (errors.price) setErrors({...errors, price: undefined});
             }}
             error={errors.price}
             fullWidth
@@ -103,8 +103,7 @@ export function CheckInputForm() {
             value={quantity}
             onChange={(e) => {
               setQuantity(e.target.value);
-              if (errors.quantity)
-                setErrors({ ...errors, quantity: undefined });
+              if (errors.quantity) setErrors({...errors, quantity: undefined});
             }}
             error={errors.quantity}
             fullWidth

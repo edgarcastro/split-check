@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
-import { Button as ShadcnButton } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import {ComponentProps} from 'react';
+import {Button as ShadcnButton} from '@/components/ui/button';
+import {cn} from '@/lib/utils';
 
 type ShadcnButtonProps = ComponentProps<typeof ShadcnButton>;
 

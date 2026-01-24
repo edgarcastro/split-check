@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'motion/react';
-import { WorkflowStep } from './types';
-import { Header } from './components/layout/Header';
-import { Footer } from './components/layout/Footer';
-import { Stepper } from './components/layout/Stepper';
-import { CheckInputView } from './views/CheckInputView';
-import { PeopleView } from './views/PeopleView';
-import { AssignmentView } from './views/AssignmentView';
-import { SummaryView } from './views/SummaryView';
+import {useState} from 'react';
+import {AnimatePresence} from 'motion/react';
+import {WorkflowStep} from './types';
+import {Header} from './components/layout/Header';
+import {Footer} from './components/layout/Footer';
+import {Stepper} from './components/layout/Stepper';
+import {CheckInputView} from './views/CheckInputView';
+import {PeopleView} from './views/PeopleView';
+import {AssignmentView} from './views/AssignmentView';
+import {SummaryView} from './views/SummaryView';
 
 function App() {
   const [currentStep, setCurrentStep] = useState<WorkflowStep>(
-    WorkflowStep.INPUT
+    WorkflowStep.INPUT,
   );
 
   const renderStep = () => {

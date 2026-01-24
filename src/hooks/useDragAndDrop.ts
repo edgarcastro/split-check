@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import {
   DragEndEvent,
   DragStartEvent,
@@ -29,7 +29,7 @@ function parseDragId(id: string): DragInfo {
   };
 }
 
-export function useDragAndDrop({ onUnitMove }: UseDragAndDropProps) {
+export function useDragAndDrop({onUnitMove}: UseDragAndDropProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const sensors = useSensors(
@@ -45,7 +45,7 @@ export function useDragAndDrop({ onUnitMove }: UseDragAndDropProps) {
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+    const {active, over} = event;
 
     if (!over) {
       setActiveId(null);
@@ -54,7 +54,7 @@ export function useDragAndDrop({ onUnitMove }: UseDragAndDropProps) {
 
     const dragId = active.id as string;
     const targetId = over.id as string;
-    const { itemId, unitIndex } = parseDragId(dragId);
+    const {itemId, unitIndex} = parseDragId(dragId);
 
     // Handle drop logic
     onUnitMove(itemId, unitIndex, targetId === 'unassigned' ? null : targetId);

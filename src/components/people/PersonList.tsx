@@ -1,12 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { useCheckSplit } from '../../context/CheckSplitContext';
-import { PersonCard } from './PersonCard';
-import { EmptyState } from '../shared/EmptyState';
-import { AnimatePresence } from 'motion/react';
+import {useTranslation} from 'react-i18next';
+import {useCheckSplit} from '../../context/CheckSplitContext';
+import {PersonCard} from './PersonCard';
+import {EmptyState} from '../shared/EmptyState';
+import {AnimatePresence} from 'motion/react';
 
 export function PersonList() {
-  const { t } = useTranslation();
-  const { state, removePerson } = useCheckSplit();
+  const {t} = useTranslation();
+  const {state, removePerson} = useCheckSplit();
 
   if (state.people.length === 0) {
     return (

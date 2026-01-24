@@ -1,10 +1,15 @@
-import { CheckState, SplitSummary, PersonTotal, PersonItemDetail } from "../types";
+import {
+  CheckState,
+  SplitSummary,
+  PersonTotal,
+  PersonItemDetail,
+} from '../types';
 
 /**
  * Calculate total split amounts for all people
  */
 export function calculateSplit(state: CheckState): SplitSummary {
-  const { items, people, taxRate, tipRate, serviceCharges } = state;
+  const {items, people, taxRate, tipRate, serviceCharges} = state;
 
   // Calculate subtotal and item details for each person based on unit assignments
   const personSubtotals = people.map((person) => {
@@ -56,7 +61,7 @@ export function calculateSplit(state: CheckState): SplitSummary {
 
   // Calculate proportional tax, tip, and service charges
   const personTotals: PersonTotal[] = personSubtotals.map(
-    ({ personId, subtotal, items: personItems }) => {
+    ({personId, subtotal, items: personItems}) => {
       const person = people.find((p) => p.id === personId)!;
       const proportion =
         totalBeforeTaxAndTip > 0 ? subtotal / totalBeforeTaxAndTip : 0;
@@ -123,15 +128,15 @@ export function validateItemName(name: string): boolean {
 export function validatePersonName(
   name: string,
   existingNames: string[],
-): { valid: boolean; error?: string } {
+): {valid: boolean; error?: string} {
   const trimmedName = name.trim();
 
   if (trimmedName.length === 0) {
-    return { valid: false, error: "Name is required" };
+    return {valid: false, error: 'Name is required'};
   }
 
   if (trimmedName.length > 50) {
-    return { valid: false, error: "Name must be 50 characters or less" };
+    return {valid: false, error: 'Name must be 50 characters or less'};
   }
 
   if (
@@ -139,8 +144,8 @@ export function validatePersonName(
       .map((n) => n.toLowerCase())
       .includes(trimmedName.toLowerCase())
   ) {
-    return { valid: false, error: "This name is already taken" };
+    return {valid: false, error: 'This name is already taken'};
   }
 
-  return { valid: true };
+  return {valid: true};
 }

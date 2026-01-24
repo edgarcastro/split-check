@@ -1,10 +1,10 @@
-import { useDraggable } from '@dnd-kit/core';
-import { useTranslation } from 'react-i18next';
-import { CheckItem } from '../../types';
-import { formatCurrency } from '../../utils/formatters';
-import { useCheckSplit } from '../../context/CheckSplitContext';
-import { motion } from 'motion/react';
-import { Bars2Icon } from '@heroicons/react/24/outline';
+import {useDraggable} from '@dnd-kit/core';
+import {useTranslation} from 'react-i18next';
+import {CheckItem} from '../../types';
+import {formatCurrency} from '../../utils/formatters';
+import {useCheckSplit} from '../../context/CheckSplitContext';
+import {motion} from 'motion/react';
+import {Bars2Icon} from '@heroicons/react/24/outline';
 import {
   Select,
   SelectContent,
@@ -22,15 +22,15 @@ export function DraggableItemCard({
   item,
   unassignedIndices,
 }: DraggableItemCardProps) {
-  const { t } = useTranslation();
-  const { state, assignUnitToPerson } = useCheckSplit();
+  const {t} = useTranslation();
+  const {state, assignUnitToPerson} = useCheckSplit();
 
   // Use the first unassigned unit index for dragging
   const firstUnassignedIndex = unassignedIndices[0];
   const dragId = `${item.id}:unit:${firstUnassignedIndex}`;
   const unassignedCount = unassignedIndices.length;
 
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
+  const {attributes, listeners, setNodeRef, transform, isDragging} =
     useDraggable({
       id: dragId,
     });
@@ -52,7 +52,7 @@ export function DraggableItemCard({
     <motion.div
       ref={setNodeRef}
       style={style}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{scale: 1.02}}
       className={`bg-white rounded-lg shadow-md p-3 transition-all ${
         isDragging ? 'opacity-50 shadow-xl' : ''
       }`}
@@ -99,7 +99,9 @@ export function DraggableItemCard({
         >
           <Select onValueChange={handleAssign}>
             <SelectTrigger className="w-[120px] h-8 text-xs">
-              <SelectValue placeholder={t('assignment.assignTo', 'Assign to')} />
+              <SelectValue
+                placeholder={t('assignment.assignTo', 'Assign to')}
+              />
             </SelectTrigger>
             <SelectContent>
               {state.people.map((person) => (
@@ -107,7 +109,7 @@ export function DraggableItemCard({
                   <div className="flex items-center gap-2">
                     <div
                       className="w-3 h-3 rounded-full shrink-0"
-                      style={{ backgroundColor: person.color }}
+                      style={{backgroundColor: person.color}}
                     />
                     <span className="truncate">{person.name}</span>
                   </div>

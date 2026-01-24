@@ -1,26 +1,26 @@
-import { MockOCRResult } from "../types";
+import {MockOCRResult} from '../types';
 
 /**
  * Mock OCR function that simulates parsing a receipt image
  * Returns random items for demonstration purposes
  */
 export async function mockReceiptOCR(imageFile: File): Promise<MockOCRResult> {
-  console.log("imageFile", imageFile);
+  console.log('imageFile', imageFile);
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   // Mock parsed items
   const mockItems = [
-    { name: "Caesar Salad", price: 12.99, quantity: 1 },
-    { name: "Margherita Pizza", price: 18.5, quantity: 1 },
-    { name: "Grilled Salmon", price: 24.99, quantity: 1 },
-    { name: "French Fries", price: 6.99, quantity: 2 },
-    { name: "Coca Cola", price: 3.5, quantity: 3 },
-    { name: "Tiramisu", price: 8.99, quantity: 1 },
-    { name: "Chicken Wings", price: 11.99, quantity: 1 },
-    { name: "Onion Rings", price: 7.99, quantity: 1 },
-    { name: "Iced Tea", price: 2.99, quantity: 2 },
-    { name: "Chocolate Cake", price: 9.99, quantity: 1 },
+    {name: 'Caesar Salad', price: 12.99, quantity: 1},
+    {name: 'Margherita Pizza', price: 18.5, quantity: 1},
+    {name: 'Grilled Salmon', price: 24.99, quantity: 1},
+    {name: 'French Fries', price: 6.99, quantity: 2},
+    {name: 'Coca Cola', price: 3.5, quantity: 3},
+    {name: 'Tiramisu', price: 8.99, quantity: 1},
+    {name: 'Chicken Wings', price: 11.99, quantity: 1},
+    {name: 'Onion Rings', price: 7.99, quantity: 1},
+    {name: 'Iced Tea', price: 2.99, quantity: 2},
+    {name: 'Chocolate Cake', price: 9.99, quantity: 1},
   ];
 
   // Randomly select 3-5 items
@@ -42,7 +42,7 @@ export function validateImageFile(file: File): {
   valid: boolean;
   errorType?: 'invalidFileType' | 'fileTooLarge';
 } {
-  const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/heic"];
+  const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic'];
   const maxSize = 10 * 1024 * 1024; // 10MB
 
   if (!validTypes.includes(file.type)) {
@@ -53,8 +53,8 @@ export function validateImageFile(file: File): {
   }
 
   if (file.size > maxSize) {
-    return { valid: false, errorType: 'fileTooLarge' };
+    return {valid: false, errorType: 'fileTooLarge'};
   }
 
-  return { valid: true };
+  return {valid: true};
 }

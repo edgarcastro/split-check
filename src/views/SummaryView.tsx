@@ -1,26 +1,22 @@
-import { useTranslation } from 'react-i18next';
-import { Container } from '../components/layout/Container';
-import { SplitSummary } from '../components/summary/SplitSummary';
-import { Button } from '../components/shared/Button';
-import { useCheckSplit } from '../context/CheckSplitContext';
-import { motion } from 'motion/react';
-import { ArrowPathIcon } from '@heroicons/react/24/outline';
+import {useTranslation} from 'react-i18next';
+import {Container} from '../components/layout/Container';
+import {SplitSummary} from '../components/summary/SplitSummary';
+import {Button} from '../components/shared/Button';
+import {useCheckSplit} from '../context/CheckSplitContext';
+import {motion} from 'motion/react';
+import {ArrowPathIcon} from '@heroicons/react/24/outline';
 
 interface SummaryViewProps {
   onBack: () => void;
   onReset: () => void;
 }
 
-export function SummaryView({ onBack, onReset }: SummaryViewProps) {
-  const { t } = useTranslation();
-  const { state, resetCheck } = useCheckSplit();
+export function SummaryView({onBack, onReset}: SummaryViewProps) {
+  const {t} = useTranslation();
+  const {state, resetCheck} = useCheckSplit();
 
   const handleReset = () => {
-    if (
-      window.confirm(
-        t('confirmations.startOver')
-      )
-    ) {
+    if (window.confirm(t('confirmations.startOver'))) {
       resetCheck();
       onReset();
     }
@@ -36,10 +32,10 @@ export function SummaryView({ onBack, onReset }: SummaryViewProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.3 }}
+      initial={{opacity: 0, x: 20}}
+      animate={{opacity: 1, x: 0}}
+      exit={{opacity: 0, x: -20}}
+      transition={{duration: 0.3}}
     >
       <Container>
         <div className="space-y-8">
@@ -47,9 +43,7 @@ export function SummaryView({ onBack, onReset }: SummaryViewProps) {
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
               {t('summary.title')}
             </h2>
-            <p className="text-gray-600">
-              {t('summary.subtitle')}
-            </p>
+            <p className="text-gray-600">{t('summary.subtitle')}</p>
           </div>
 
           {unassignedUnitCount > 0 && (
