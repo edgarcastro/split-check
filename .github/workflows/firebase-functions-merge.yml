@@ -23,5 +23,5 @@ jobs:
         with:
           args: deploy --only functions
         env:
-          GCP_SA_KEY: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPLIT_CHECK_41CB9 }}"
+          FIREBASE_TOKEN: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPLIT_CHECK_41CB9 }}"
           PROJECT_ID: split-check-41cb9
