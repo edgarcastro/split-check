@@ -62,7 +62,6 @@
     "title": "Asignar Artículos a Personas",
     "subtitle": "Arrastra los artículos para asignarlos. Puedes asignar artículos a múltiples personas para dividir el costo.",
     "nextButton": "Siguiente: Ver Resumen →",
-    "unassigned": "Artículos Sin Asignar",
     "unassignedItems": "Artículos Sin Asignar",
     "assignedTo": "Asignado a",
     "splitEqually": "Dividir Equitativamente",

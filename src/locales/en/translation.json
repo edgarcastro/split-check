@@ -62,7 +62,6 @@
     "title": "Assign Items to People",
     "subtitle": "Drag items to assign them. You can assign items to multiple people to split the cost.",
     "nextButton": "Next: View Summary →",
-    "unassigned": "Unassigned Items",
     "unassignedItems": "Unassigned Items",
     "assignedTo": "Assigned to",
     "splitEqually": "Split Equally",
