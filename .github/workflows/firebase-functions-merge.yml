@@ -5,6 +5,8 @@ name: Deploy Firebase Functions on merge
       - main
     paths:
       - "functions/**"
+      - ".github/workflows/firebase-functions-merge.yml"
+      - ".github/workflows/firebase-functions-pull-request.yml"
 jobs:
   deploy_functions:
     runs-on: ubuntu-latest
