@@ -31,8 +31,14 @@ type Action =
       type: "UPDATE_PERSON";
       payload: { id: string; updates: Partial<Person> };
     }
-  | { type: "ASSIGN_ITEM"; payload: { itemId: string; personId: string } }
-  | { type: "UNASSIGN_ITEM"; payload: { itemId: string; personId: string } }
+  | {
+      type: "ASSIGN_UNIT";
+      payload: { itemId: string; unitIndex: number; personId: string };
+    }
+  | {
+      type: "UNASSIGN_UNIT";
+      payload: { itemId: string; unitIndex: number; personId: string };
+    }
   | { type: "SET_TAX_RATE"; payload: number }
   | { type: "SET_TIP_RATE"; payload: number }
   | { type: "SET_SERVICE_CHARGES"; payload: number }
@@ -73,10 +79,13 @@ function checkSplitReducer(state: CheckState, action: Action): CheckState {
       return {
         ...state,
         people: state.people.filter((person) => person.id !== action.payload),
-        // Unassign all items from this person
+        // Unassign all units from this person
         items: state.items.map((item) => ({
           ...item,
-          assignedTo: item.assignedTo.filter((id) => id !== action.payload),
+          unitAssignments: item.unitAssignments.map((ua) => ({
+            ...ua,
+            assignedTo: ua.assignedTo.filter((id: string) => id !== action.payload),
+          })),
         })),
       };
 
@@ -90,30 +99,44 @@ function checkSplitReducer(state: CheckState, action: Action): CheckState {
         ),
       };
 
-    case "ASSIGN_ITEM":
+    case "ASSIGN_UNIT":
       return {
         ...state,
         items: state.items.map((item) =>
           item.id === action.payload.itemId
             ? {
                 ...item,
-                assignedTo: item.assignedTo.includes(action.payload.personId)
-                  ? item.assignedTo
-                  : [...item.assignedTo, action.payload.personId],
+                unitAssignments: item.unitAssignments.map((ua, idx) =>
+                  idx === action.payload.unitIndex
+                    ? {
+                        ...ua,
+                        assignedTo: ua.assignedTo.includes(action.payload.personId)
+                          ? ua.assignedTo
+                          : [...ua.assignedTo, action.payload.personId],
+                      }
+                    : ua,
+                ),
               }
             : item,
         ),
       };
 
-    case "UNASSIGN_ITEM":
+    case "UNASSIGN_UNIT":
       return {
         ...state,
         items: state.items.map((item) =>
           item.id === action.payload.itemId
             ? {
                 ...item,
-                assignedTo: item.assignedTo.filter(
-                  (id) => id !== action.payload.personId,
+                unitAssignments: item.unitAssignments.map((ua, idx) =>
+                  idx === action.payload.unitIndex
+                    ? {
+                        ...ua,
+                        assignedTo: ua.assignedTo.filter(
+                          (id) => id !== action.payload.personId,
+                        ),
+                      }
+                    : ua,
                 ),
               }
             : item,
@@ -157,12 +180,15 @@ export function CheckSplitProvider({ children }: { children: ReactNode }) {
 
   // Wrapper functions for dispatch
   const addItem = (
-    item: Omit<CheckItem, "id" | "assignedTo" | "createdAt">,
+    item: Omit<CheckItem, "id" | "unitAssignments" | "createdAt">,
   ) => {
     const newItem: CheckItem = {
       ...item,
       id: crypto.randomUUID(),
-      assignedTo: [],
+      unitAssignments: Array.from({ length: item.quantity }, (_, i) => ({
+        unitIndex: i,
+        assignedTo: [],
+      })),
       createdAt: new Date(),
     };
     dispatch({ type: "ADD_ITEM", payload: newItem });
@@ -193,12 +219,23 @@ export function CheckSplitProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "UPDATE_PERSON", payload: { id: personId, updates } });
   };
 
-  const assignItemToPerson = (itemId: string, personId: string) => {
-    dispatch({ type: "ASSIGN_ITEM", payload: { itemId, personId } });
+  const assignUnitToPerson = (
+    itemId: string,
+    unitIndex: number,
+    personId: string,
+  ) => {
+    dispatch({ type: "ASSIGN_UNIT", payload: { itemId, unitIndex, personId } });
   };
 
-  const unassignItemFromPerson = (itemId: string, personId: string) => {
-    dispatch({ type: "UNASSIGN_ITEM", payload: { itemId, personId } });
+  const unassignUnitFromPerson = (
+    itemId: string,
+    unitIndex: number,
+    personId: string,
+  ) => {
+    dispatch({
+      type: "UNASSIGN_UNIT",
+      payload: { itemId, unitIndex, personId },
+    });
   };
 
   const setTaxRate = (rate: number) => {
@@ -229,8 +266,8 @@ export function CheckSplitProvider({ children }: { children: ReactNode }) {
     addPerson,
     removePerson,
     updatePerson,
-    assignItemToPerson,
-    unassignItemFromPerson,
+    assignUnitToPerson,
+    unassignUnitFromPerson,
     setTaxRate,
     setTipRate,
     setServiceCharges,

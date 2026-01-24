@@ -4,6 +4,7 @@ import { SplitSummary } from '../components/summary/SplitSummary';
 import { Button } from '../components/shared/Button';
 import { useCheckSplit } from '../context/CheckSplitContext';
 import { motion } from 'motion/react';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 interface SummaryViewProps {
   onBack: () => void;
@@ -25,9 +26,13 @@ export function SummaryView({ onBack, onReset }: SummaryViewProps) {
     }
   };
 
-  const unassignedItems = state.items.filter(
-    (item) => item.assignedTo.length === 0
-  );
+  // Count unassigned units (items where all units have no assignments)
+  const unassignedUnitCount = state.items.reduce((count, item) => {
+    return (
+      count +
+      item.unitAssignments.filter((ua) => ua.assignedTo.length === 0).length
+    );
+  }, 0);
 
   return (
     <motion.div
@@ -47,13 +52,13 @@ export function SummaryView({ onBack, onReset }: SummaryViewProps) {
             </p>
           </div>
 
-          {unassignedItems.length > 0 && (
+          {unassignedUnitCount > 0 && (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
               <div className="flex items-start gap-2">
                 <div className="text-2xl">⚠️</div>
                 <div>
                   <p className="font-medium text-amber-900">
-                    {unassignedItems.length} {t('summary.unassignedWarningTitle')}
+                    {unassignedUnitCount} {t('summary.unassignedWarningTitle')}
                   </p>
                   <p className="text-sm text-amber-800 mt-1">
                     {t('summary.unassignedWarningMessage')}
@@ -70,6 +75,7 @@ export function SummaryView({ onBack, onReset }: SummaryViewProps) {
               ← {t('common.back')}
             </Button>
             <Button variant="danger" onClick={handleReset}>
+              <ArrowPathIcon className="size-4" />
               {t('summary.resetButton')}
             </Button>
           </div>

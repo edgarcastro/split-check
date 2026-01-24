@@ -1,4 +1,4 @@
-import { CheckState, SplitSummary, PersonTotal } from "../types";
+import { CheckState, SplitSummary, PersonTotal, PersonItemDetail } from "../types";
 
 /**
  * Calculate total split amounts for all people
@@ -6,20 +6,47 @@ import { CheckState, SplitSummary, PersonTotal } from "../types";
 export function calculateSplit(state: CheckState): SplitSummary {
   const { items, people, taxRate, tipRate, serviceCharges } = state;
 
-  // Calculate subtotal for each person
+  // Calculate subtotal and item details for each person based on unit assignments
   const personSubtotals = people.map((person) => {
-    const assignedItems = items.filter((item) =>
-      item.assignedTo.includes(person.id),
-    );
+    let subtotal = 0;
+    const itemDetailsMap = new Map<string, PersonItemDetail>();
 
-    const subtotal = assignedItems.reduce((sum, item) => {
-      // If item is split between multiple people, divide price
-      const splitCount = item.assignedTo.length;
-      const itemTotal = item.price * item.quantity;
-      return sum + itemTotal / splitCount;
-    }, 0);
+    items.forEach((item) => {
+      let itemAmount = 0;
+      let unitsAssigned = 0;
+      let hasSharedUnit = false;
 
-    return { personId: person.id, subtotal };
+      item.unitAssignments.forEach((ua) => {
+        if (ua.assignedTo.includes(person.id)) {
+          // This person has this unit - split unit price among all assigned
+          const splitCount = ua.assignedTo.length;
+          const unitAmount = item.price / splitCount;
+          itemAmount += unitAmount;
+          unitsAssigned++;
+          if (splitCount > 1) {
+            hasSharedUnit = true;
+          }
+        }
+      });
+
+      if (unitsAssigned > 0) {
+        subtotal += itemAmount;
+        itemDetailsMap.set(item.id, {
+          itemId: item.id,
+          itemName: item.name,
+          unitPrice: item.price,
+          unitsAssigned,
+          isShared: hasSharedUnit,
+          amount: itemAmount,
+        });
+      }
+    });
+
+    return {
+      personId: person.id,
+      subtotal,
+      items: Array.from(itemDetailsMap.values()),
+    };
   });
 
   const totalBeforeTaxAndTip = personSubtotals.reduce(
@@ -29,7 +56,7 @@ export function calculateSplit(state: CheckState): SplitSummary {
 
   // Calculate proportional tax, tip, and service charges
   const personTotals: PersonTotal[] = personSubtotals.map(
-    ({ personId, subtotal }) => {
+    ({ personId, subtotal, items: personItems }) => {
       const person = people.find((p) => p.id === personId)!;
       const proportion =
         totalBeforeTaxAndTip > 0 ? subtotal / totalBeforeTaxAndTip : 0;
@@ -46,6 +73,7 @@ export function calculateSplit(state: CheckState): SplitSummary {
         tip,
         serviceCharge,
         total: subtotal + tax + tip + serviceCharge,
+        items: personItems,
       };
     },
   );

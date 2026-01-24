@@ -1,14 +1,20 @@
 import { useDroppable } from '@dnd-kit/core';
 import { useTranslation } from 'react-i18next';
 import { Person, CheckItem } from '../../types';
-import { DraggableItem } from './DraggableItem';
+import { DraggableUnit } from './DraggableUnit';
 import { formatCurrency } from '../../utils/formatters';
 import { EmptyState } from '../shared/EmptyState';
 
 interface PersonDropZoneProps {
   person: Person;
-  items: CheckItem[];
+  items: CheckItem[]; // All items (to find units assigned to this person)
   subtotal: number;
+}
+
+interface AssignedUnit {
+  item: CheckItem;
+  unitIndex: number;
+  isShared: boolean;
 }
 
 export function PersonDropZone({
@@ -19,6 +25,20 @@ export function PersonDropZone({
   const { t } = useTranslation();
   const { setNodeRef, isOver } = useDroppable({
     id: person.id,
+  });
+
+  // Get all units assigned to this person
+  const assignedUnits: AssignedUnit[] = [];
+  items.forEach((item) => {
+    item.unitAssignments.forEach((ua, unitIndex) => {
+      if (ua.assignedTo.includes(person.id)) {
+        assignedUnits.push({
+          item,
+          unitIndex,
+          isShared: ua.assignedTo.length > 1,
+        });
+      }
+    });
   });
 
   return (
@@ -39,27 +59,33 @@ export function PersonDropZone({
           {person.name.charAt(0).toUpperCase()}
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-gray-900">
-            {person.name}
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900">{person.name}</h3>
           <p className="text-sm text-gray-600">
             {t('common.subtotal')}: {formatCurrency(subtotal)}
           </p>
         </div>
         <span className="text-sm text-gray-600">
-          {items.length} {items.length === 1 ? t('common.item') : t('common.items')}
+          {assignedUnits.length}{' '}
+          {assignedUnits.length === 1 ? t('common.item') : t('common.items')}
         </span>
       </div>
 
       <div className="space-y-2">
-        {items.length === 0 ? (
+        {assignedUnits.length === 0 ? (
           <EmptyState
             icon={<div className="text-4xl">👤</div>}
             title={t('assignment.noItemsYet')}
             description={t('assignment.dragItemsHere')}
           />
         ) : (
-          items.map((item) => <DraggableItem key={item.id} item={item} />)
+          assignedUnits.map(({ item, unitIndex, isShared }) => (
+            <DraggableUnit
+              key={`${item.id}:unit:${unitIndex}`}
+              item={item}
+              unitIndex={unitIndex}
+              isShared={isShared}
+            />
+          ))
         )}
       </div>
     </div>

@@ -1,44 +1,31 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { motion } from 'motion/react';
+import { ComponentProps } from 'react';
+import { Button as ShadcnButton } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-interface ButtonProps
-  extends Omit<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration'
-  > {
+type ShadcnButtonProps = ComponentProps<typeof ShadcnButton>;
+
+interface ButtonProps extends Omit<ShadcnButtonProps, 'variant'> {
   variant?: 'primary' | 'secondary' | 'danger';
-  children: ReactNode;
   fullWidth?: boolean;
 }
 
+const variantMap = {
+  primary: 'default',
+  secondary: 'outline',
+  danger: 'destructive',
+} as const;
+
 export function Button({
   variant = 'primary',
-  children,
   fullWidth = false,
-  className = '',
-  disabled,
+  className,
   ...props
 }: ButtonProps) {
-  const baseClasses = 'btn';
-
-  const variantClasses = {
-    primary: 'btn-primary',
-    secondary: 'btn-secondary',
-    danger: 'btn-danger',
-  };
-
-  const widthClass = fullWidth ? 'w-full' : '';
-  const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : '';
-
   return (
-    <motion.button
-      whileHover={!disabled ? { scale: 1.02 } : {}}
-      whileTap={!disabled ? { scale: 0.98 } : {}}
-      className={`${baseClasses} ${variantClasses[variant]} ${widthClass} ${disabledClass} ${className}`}
-      disabled={disabled}
+    <ShadcnButton
+      variant={variantMap[variant]}
+      className={cn(fullWidth && 'w-full', className)}
       {...props}
-    >
-      {children}
-    </motion.button>
+    />
   );
 }

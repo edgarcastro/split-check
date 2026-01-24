@@ -13,7 +13,9 @@
     "total": "Total",
     "subtotal": "Subtotal",
     "item": "artículo",
-    "items": "artículos"
+    "items": "artículos",
+    "each": "c/u",
+    "shared": "Compartido"
   },
   "confirmations": {
     "startOver": "¿Estás seguro de que quieres empezar de nuevo? Esto borrará todos tus datos."
@@ -63,6 +65,7 @@
     "subtitle": "Arrastra los artículos para asignarlos. Puedes asignar artículos a múltiples personas para dividir el costo.",
     "nextButton": "Siguiente: Ver Resumen →",
     "unassignedItems": "Artículos Sin Asignar",
+    "assignTo": "Asignar a",
     "assignedTo": "Asignado a",
     "splitEqually": "Dividir Equitativamente",
     "allItemsAssigned": "Todos los artículos asignados",
@@ -96,7 +99,9 @@
     "serviceCharges": "Cargos por Servicio ($)",
     "totalTax": "Impuesto Total ({{rate}}%)",
     "totalTip": "Propina Total ({{rate}}%)",
-    "grandTotal": "Total General"
+    "grandTotal": "Total General",
+    "viewDetails": "Ver detalle",
+    "hideDetails": "Ocultar detalle"
   },
   "errors": {
     "itemNameRequired": "El nombre del artículo es requerido (máximo 100 caracteres)",

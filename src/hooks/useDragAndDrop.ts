@@ -7,11 +7,29 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 
-interface UseDragAndDropProps {
-  onItemMove: (itemId: string, targetId: string | null) => void;
+interface DragInfo {
+  itemId: string;
+  unitIndex: number;
 }
 
-export function useDragAndDrop({ onItemMove }: UseDragAndDropProps) {
+interface UseDragAndDropProps {
+  onUnitMove: (
+    itemId: string,
+    unitIndex: number,
+    targetId: string | null,
+  ) => void;
+}
+
+// Parse drag ID format: "{itemId}:unit:{unitIndex}"
+function parseDragId(id: string): DragInfo {
+  const parts = id.split(':unit:');
+  return {
+    itemId: parts[0],
+    unitIndex: parseInt(parts[1], 10),
+  };
+}
+
+export function useDragAndDrop({ onUnitMove }: UseDragAndDropProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const sensors = useSensors(
@@ -19,7 +37,7 @@ export function useDragAndDrop({ onItemMove }: UseDragAndDropProps) {
       activationConstraint: {
         distance: 8, // Require 8px movement before drag starts
       },
-    })
+    }),
   );
 
   const handleDragStart = (event: DragStartEvent) => {
@@ -34,11 +52,12 @@ export function useDragAndDrop({ onItemMove }: UseDragAndDropProps) {
       return;
     }
 
-    const itemId = active.id as string;
+    const dragId = active.id as string;
     const targetId = over.id as string;
+    const { itemId, unitIndex } = parseDragId(dragId);
 
     // Handle drop logic
-    onItemMove(itemId, targetId === 'unassigned' ? null : targetId);
+    onUnitMove(itemId, unitIndex, targetId === 'unassigned' ? null : targetId);
 
     setActiveId(null);
   };

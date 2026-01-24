@@ -13,7 +13,9 @@
     "total": "Total",
     "subtotal": "Subtotal",
     "item": "item",
-    "items": "items"
+    "items": "items",
+    "each": "each",
+    "shared": "Shared"
   },
   "confirmations": {
     "startOver": "Are you sure you want to start over? This will clear all your data."
@@ -63,6 +65,7 @@
     "subtitle": "Drag items to assign them. You can assign items to multiple people to split the cost.",
     "nextButton": "Next: View Summary →",
     "unassignedItems": "Unassigned Items",
+    "assignTo": "Assign to",
     "assignedTo": "Assigned to",
     "splitEqually": "Split Equally",
     "allItemsAssigned": "All items assigned",
@@ -96,7 +99,9 @@
     "serviceCharges": "Service Charges ($)",
     "totalTax": "Total Tax ({{rate}}%)",
     "totalTip": "Total Tip ({{rate}}%)",
-    "grandTotal": "Grand Total"
+    "grandTotal": "Grand Total",
+    "viewDetails": "View details",
+    "hideDetails": "Hide details"
   },
   "errors": {
     "itemNameRequired": "Item name is required (max 100 characters)",
