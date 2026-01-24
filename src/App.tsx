@@ -53,7 +53,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
       <Header />
-      <Stepper currentStep={currentStep} />
+      <Stepper currentStep={currentStep} onStepClick={setCurrentStep} />
 
       <main className="flex-1">
         <AnimatePresence mode="wait">{renderStep()}</AnimatePresence>

@@ -1,12 +1,14 @@
 import {useTranslation} from 'react-i18next';
 import {WorkflowStep} from '../../types';
 import {motion} from 'motion/react';
+import {Progress} from '@/components/ui/progress';
 
 interface StepperProps {
   currentStep: WorkflowStep;
+  onStepClick?: (step: WorkflowStep) => void;
 }
 
-export function Stepper({currentStep}: StepperProps) {
+export function Stepper({currentStep, onStepClick}: StepperProps) {
   const {t} = useTranslation();
 
   const steps = [
@@ -17,68 +19,75 @@ export function Stepper({currentStep}: StepperProps) {
   ];
 
   const currentIndex = steps.findIndex((step) => step.key === currentStep);
+  const progressValue = (currentIndex / (steps.length - 1)) * 100;
+
+  const handleStepClick = (step: WorkflowStep, index: number) => {
+    if (index < currentIndex && onStepClick) {
+      onStepClick(step);
+    }
+  };
 
   return (
     <div className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between max-w-3xl mx-auto">
-          {steps.map((step, index) => {
-            const isActive = index === currentIndex;
-            const isCompleted = index < currentIndex;
-            // const isUpcoming = index > currentIndex;
+        <div className="max-w-3xl mx-auto">
+          {/* Progress bar background */}
+          <div className="relative">
+            {/* Progress bar - positioned behind the circles */}
+            <div className="absolute top-6 left-0 right-0 px-6 -translate-y-1/2">
+              <Progress value={progressValue} className="h-1 bg-gray-200 *:data-[slot=progress-indicator]:bg-green-500" />
+            </div>
 
-            return (
-              <div key={step.key} className="flex items-center flex-1">
-                <div className="flex flex-col items-center flex-1">
-                  {/* Circle */}
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      scale: isActive ? 1.1 : 1,
-                      backgroundColor: isCompleted
-                        ? '#10b981'
-                        : isActive
-                          ? '#0ea5e9'
-                          : '#e5e7eb',
-                    }}
-                    className={`w-12 h-12 rounded-full flex items-center justify-center text-xl ${
-                      isCompleted || isActive ? 'text-white' : 'text-gray-400'
-                    } shadow-md`}
-                  >
-                    {isCompleted ? '✓' : step.icon}
-                  </motion.div>
+            {/* Steps */}
+            <div className="relative flex items-start justify-between">
+              {steps.map((step, index) => {
+                const isActive = index === currentIndex;
+                const isCompleted = index < currentIndex;
+                const isClickable = isCompleted && onStepClick;
 
-                  {/* Label */}
-                  <p
-                    className={`mt-2 text-xs font-medium ${
-                      isActive
-                        ? 'text-primary-600'
-                        : isCompleted
-                          ? 'text-green-600'
-                          : 'text-gray-400'
-                    }`}
-                  >
-                    {step.label}
-                  </p>
-                </div>
-
-                {/* Connector line */}
-                {index < steps.length - 1 && (
-                  <div className="flex-1 h-1 mx-2 mb-8 relative">
-                    <div className="absolute inset-0 bg-gray-200 rounded-full" />
-                    <motion.div
+                return (
+                  <div key={step.key} className="flex flex-col items-center">
+                    {/* Circle */}
+                    <motion.button
+                      type="button"
+                      disabled={!isClickable}
+                      onClick={() => handleStepClick(step.key, index)}
                       initial={false}
                       animate={{
-                        width: isCompleted ? '100%' : '0%',
+                        scale: isActive ? 1.1 : 1,
+                        backgroundColor: isCompleted
+                          ? '#10b981'
+                          : isActive
+                            ? '#0ea5e9'
+                            : '#e5e7eb',
                       }}
-                      transition={{duration: 0.3}}
-                      className="absolute inset-0 bg-green-500 rounded-full"
-                    />
+                      whileHover={isClickable ? {scale: 1.15} : undefined}
+                      whileTap={isClickable ? {scale: 0.95} : undefined}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-xl ${
+                        isCompleted || isActive ? 'text-white' : 'text-gray-400'
+                      } shadow-md ${isClickable ? 'cursor-pointer' : 'cursor-default'}`}
+                    >
+                      {isCompleted ? '✓' : step.icon}
+                    </motion.button>
+
+                    {/* Label */}
+                    <p
+                      className={`mt-2 text-xs font-medium text-center ${
+                        isActive
+                          ? 'text-primary-600'
+                          : isCompleted
+                            ? 'text-green-600'
+                            : 'text-gray-400'
+                      } ${isClickable ? 'cursor-pointer hover:underline' : ''}`}
+                      onClick={() => handleStepClick(step.key, index)}
+                    >
+                      {step.label}
+                    </p>
                   </div>
-                )}
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

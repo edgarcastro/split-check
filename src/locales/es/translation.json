@@ -101,7 +101,9 @@
     "totalTip": "Propina Total ({{rate}}%)",
     "grandTotal": "Total General",
     "viewDetails": "Ver detalle",
-    "hideDetails": "Ocultar detalle"
+    "hideDetails": "Ocultar detalle",
+    "shareButton": "Compartir",
+    "sharing": "Compartiendo..."
   },
   "errors": {
     "itemNameRequired": "El nombre del artículo es requerido (máximo 100 caracteres)",

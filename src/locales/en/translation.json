@@ -101,7 +101,9 @@
     "totalTip": "Total Tip ({{rate}}%)",
     "grandTotal": "Grand Total",
     "viewDetails": "View details",
-    "hideDetails": "Hide details"
+    "hideDetails": "Hide details",
+    "shareButton": "Share",
+    "sharing": "Sharing..."
   },
   "errors": {
     "itemNameRequired": "Item name is required (max 100 characters)",

@@ -1,10 +1,13 @@
+import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Container} from '../components/layout/Container';
 import {SplitSummary} from '../components/summary/SplitSummary';
 import {Button} from '../components/shared/Button';
 import {useCheckSplit} from '../context/CheckSplitContext';
+import {useCheckCalculations} from '../hooks/useCheckCalculations';
+import {generateSummaryPdf} from '../utils/generateSummaryPdf';
 import {motion} from 'motion/react';
-import {ArrowPathIcon} from '@heroicons/react/24/outline';
+import {ArrowPathIcon, ShareIcon} from '@heroicons/react/24/outline';
 
 interface SummaryViewProps {
   onBack: () => void;
@@ -14,6 +17,34 @@ interface SummaryViewProps {
 export function SummaryView({onBack, onReset}: SummaryViewProps) {
   const {t} = useTranslation();
   const {state, resetCheck} = useCheckSplit();
+  const summary = useCheckCalculations();
+  const [isSharing, setIsSharing] = useState(false);
+
+  const handleShare = async () => {
+    if (!navigator.share) return;
+
+    setIsSharing(true);
+    try {
+      const pdfBlob = await generateSummaryPdf({summary, state, t});
+      const file = new File([pdfBlob], 'split-check-summary.pdf', {
+        type: 'application/pdf',
+      });
+
+      await navigator.share({
+        title: t('summary.title'),
+        files: [file],
+      });
+    } catch (error) {
+      // User cancelled or share failed - ignore
+      if ((error as Error).name !== 'AbortError') {
+        console.error('Share failed:', error);
+      }
+    } finally {
+      setIsSharing(false);
+    }
+  };
+
+  const canShare = typeof navigator.share === 'function';
 
   const handleReset = () => {
     if (window.confirm(t('confirmations.startOver'))) {
@@ -68,10 +99,22 @@ export function SummaryView({onBack, onReset}: SummaryViewProps) {
             <Button variant="secondary" onClick={onBack}>
               ← {t('common.back')}
             </Button>
-            <Button variant="danger" onClick={handleReset}>
-              <ArrowPathIcon className="size-4" />
-              {t('summary.resetButton')}
-            </Button>
+            <div className="flex gap-2">
+              {canShare && (
+                <Button
+                  variant="primary"
+                  onClick={handleShare}
+                  disabled={isSharing}
+                >
+                  <ShareIcon className="size-4" />
+                  {isSharing ? t('summary.sharing') : t('summary.shareButton')}
+                </Button>
+              )}
+              <Button variant="danger" onClick={handleReset}>
+                <ArrowPathIcon className="size-4" />
+                {t('summary.resetButton')}
+              </Button>
+            </div>
           </div>
         </div>
       </Container>
