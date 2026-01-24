@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Person } from '../../types';
 import { Card } from '../shared/Card';
 import { Badge } from '../shared/Badge';
@@ -10,6 +11,7 @@ interface PersonCardProps {
 }
 
 export function PersonCard({ person, onRemove }: PersonCardProps) {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -38,7 +40,7 @@ export function PersonCard({ person, onRemove }: PersonCardProps) {
           <button
             onClick={() => onRemove(person.id)}
             className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
-            aria-label="Remove person"
+            aria-label={t('people.removePerson')}
           >
 <TrashIcon className="w-5 h-5" />
           </button>

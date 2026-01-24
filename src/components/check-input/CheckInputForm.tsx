@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useCheckSplit } from '../../context/CheckSplitContext';
 import { Input } from '../shared/Input';
 import { Button } from '../shared/Button';
@@ -10,6 +11,7 @@ import {
 } from '../../utils/calculations';
 
 export function CheckInputForm() {
+  const { t } = useTranslation();
   const { addItem } = useCheckSplit();
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -26,15 +28,15 @@ export function CheckInputForm() {
     const newErrors: typeof errors = {};
 
     if (!validateItemName(name)) {
-      newErrors.name = 'Item name is required (max 100 characters)';
+      newErrors.name = t('errors.itemNameRequired');
     }
 
     if (!validatePrice(price)) {
-      newErrors.price = 'Please enter a valid price greater than 0';
+      newErrors.price = t('errors.invalidPrice');
     }
 
     if (!validateQuantity(quantity)) {
-      newErrors.quantity = 'Please enter a valid quantity (1-99)';
+      newErrors.quantity = t('errors.invalidQuantity');
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -58,13 +60,13 @@ export function CheckInputForm() {
   return (
     <Card>
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
-        Add Item Manually
+        {t('checkInput.addItemManually')}
       </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
-          label="Item Name"
+          label={t('checkInput.itemName')}
           type="text"
-          placeholder="e.g., Burger, Pizza"
+          placeholder={t('checkInput.itemNamePlaceholder')}
           value={name}
           onChange={(e) => {
             setName(e.target.value);
@@ -77,7 +79,7 @@ export function CheckInputForm() {
 
         <div className="grid grid-cols-2 gap-4">
           <Input
-            label="Price"
+            label={t('checkInput.itemPrice')}
             type="number"
             step="0.01"
             min="0"
@@ -93,7 +95,7 @@ export function CheckInputForm() {
           />
 
           <Input
-            label="Quantity"
+            label={t('checkInput.quantity')}
             type="number"
             min="1"
             max="99"
@@ -111,7 +113,7 @@ export function CheckInputForm() {
         </div>
 
         <Button type="submit" variant="primary" fullWidth>
-          Add Item
+          {t('checkInput.addItem')}
         </Button>
       </form>
     </Card>

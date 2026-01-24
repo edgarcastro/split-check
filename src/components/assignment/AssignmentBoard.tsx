@@ -1,4 +1,5 @@
 import { DndContext, DragOverlay } from '@dnd-kit/core';
+import { useTranslation } from 'react-i18next';
 import { useCheckSplit } from '../../context/CheckSplitContext';
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 import { UnassignedPool } from './UnassignedPool';
@@ -6,6 +7,7 @@ import { PersonDropZone } from './PersonDropZone';
 import { DraggableItem } from './DraggableItem';
 
 export function AssignmentBoard() {
+  const { t } = useTranslation();
   const { state, assignItemToPerson, unassignItemFromPerson } = useCheckSplit();
 
   const handleItemMove = (itemId: string, targetId: string | null) => {
@@ -70,9 +72,7 @@ export function AssignmentBoard() {
       <div className="space-y-4">
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <p className="text-sm text-blue-800">
-            <strong>Tip:</strong> Drag items from the unassigned pool to assign them
-            to people. You can assign the same item to multiple people to split the
-            cost evenly between them.
+            {t('assignment.tipMessage')}
           </p>
         </div>
 

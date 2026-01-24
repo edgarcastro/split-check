@@ -1,10 +1,12 @@
 import { useState, useRef, DragEvent, ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useCheckSplit } from "../../context/CheckSplitContext";
 import { Card } from "../shared/Card";
 import { mockReceiptOCR, validateImageFile } from "../../utils/mockOCR";
 import { motion } from "motion/react";
 
 export function ImageUpload() {
+  const { t } = useTranslation();
   const { addItem } = useCheckSplit();
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -17,7 +19,10 @@ export function ImageUpload() {
 
     const validation = validateImageFile(file);
     if (!validation.valid) {
-      setError(validation.error || "Invalid file");
+      const errorKey = validation.errorType
+        ? `errors.${validation.errorType}`
+        : 'errors.invalidFile';
+      setError(t(errorKey));
       return;
     }
 
@@ -37,7 +42,7 @@ export function ImageUpload() {
       });
       setPreview(null);
     } catch {
-      setError("Failed to process image. Please try again.");
+      setError(t('errors.processingFailed'));
     } finally {
       setIsProcessing(false);
     }
@@ -77,11 +82,10 @@ export function ImageUpload() {
   return (
     <Card>
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
-        Upload Receipt Image
+        {t('checkInput.uploadReceiptImage')}
       </h3>
       <p className="text-sm text-gray-600 mb-4">
-        Upload a photo of your receipt and we'll extract the items automatically
-        (mock OCR for demo purposes)
+        {t('checkInput.uploadInstructions')}
       </p>
 
       <motion.div
@@ -105,7 +109,7 @@ export function ImageUpload() {
             >
               ⏳
             </motion.div>
-            <p className="text-sm text-gray-600">Processing receipt...</p>
+            <p className="text-sm text-gray-600">{t('checkInput.processingReceipt')}</p>
           </div>
         ) : preview ? (
           <div className="flex flex-col items-center">
@@ -114,16 +118,16 @@ export function ImageUpload() {
               alt="Receipt preview"
               className="max-h-40 rounded mb-2"
             />
-            <p className="text-sm text-gray-600">Processing...</p>
+            <p className="text-sm text-gray-600">{t('checkInput.processing')}</p>
           </div>
         ) : (
           <div className="flex flex-col items-center">
             <div className="text-5xl mb-2">📸</div>
             <p className="text-sm font-medium text-gray-900 mb-1">
-              Click to upload or drag and drop
+              {t('checkInput.clickToUpload')}
             </p>
             <p className="text-xs text-gray-500">
-              PNG, JPG, or HEIC up to 10MB
+              {t('checkInput.fileTypes')}
             </p>
           </div>
         )}

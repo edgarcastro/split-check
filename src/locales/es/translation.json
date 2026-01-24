@@ -10,7 +10,10 @@
     "edit": "Editar",
     "save": "Guardar",
     "add": "Agregar",
-    "total": "Total"
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "item": "artículo",
+    "items": "artículos"
   },
   "confirmations": {
     "startOver": "¿Estás seguro de que quieres empezar de nuevo? Esto borrará todos tus datos."
@@ -25,32 +28,48 @@
     "title": "Agrega los Artículos de tu Cuenta",
     "subtitle": "Comienza agregando artículos manualmente o sube una imagen del recibo",
     "nextButton": "Siguiente: Agregar Personas →",
+    "addItemManually": "Agregar Artículo Manualmente",
     "itemName": "Nombre del Artículo",
+    "itemNamePlaceholder": "ej., Hamburguesa, Pizza",
     "itemPrice": "Precio",
+    "quantity": "Cantidad",
     "addItem": "Agregar Artículo",
     "uploadReceipt": "Subir Recibo",
+    "uploadReceiptImage": "Subir Imagen del Recibo",
     "uploadDescription": "Arrastra y suelta o haz clic para subir",
-    "noItems": "No hay artículos agregados aún",
-    "noItemsDescription": "Agrega artículos manualmente o sube un recibo para comenzar"
+    "uploadInstructions": "Sube una foto de tu recibo y extraeremos los artículos automáticamente (OCR simulado para propósitos de demostración)",
+    "clickToUpload": "Haz clic para subir o arrastra y suelta",
+    "fileTypes": "PNG, JPG, o HEIC hasta 10MB",
+    "processingReceipt": "Procesando recibo...",
+    "processing": "Procesando...",
+    "noItems": "No hay artículos aún",
+    "noItemsDescription": "Agrega artículos manualmente o sube una imagen del recibo para comenzar",
+    "removeItem": "Eliminar artículo"
   },
   "people": {
     "title": "Agregar Personas",
     "subtitle": "Agrega al menos 2 personas que van a dividir la cuenta",
     "nextButton": "Siguiente: Asignar Artículos →",
-    "personName": "Nombre de la Persona",
     "addPerson": "Agregar Persona",
-    "noPeople": "No hay personas agregadas aún",
+    "personName": "Nombre de la Persona",
+    "personNamePlaceholder": "ej., Juan, Sara",
+    "noPeople": "No hay personas aún",
     "noPeopleDescription": "Agrega las personas que van a dividir la cuenta",
-    "minPeopleWarning": "Por favor agrega al menos 2 personas para continuar"
+    "minPeopleWarning": "Por favor agrega al menos 2 personas para continuar",
+    "removePerson": "Eliminar persona"
   },
   "assignment": {
     "title": "Asignar Artículos a Personas",
     "subtitle": "Arrastra los artículos para asignarlos. Puedes asignar artículos a múltiples personas para dividir el costo.",
     "nextButton": "Siguiente: Ver Resumen →",
-    "unassigned": "Artículos Sin Asignar",
+    "unassignedItems": "Artículos Sin Asignar",
     "assignedTo": "Asignado a",
     "splitEqually": "Dividir Equitativamente",
-    "noUnassignedItems": "Todos los artículos han sido asignados"
+    "allItemsAssigned": "Todos los artículos asignados",
+    "allItemsAssignedDescription": "¡Excelente! Todos los artículos han sido asignados a personas",
+    "noItemsYet": "No hay artículos aún",
+    "dragItemsHere": "Arrastra artículos aquí para asignarlos",
+    "tipMessage": "Consejo: Arrastra artículos desde el grupo sin asignar para asignarlos a personas. Puedes asignar el mismo artículo a múltiples personas para dividir el costo equitativamente entre ellas."
   },
   "summary": {
     "title": "Resumen de División",
@@ -62,6 +81,33 @@
     "totalAmount": "Cantidad Total",
     "perPerson": "por persona",
     "unassignedWarningTitle": "artículo(s) sin asignar",
-    "unassignedWarningMessage": "Algunos artículos aún no han sido asignados a nadie. No se incluirán en el cálculo de división."
+    "unassignedWarningMessage": "Algunos artículos aún no han sido asignados a nadie. No se incluirán en el cálculo de división.",
+    "noPeopleToSplit": "No hay personas para dividir la cuenta",
+    "noPeopleDescription": "Por favor agrega personas en el paso anterior para ver la división",
+    "individualTotals": "Totales Individuales",
+    "checkDetails": "Detalles de la Cuenta",
+    "totalBreakdown": "Desglose total",
+    "overallBreakdown": "Desglose General",
+    "tax": "Impuesto",
+    "tip": "Propina",
+    "serviceCharge": "Cargo por Servicio",
+    "taxRate": "Tasa de Impuesto (%)",
+    "tipRate": "Tasa de Propina (%)",
+    "serviceCharges": "Cargos por Servicio ($)",
+    "totalTax": "Impuesto Total ({{rate}}%)",
+    "totalTip": "Propina Total ({{rate}}%)",
+    "grandTotal": "Total General"
+  },
+  "errors": {
+    "itemNameRequired": "El nombre del artículo es requerido (máximo 100 caracteres)",
+    "invalidPrice": "Por favor ingresa un precio válido mayor que 0",
+    "invalidQuantity": "Por favor ingresa una cantidad válida (1-99)",
+    "invalidFile": "Archivo inválido",
+    "processingFailed": "Falló el procesamiento de la imagen. Por favor intenta de nuevo.",
+    "invalidFileType": "Por favor sube un archivo de imagen válido (JPEG, PNG, HEIC)",
+    "fileTooLarge": "El tamaño de la imagen debe ser menor a 10MB"
+  },
+  "footer": {
+    "builtWith": "Construido con React, TypeScript, Tailwind CSS y Framer Motion"
   }
 }

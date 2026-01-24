@@ -1,4 +1,5 @@
 import { useDroppable } from '@dnd-kit/core';
+import { useTranslation } from 'react-i18next';
 import { Person, CheckItem } from '../../types';
 import { DraggableItem } from './DraggableItem';
 import { formatCurrency } from '../../utils/formatters';
@@ -15,6 +16,7 @@ export function PersonDropZone({
   items,
   subtotal,
 }: PersonDropZoneProps) {
+  const { t } = useTranslation();
   const { setNodeRef, isOver } = useDroppable({
     id: person.id,
   });
@@ -41,11 +43,11 @@ export function PersonDropZone({
             {person.name}
           </h3>
           <p className="text-sm text-gray-600">
-            Subtotal: {formatCurrency(subtotal)}
+            {t('common.subtotal')}: {formatCurrency(subtotal)}
           </p>
         </div>
         <span className="text-sm text-gray-600">
-          {items.length} {items.length === 1 ? 'item' : 'items'}
+          {items.length} {items.length === 1 ? t('common.item') : t('common.items')}
         </span>
       </div>
 
@@ -53,8 +55,8 @@ export function PersonDropZone({
         {items.length === 0 ? (
           <EmptyState
             icon={<div className="text-4xl">👤</div>}
-            title="No items yet"
-            description="Drag items here to assign them"
+            title={t('assignment.noItemsYet')}
+            description={t('assignment.dragItemsHere')}
           />
         ) : (
           items.map((item) => <DraggableItem key={item.id} item={item} />)

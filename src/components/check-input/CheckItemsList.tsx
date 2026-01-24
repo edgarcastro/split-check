@@ -1,17 +1,19 @@
+import { useTranslation } from 'react-i18next';
 import { useCheckSplit } from '../../context/CheckSplitContext';
 import { CheckItemCard } from './CheckItemCard';
 import { EmptyState } from '../shared/EmptyState';
 import { AnimatePresence } from 'motion/react';
 
 export function CheckItemsList() {
+  const { t } = useTranslation();
   const { state, removeItem } = useCheckSplit();
 
   if (state.items.length === 0) {
     return (
       <EmptyState
         icon={<div className="text-6xl">🍽️</div>}
-        title="No items yet"
-        description="Add items manually or upload a receipt image to get started"
+        title={t('checkInput.noItems')}
+        description={t('checkInput.noItemsDescription')}
       />
     );
   }
