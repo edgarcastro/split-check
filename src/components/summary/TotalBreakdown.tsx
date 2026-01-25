@@ -2,6 +2,7 @@ import {useTranslation} from 'react-i18next';
 import {SplitSummary} from '../../types';
 import {Card} from '../shared/Card';
 import {Input} from '../shared/Input';
+import {NumberStepper} from '../shared/NumberStepper';
 import {formatCurrency} from '../../utils/formatters';
 import {useCheckSplit} from '../../context/CheckSplitContext';
 import {motion} from 'motion/react';
@@ -23,26 +24,24 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
       <div className="space-y-6">
         {/* Adjustable rates */}
         <div className="space-y-4 pb-4 border-b border-gray-200">
-          <Input
-            label={t('summary.taxRate')}
-            type="number"
-            step="0.1"
-            min="0"
-            max="30"
+          <NumberStepper
+            label={t('summary.tax')}
             value={state.taxRate}
-            onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}
-            fullWidth
+            onChange={setTaxRate}
+            min={0}
+            max={30}
+            step={0.5}
+            suffix="%"
           />
 
-          <Input
-            label={t('summary.tipRate')}
-            type="number"
-            step="0.1"
-            min="0"
-            max="100"
+          <NumberStepper
+            label={t('summary.tip')}
             value={state.tipRate}
-            onChange={(e) => setTipRate(parseFloat(e.target.value) || 0)}
-            fullWidth
+            onChange={setTipRate}
+            min={0}
+            max={100}
+            step={1}
+            suffix="%"
           />
 
           <Input
@@ -50,8 +49,12 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
             type="number"
             step="0.01"
             min="0"
-            value={state.serviceCharges}
+            value={state.serviceCharges || ''}
             onChange={(e) => setServiceCharges(parseFloat(e.target.value) || 0)}
+            onBlur={(e) => {
+              if (e.target.value === '') setServiceCharges(0);
+            }}
+            suffix="$"
             fullWidth
           />
         </div>

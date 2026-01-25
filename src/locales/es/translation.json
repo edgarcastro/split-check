@@ -1,7 +1,7 @@
 {
   "common": {
     "appName": "Dividir Cuenta",
-    "startOver": "Empezar de Nuevo",
+    "startOver": "Reiniciar",
     "next": "Siguiente",
     "back": "Atrás",
     "cancel": "Cancelar",
@@ -21,9 +21,9 @@
     "startOver": "¿Estás seguro de que quieres empezar de nuevo? Esto borrará todos tus datos."
   },
   "stepper": {
-    "addItems": "Agregar Artículos",
-    "addPeople": "Agregar Personas",
-    "assignItems": "Asignar Artículos",
+    "addItems": "Artículos",
+    "addPeople": "Personas",
+    "assignItems": "Asignar",
     "summary": "Resumen"
   },
   "checkInput": {

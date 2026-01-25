@@ -95,22 +95,24 @@ export function SummaryView({onBack, onReset}: SummaryViewProps) {
 
           <SplitSummary />
 
-          <div className="flex justify-between pt-6 border-t border-gray-200">
-            <Button variant="secondary" onClick={onBack}>
+          <div className="flex flex-col-reverse gap-3 pt-6 border-t border-gray-200 sm:flex-row sm:justify-between sm:gap-2">
+            <Button variant="secondary" onClick={onBack} fullWidth className="sm:w-auto">
               ← {t('common.back')}
             </Button>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row">
               {canShare && (
                 <Button
                   variant="primary"
                   onClick={handleShare}
                   disabled={isSharing}
+                  fullWidth
+                  className="sm:w-auto"
                 >
                   <ShareIcon className="size-4" />
                   {isSharing ? t('summary.sharing') : t('summary.shareButton')}
                 </Button>
               )}
-              <Button variant="danger" onClick={handleReset}>
+              <Button variant="danger" onClick={handleReset} fullWidth className="sm:w-auto">
                 <ArrowPathIcon className="size-4" />
                 {t('summary.resetButton')}
               </Button>

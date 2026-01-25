@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {useDraggable} from '@dnd-kit/core';
 import {useTranslation} from 'react-i18next';
 import {CheckItem} from '../../types';
@@ -43,9 +44,13 @@ export function DraggableItemCard({
 
   const itemTotal = item.price * unassignedCount;
 
+  const [selectedPerson, setSelectedPerson] = useState<string>('');
+
   const handleAssign = (personId: string) => {
     // Assign the first unassigned unit to the selected person
     assignUnitToPerson(item.id, firstUnassignedIndex, personId);
+    // Reset the select to show placeholder again
+    setSelectedPerson('');
   };
 
   return (
@@ -97,7 +102,7 @@ export function DraggableItemCard({
           onMouseDown={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
         >
-          <Select onValueChange={handleAssign}>
+          <Select value={selectedPerson} onValueChange={handleAssign}>
             <SelectTrigger className="w-[120px] h-8 text-xs">
               <SelectValue
                 placeholder={t('assignment.assignTo', 'Assign to')}

@@ -21,9 +21,9 @@
     "startOver": "Are you sure you want to start over? This will clear all your data."
   },
   "stepper": {
-    "addItems": "Add Items",
-    "addPeople": "Add People",
-    "assignItems": "Assign Items",
+    "addItems": "Items",
+    "addPeople": "People",
+    "assignItems": "Assign",
     "summary": "Summary"
   },
   "checkInput": {
