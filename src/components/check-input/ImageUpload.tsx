@@ -6,7 +6,11 @@ import {validateImageFile} from '../../utils/mockOCR';
 import {processReceiptImage} from '../../utils/receiptOCR';
 import {motion} from 'motion/react';
 
-export function ImageUpload() {
+interface ImageUploadProps {
+  onProcessComplete?: () => void;
+}
+
+export function ImageUpload({onProcessComplete}: ImageUploadProps) {
   const {t} = useTranslation();
   const {addItem} = useCheckSplit();
   const [isDragging, setIsDragging] = useState(false);
@@ -42,6 +46,7 @@ export function ImageUpload() {
         addItem(item);
       });
       setPreview(null);
+      onProcessComplete?.();
     } catch {
       setError(t('errors.processingFailed'));
     } finally {

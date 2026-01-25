@@ -1,3 +1,4 @@
+import {useRef, useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Container} from '../components/layout/Container';
 import {CheckInputForm} from '../components/check-input/CheckInputForm';
@@ -15,6 +16,17 @@ export function CheckInputView({onNext}: CheckInputViewProps) {
   const {t} = useTranslation();
   const {state} = useCheckSplit();
   const hasItems = state.items.length > 0;
+  const itemsListRef = useRef<HTMLDivElement>(null);
+
+  const scrollToItems = useCallback(() => {
+    // Small delay to allow the items list to render
+    setTimeout(() => {
+      itemsListRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }, 100);
+  }, []);
 
   return (
     <motion.div
@@ -33,12 +45,12 @@ export function CheckInputView({onNext}: CheckInputViewProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ImageUpload />
+            <ImageUpload onProcessComplete={scrollToItems} />
             <CheckInputForm />
           </div>
 
           {hasItems && (
-            <>
+            <div ref={itemsListRef}>
               <CheckItemsList />
 
               <div className="flex justify-end pt-6 border-t border-gray-200">
@@ -46,7 +58,7 @@ export function CheckInputView({onNext}: CheckInputViewProps) {
                   {t('checkInput.nextButton')}
                 </Button>
               </div>
-            </>
+            </div>
           )}
         </div>
       </Container>
