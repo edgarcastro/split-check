@@ -1,10 +1,44 @@
+interface LocaleCurrencyConfig {
+  locale: string;
+  currency: string;
+}
+
+const CURRENCY_CONFIGS: Record<string, LocaleCurrencyConfig> = {
+  en: {
+    locale: 'en-US',
+    currency: 'USD',
+  },
+  es: {
+    locale: 'es-CO',
+    currency: 'COP',
+  },
+};
+
 /**
- * Format currency value
+ * Get currency configuration based on language
+ */
+export function getCurrencyConfig(language: string): LocaleCurrencyConfig {
+  return CURRENCY_CONFIGS[language] || CURRENCY_CONFIGS.en;
+}
+
+/**
+ * Format currency value (default to US format for backwards compatibility)
  */
 export function formatCurrency(amount: number): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
+  }).format(amount);
+}
+
+/**
+ * Format currency value based on language locale
+ */
+export function formatCurrencyLocale(amount: number, language: string): string {
+  const config = getCurrencyConfig(language);
+  return new Intl.NumberFormat(config.locale, {
+    style: 'currency',
+    currency: config.currency,
   }).format(amount);
 }
 

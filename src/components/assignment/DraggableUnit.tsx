@@ -1,7 +1,7 @@
 import {useDraggable} from '@dnd-kit/core';
 import {useTranslation} from 'react-i18next';
 import {CheckItem} from '../../types';
-import {formatCurrency} from '../../utils/formatters';
+import {formatCurrencyLocale} from '../../utils/formatters';
 import {motion} from 'motion/react';
 import {Bars2Icon} from '@heroicons/react/24/outline';
 
@@ -12,7 +12,7 @@ interface DraggableUnitProps {
 }
 
 export function DraggableUnit({item, unitIndex, isShared}: DraggableUnitProps) {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const dragId = `${item.id}:unit:${unitIndex}`;
 
   const {attributes, listeners, setNodeRef, transform, isDragging} =
@@ -51,7 +51,7 @@ export function DraggableUnit({item, unitIndex, isShared}: DraggableUnitProps) {
           </h4>
           <div className="flex items-center gap-1.5 mt-1 text-xs text-gray-600">
             <span className="font-medium text-gray-900">
-              {formatCurrency(item.price)}
+              {formatCurrencyLocale(item.price, i18n.language)}
             </span>
             {isShared && (
               <>

@@ -2,7 +2,7 @@ import {useDroppable} from '@dnd-kit/core';
 import {useTranslation} from 'react-i18next';
 import {Person, CheckItem} from '../../types';
 import {DraggableUnit} from './DraggableUnit';
-import {formatCurrency} from '../../utils/formatters';
+import {formatCurrencyLocale} from '../../utils/formatters';
 import {EmptyState} from '../shared/EmptyState';
 
 interface PersonDropZoneProps {
@@ -18,7 +18,7 @@ interface AssignedUnit {
 }
 
 export function PersonDropZone({person, items, subtotal}: PersonDropZoneProps) {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const {setNodeRef, isOver} = useDroppable({
     id: person.id,
   });
@@ -57,7 +57,7 @@ export function PersonDropZone({person, items, subtotal}: PersonDropZoneProps) {
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-900">{person.name}</h3>
           <p className="text-sm text-gray-600">
-            {t('common.subtotal')}: {formatCurrency(subtotal)}
+            {t('common.subtotal')}: {formatCurrencyLocale(subtotal, i18n.language)}
           </p>
         </div>
         <span className="text-sm text-gray-600">
