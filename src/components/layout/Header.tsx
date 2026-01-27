@@ -3,13 +3,18 @@ import {useCheckSplit} from '../../context/CheckSplitContext';
 import {Button} from '../shared/Button';
 import {ArrowPathIcon} from '@heroicons/react/24/outline';
 
-export function Header() {
+interface HeaderProps {
+  onReset: () => void;
+}
+
+export function Header({onReset}: HeaderProps) {
   const {t} = useTranslation();
   const {resetCheck, state} = useCheckSplit();
 
   const handleReset = () => {
     if (state.items.length > 0 || state.people.length > 0) {
       if (window.confirm(t('confirmations.startOver'))) {
+        onReset();
         resetCheck();
       }
     }

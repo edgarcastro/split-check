@@ -4,22 +4,18 @@ import {useCheckSplit} from '../../context/CheckSplitContext';
 import {Input} from '../shared/Input';
 import {Button} from '../shared/Button';
 import {Card} from '../shared/Card';
-import {
-  validatePrice,
-  validateQuantity,
-  validateItemName,
-} from '../../utils/calculations';
+import {NumberStepper} from '../shared/NumberStepper';
+import {validatePrice, validateItemName} from '../../utils/calculations';
 
 export function CheckInputForm() {
   const {t} = useTranslation();
   const {addItem} = useCheckSplit();
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('1');
+  const [quantity, setQuantity] = useState(1);
   const [errors, setErrors] = useState<{
     name?: string;
     price?: string;
-    quantity?: string;
   }>({});
 
   const handleSubmit = (e: FormEvent) => {
@@ -35,10 +31,6 @@ export function CheckInputForm() {
       newErrors.price = t('errors.invalidPrice');
     }
 
-    if (!validateQuantity(quantity)) {
-      newErrors.quantity = t('errors.invalidQuantity');
-    }
-
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -47,13 +39,13 @@ export function CheckInputForm() {
     addItem({
       name: name.trim(),
       price: parseFloat(price),
-      quantity: parseInt(quantity, 10),
+      quantity,
     });
 
     // Reset form
     setName('');
     setPrice('');
-    setQuantity('1');
+    setQuantity(1);
     setErrors({});
   };
 
@@ -94,21 +86,17 @@ export function CheckInputForm() {
             required
           />
 
-          <Input
-            label={t('checkInput.quantity')}
-            type="number"
-            min="1"
-            max="99"
-            placeholder="1"
-            value={quantity}
-            onChange={(e) => {
-              setQuantity(e.target.value);
-              if (errors.quantity) setErrors({...errors, quantity: undefined});
-            }}
-            error={errors.quantity}
-            fullWidth
-            required
-          />
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">
+              {t('checkInput.quantity')}
+            </label>
+            <NumberStepper
+              value={quantity}
+              onChange={setQuantity}
+              min={1}
+              max={99}
+            />
+          </div>
         </div>
 
         <Button type="submit" variant="primary" fullWidth>

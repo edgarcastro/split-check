@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {AnimatePresence} from 'motion/react';
 import {WorkflowStep} from './types';
 import {Header} from './components/layout/Header';
@@ -13,6 +13,11 @@ function App() {
   const [currentStep, setCurrentStep] = useState<WorkflowStep>(
     WorkflowStep.INPUT,
   );
+
+  // Scroll to top when navigating between steps
+  useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }, [currentStep]);
 
   const renderStep = () => {
     switch (currentStep) {
@@ -52,7 +57,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
-      <Header />
+      <Header onReset={() => setCurrentStep(WorkflowStep.INPUT)} />
       <Stepper currentStep={currentStep} onStepClick={setCurrentStep} />
 
       <main className="flex-1">

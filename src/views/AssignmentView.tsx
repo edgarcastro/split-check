@@ -1,3 +1,4 @@
+import {useRef, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Container} from '../components/layout/Container';
 import {AssignmentBoard} from '../components/assignment/AssignmentBoard';
@@ -13,11 +14,24 @@ interface AssignmentViewProps {
 export function AssignmentView({onNext, onBack}: AssignmentViewProps) {
   const {t} = useTranslation();
   const {state} = useCheckSplit();
+  const nextButtonRef = useRef<HTMLDivElement>(null);
 
   // Check if there are any unassigned units
   const hasUnassignedUnits = state.items.some((item) =>
     item.unitAssignments.some((ua) => ua.assignedTo.length === 0),
   );
+
+  // Scroll to next button when all items are assigned
+  useEffect(() => {
+    if (!hasUnassignedUnits && state.items.length > 0) {
+      setTimeout(() => {
+        nextButtonRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }, 100);
+    }
+  }, [hasUnassignedUnits, state.items.length]);
 
   return (
     <motion.div
@@ -37,7 +51,10 @@ export function AssignmentView({onNext, onBack}: AssignmentViewProps) {
 
           <AssignmentBoard />
 
-          <div className="flex justify-between pt-6 border-t border-gray-200">
+          <div
+            ref={nextButtonRef}
+            className="flex justify-between pt-6 border-t border-gray-200"
+          >
             <Button variant="secondary" onClick={onBack}>
               ← {t('common.back')}
             </Button>
