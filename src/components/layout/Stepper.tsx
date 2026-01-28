@@ -35,7 +35,10 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
           <div className="relative">
             {/* Progress bar - positioned behind the circles */}
             <div className="absolute top-6 left-0 right-0 px-6 -translate-y-1/2">
-              <Progress value={progressValue} className="h-1 bg-gray-200 *:data-[slot=progress-indicator]:bg-green-500" />
+              <Progress
+                value={progressValue}
+                className="h-1 bg-gray-200 *:data-[slot=progress-indicator]:bg-green-500"
+              />
             </div>
 
             {/* Steps */}

@@ -27,7 +27,8 @@ export function CheckItemCard({item, onRemove}: CheckItemCardProps) {
             <h4 className="font-medium text-gray-900 truncate">{item.name}</h4>
             <div className="flex items-center gap-2 mt-1 text-sm text-gray-600">
               <span>
-                {formatCurrencyLocale(item.price, i18n.language)} × {item.quantity}
+                {formatCurrencyLocale(item.price, i18n.language)} ×{' '}
+                {item.quantity}
               </span>
               <span className="text-gray-400">•</span>
               <span className="font-medium text-gray-900">

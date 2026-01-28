@@ -46,7 +46,7 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
 
           <MoneyInput
             label={t('summary.serviceCharges')}
-            value={state.serviceCharges || ''}
+            value={state.serviceCharges === 0 ? '' : state.serviceCharges}
             onChange={(value) => setServiceCharges(value)}
             fullWidth
           />
@@ -57,7 +57,10 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">{t('common.subtotal')}</span>
             <span className="font-medium text-gray-900">
-              {formatCurrencyLocale(summary.totalBeforeTaxAndTip, i18n.language)}
+              {formatCurrencyLocale(
+                summary.totalBeforeTaxAndTip,
+                i18n.language,
+              )}
             </span>
           </div>
 
@@ -89,7 +92,10 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
                 {t('summary.serviceCharge')}
               </span>
               <span className="font-medium text-gray-900">
-                {formatCurrencyLocale(summary.totalServiceCharges, i18n.language)}
+                {formatCurrencyLocale(
+                  summary.totalServiceCharges,
+                  i18n.language,
+                )}
               </span>
             </div>
           )}

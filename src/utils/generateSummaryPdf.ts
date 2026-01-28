@@ -28,7 +28,9 @@ export async function generateSummaryPdf({
   // Date
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.text(new Date().toLocaleDateString(), pageWidth / 2, y, {align: 'center'});
+  doc.text(new Date().toLocaleDateString(), pageWidth / 2, y, {
+    align: 'center',
+  });
   y += 15;
 
   // Individual totals section
@@ -74,14 +76,26 @@ export async function generateSummaryPdf({
     // Subtotal, tax, tip breakdown
     doc.setFontSize(9);
     doc.setTextColor(100);
-    doc.text(`  ${t('common.subtotal')}: ${formatCurrency(personTotal.subtotal)}`, margin, y);
+    doc.text(
+      `  ${t('common.subtotal')}: ${formatCurrency(personTotal.subtotal)}`,
+      margin,
+      y,
+    );
     y += 4;
     if (personTotal.tax > 0) {
-      doc.text(`  ${t('summary.tax')}: ${formatCurrency(personTotal.tax)}`, margin, y);
+      doc.text(
+        `  ${t('summary.tax')}: ${formatCurrency(personTotal.tax)}`,
+        margin,
+        y,
+      );
       y += 4;
     }
     if (personTotal.tip > 0) {
-      doc.text(`  ${t('summary.tip')}: ${formatCurrency(personTotal.tip)}`, margin, y);
+      doc.text(
+        `  ${t('summary.tip')}: ${formatCurrency(personTotal.tip)}`,
+        margin,
+        y,
+      );
       y += 4;
     }
     if (personTotal.serviceCharge > 0) {
@@ -119,9 +133,14 @@ export async function generateSummaryPdf({
 
   // Subtotal
   doc.text(t('common.subtotal'), margin, y);
-  doc.text(formatCurrency(summary.totalBeforeTaxAndTip), pageWidth - margin, y, {
-    align: 'right',
-  });
+  doc.text(
+    formatCurrency(summary.totalBeforeTaxAndTip),
+    pageWidth - margin,
+    y,
+    {
+      align: 'right',
+    },
+  );
   y += 7;
 
   // Tax
@@ -145,9 +164,14 @@ export async function generateSummaryPdf({
   // Service charges
   if (summary.totalServiceCharges > 0) {
     doc.text(t('summary.serviceCharge'), margin, y);
-    doc.text(formatCurrency(summary.totalServiceCharges), pageWidth - margin, y, {
-      align: 'right',
-    });
+    doc.text(
+      formatCurrency(summary.totalServiceCharges),
+      pageWidth - margin,
+      y,
+      {
+        align: 'right',
+      },
+    );
     y += 7;
   }
 

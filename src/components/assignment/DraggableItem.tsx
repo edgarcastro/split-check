@@ -42,7 +42,8 @@ export function DraggableItem({item}: DraggableItemProps) {
           </h4>
           <div className="flex items-center gap-1.5 mt-1 text-xs text-gray-600">
             <span>
-              {formatCurrencyLocale(item.price, i18n.language)} × {item.quantity}
+              {formatCurrencyLocale(item.price, i18n.language)} ×{' '}
+              {item.quantity}
             </span>
             <span className="text-gray-400">•</span>
             <span className="font-medium text-gray-900">

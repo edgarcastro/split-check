@@ -57,7 +57,8 @@ export function PersonDropZone({person, items, subtotal}: PersonDropZoneProps) {
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-900">{person.name}</h3>
           <p className="text-sm text-gray-600">
-            {t('common.subtotal')}: {formatCurrencyLocale(subtotal, i18n.language)}
+            {t('common.subtotal')}:{' '}
+            {formatCurrencyLocale(subtotal, i18n.language)}
           </p>
         </div>
         <span className="text-sm text-gray-600">
