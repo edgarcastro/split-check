@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next';
 import {CheckItem} from '../../types';
 import {Card} from '../shared/Card';
-import {formatCurrency} from '../../utils/formatters';
+import {formatCurrencyLocale} from '../../utils/formatters';
 import {motion} from 'motion/react';
 import {TrashIcon} from '@heroicons/react/24/outline';
 
@@ -11,7 +11,7 @@ interface CheckItemCardProps {
 }
 
 export function CheckItemCard({item, onRemove}: CheckItemCardProps) {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const itemTotal = item.price * item.quantity;
 
   return (
@@ -27,11 +27,12 @@ export function CheckItemCard({item, onRemove}: CheckItemCardProps) {
             <h4 className="font-medium text-gray-900 truncate">{item.name}</h4>
             <div className="flex items-center gap-2 mt-1 text-sm text-gray-600">
               <span>
-                {formatCurrency(item.price)} × {item.quantity}
+                {formatCurrencyLocale(item.price, i18n.language)} ×{' '}
+                {item.quantity}
               </span>
               <span className="text-gray-400">•</span>
               <span className="font-medium text-gray-900">
-                {formatCurrency(itemTotal)}
+                {formatCurrencyLocale(itemTotal, i18n.language)}
               </span>
             </div>
           </div>

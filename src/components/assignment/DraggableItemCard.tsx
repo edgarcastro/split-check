@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useDraggable} from '@dnd-kit/core';
 import {useTranslation} from 'react-i18next';
 import {CheckItem} from '../../types';
-import {formatCurrency} from '../../utils/formatters';
+import {formatCurrencyLocale} from '../../utils/formatters';
 import {useCheckSplit} from '../../context/CheckSplitContext';
 import {motion} from 'motion/react';
 import {Bars2Icon} from '@heroicons/react/24/outline';
@@ -23,7 +23,7 @@ export function DraggableItemCard({
   item,
   unassignedIndices,
 }: DraggableItemCardProps) {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const {state, assignUnitToPerson} = useCheckSplit();
 
   // Use the first unassigned unit index for dragging
@@ -82,14 +82,14 @@ export function DraggableItemCard({
           </div>
           <div className="flex items-center gap-1.5 mt-1 text-xs text-gray-600 ml-6">
             <span>
-              {formatCurrency(item.price)}
+              {formatCurrencyLocale(item.price, i18n.language)}
               {unassignedCount > 1 && ` ${t('common.each')}`}
             </span>
             {unassignedCount > 1 && (
               <>
                 <span className="text-gray-400">•</span>
                 <span className="font-medium text-gray-900">
-                  {formatCurrency(itemTotal)}
+                  {formatCurrencyLocale(itemTotal, i18n.language)}
                 </span>
               </>
             )}

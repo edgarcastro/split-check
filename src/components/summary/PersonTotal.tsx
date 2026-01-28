@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {PersonTotal as PersonTotalType} from '../../types';
 import {Card} from '../shared/Card';
-import {formatCurrency} from '../../utils/formatters';
+import {formatCurrencyLocale} from '../../utils/formatters';
 import {motion} from 'motion/react';
 import {ChevronDownIcon} from '@heroicons/react/24/outline';
 import {
@@ -17,7 +17,7 @@ interface PersonTotalProps {
 }
 
 export function PersonTotal({personTotal, color}: PersonTotalProps) {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -48,7 +48,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">{t('common.subtotal')}</span>
             <span className="font-medium text-gray-900">
-              {formatCurrency(personTotal.subtotal)}
+              {formatCurrencyLocale(personTotal.subtotal, i18n.language)}
             </span>
           </div>
 
@@ -95,7 +95,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
                         )}
                       </div>
                       <span className="font-medium text-gray-700">
-                        {formatCurrency(item.amount)}
+                        {formatCurrencyLocale(item.amount, i18n.language)}
                       </span>
                     </div>
                   ))}
@@ -108,7 +108,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">{t('summary.tax')}</span>
               <span className="font-medium text-gray-900">
-                {formatCurrency(personTotal.tax)}
+                {formatCurrencyLocale(personTotal.tax, i18n.language)}
               </span>
             </div>
           )}
@@ -117,7 +117,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">{t('summary.tip')}</span>
               <span className="font-medium text-gray-900">
-                {formatCurrency(personTotal.tip)}
+                {formatCurrencyLocale(personTotal.tip, i18n.language)}
               </span>
             </div>
           )}
@@ -128,7 +128,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
                 {t('summary.serviceCharge')}
               </span>
               <span className="font-medium text-gray-900">
-                {formatCurrency(personTotal.serviceCharge)}
+                {formatCurrencyLocale(personTotal.serviceCharge, i18n.language)}
               </span>
             </div>
           )}
@@ -144,7 +144,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
                 animate={{scale: 1, color: '#111827'}}
                 className="font-bold text-xl text-gray-900"
               >
-                {formatCurrency(personTotal.total)}
+                {formatCurrencyLocale(personTotal.total, i18n.language)}
               </motion.span>
             </div>
           </div>

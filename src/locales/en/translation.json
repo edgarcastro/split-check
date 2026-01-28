@@ -96,7 +96,7 @@
     "serviceCharge": "Service Charge",
     "taxRate": "Tax Rate (%)",
     "tipRate": "Tip Rate (%)",
-    "serviceCharges": "Service Charges ($)",
+    "serviceCharges": "Service Charges",
     "totalTax": "Total Tax ({{rate}}%)",
     "totalTip": "Total Tip ({{rate}}%)",
     "grandTotal": "Grand Total",

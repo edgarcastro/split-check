@@ -1,9 +1,9 @@
 import {useTranslation} from 'react-i18next';
 import {SplitSummary} from '../../types';
 import {Card} from '../shared/Card';
-import {Input} from '../shared/Input';
+import {MoneyInput} from '../shared/MoneyInput';
 import {NumberStepper} from '../shared/NumberStepper';
-import {formatCurrency} from '../../utils/formatters';
+import {formatCurrencyLocale} from '../../utils/formatters';
 import {useCheckSplit} from '../../context/CheckSplitContext';
 import {motion} from 'motion/react';
 
@@ -12,7 +12,7 @@ interface TotalBreakdownProps {
 }
 
 export function TotalBreakdown({summary}: TotalBreakdownProps) {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const {state, setTaxRate, setTipRate, setServiceCharges} = useCheckSplit();
 
   return (
@@ -44,17 +44,10 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
             suffix="%"
           />
 
-          <Input
+          <MoneyInput
             label={t('summary.serviceCharges')}
-            type="number"
-            step="0.01"
-            min="0"
-            value={state.serviceCharges || ''}
-            onChange={(e) => setServiceCharges(parseFloat(e.target.value) || 0)}
-            onBlur={(e) => {
-              if (e.target.value === '') setServiceCharges(0);
-            }}
-            suffix="$"
+            value={state.serviceCharges === 0 ? '' : state.serviceCharges}
+            onChange={(value) => setServiceCharges(value)}
             fullWidth
           />
         </div>
@@ -64,7 +57,10 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">{t('common.subtotal')}</span>
             <span className="font-medium text-gray-900">
-              {formatCurrency(summary.totalBeforeTaxAndTip)}
+              {formatCurrencyLocale(
+                summary.totalBeforeTaxAndTip,
+                i18n.language,
+              )}
             </span>
           </div>
 
@@ -74,7 +70,7 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
                 {t('summary.totalTax', {rate: state.taxRate})}
               </span>
               <span className="font-medium text-gray-900">
-                {formatCurrency(summary.totalTax)}
+                {formatCurrencyLocale(summary.totalTax, i18n.language)}
               </span>
             </div>
           )}
@@ -85,7 +81,7 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
                 {t('summary.totalTip', {rate: state.tipRate})}
               </span>
               <span className="font-medium text-gray-900">
-                {formatCurrency(summary.totalTip)}
+                {formatCurrencyLocale(summary.totalTip, i18n.language)}
               </span>
             </div>
           )}
@@ -96,7 +92,10 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
                 {t('summary.serviceCharge')}
               </span>
               <span className="font-medium text-gray-900">
-                {formatCurrency(summary.totalServiceCharges)}
+                {formatCurrencyLocale(
+                  summary.totalServiceCharges,
+                  i18n.language,
+                )}
               </span>
             </div>
           )}
@@ -112,7 +111,7 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
                 animate={{scale: 1, color: '#111827'}}
                 className="font-bold text-2xl text-gray-900"
               >
-                {formatCurrency(summary.grandTotal)}
+                {formatCurrencyLocale(summary.grandTotal, i18n.language)}
               </motion.span>
             </div>
           </div>

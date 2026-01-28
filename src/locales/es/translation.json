@@ -96,7 +96,7 @@
     "serviceCharge": "Cargo por Servicio",
     "taxRate": "Tasa de Impuesto (%)",
     "tipRate": "Tasa de Propina (%)",
-    "serviceCharges": "Cargos por Servicio ($)",
+    "serviceCharges": "Cargos por Servicio",
     "totalTax": "Impuesto Total ({{rate}}%)",
     "totalTip": "Propina Total ({{rate}}%)",
     "grandTotal": "Total General",

@@ -96,7 +96,12 @@ export function SummaryView({onBack, onReset}: SummaryViewProps) {
           <SplitSummary />
 
           <div className="flex flex-col-reverse gap-3 pt-6 border-t border-gray-200 sm:flex-row sm:justify-between sm:gap-2">
-            <Button variant="secondary" onClick={onBack} fullWidth className="sm:w-auto">
+            <Button
+              variant="secondary"
+              onClick={onBack}
+              fullWidth
+              className="sm:w-auto"
+            >
               ← {t('common.back')}
             </Button>
             <div className="flex flex-col gap-2 sm:flex-row">
@@ -112,7 +117,12 @@ export function SummaryView({onBack, onReset}: SummaryViewProps) {
                   {isSharing ? t('summary.sharing') : t('summary.shareButton')}
                 </Button>
               )}
-              <Button variant="danger" onClick={handleReset} fullWidth className="sm:w-auto">
+              <Button
+                variant="danger"
+                onClick={handleReset}
+                fullWidth
+                className="sm:w-auto"
+              >
                 <ArrowPathIcon className="size-4" />
                 {t('summary.resetButton')}
               </Button>

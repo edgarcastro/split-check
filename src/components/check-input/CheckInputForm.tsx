@@ -2,16 +2,17 @@ import {useState, FormEvent} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useCheckSplit} from '../../context/CheckSplitContext';
 import {Input} from '../shared/Input';
+import {MoneyInput} from '../shared/MoneyInput';
 import {Button} from '../shared/Button';
 import {Card} from '../shared/Card';
 import {NumberStepper} from '../shared/NumberStepper';
-import {validatePrice, validateItemName} from '../../utils/calculations';
+import {validateItemName} from '../../utils/calculations';
 
 export function CheckInputForm() {
   const {t} = useTranslation();
   const {addItem} = useCheckSplit();
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState<number | ''>(0);
   const [quantity, setQuantity] = useState(1);
   const [errors, setErrors] = useState<{
     name?: string;
@@ -27,7 +28,8 @@ export function CheckInputForm() {
       newErrors.name = t('errors.itemNameRequired');
     }
 
-    if (!validatePrice(price)) {
+    // Validate price is a positive number
+    if (typeof price !== 'number' || price <= 0) {
       newErrors.price = t('errors.invalidPrice');
     }
 
@@ -38,13 +40,13 @@ export function CheckInputForm() {
 
     addItem({
       name: name.trim(),
-      price: parseFloat(price),
-      quantity,
+      price: price as number,
+      quantity: quantity,
     });
 
     // Reset form
     setName('');
-    setPrice('');
+    setPrice(0);
     setQuantity(1);
     setErrors({});
   };
@@ -70,15 +72,11 @@ export function CheckInputForm() {
         />
 
         <div className="grid grid-cols-2 gap-4">
-          <Input
+          <MoneyInput
             label={t('checkInput.itemPrice')}
-            type="number"
-            step="0.01"
-            min="0"
-            placeholder="0.00"
             value={price}
-            onChange={(e) => {
-              setPrice(e.target.value);
+            onChange={(value) => {
+              setPrice(value);
               if (errors.price) setErrors({...errors, price: undefined});
             }}
             error={errors.price}

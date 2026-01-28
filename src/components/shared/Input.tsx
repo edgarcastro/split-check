@@ -8,7 +8,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({label, error, fullWidth = false, suffix, className = '', ...props}, ref) => {
+  (
+    {label, error, fullWidth = false, suffix, className = '', ...props},
+    ref,
+  ) => {
     const widthClass = fullWidth ? 'w-full' : '';
     const errorClass = error ? 'border-red-500 focus:ring-red-500' : '';
 
