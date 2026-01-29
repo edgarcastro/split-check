@@ -25,6 +25,18 @@ bun add <package-name>
 
 # Add dev dependency
 bun add -d <package-name>
+
+# Firebase Functions (Python backend)
+cd functions
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Deploy functions
+firebase deploy --only functions
+
+# Run functions emulator locally
+firebase emulators:start --only functions
 ```
 
 ## High-Level Architecture
@@ -77,12 +89,43 @@ Assignment view uses `@dnd-kit` library:
 - Supports assigning items to multiple people (creates copies in UI)
 - Uses collision detection to determine valid drop targets
 
+### Backend (Firebase Functions)
+
+The `functions/` directory contains a Python Firebase Functions backend for receipt OCR:
+
+**Receipt Analysis Callable** (`analyze_receipt`):
+
+- Uses AWS Textract AnalyzeExpense API for receipt OCR
+- Called via Firebase `httpsCallable` from frontend (not direct HTTP)
+- Accepts base64-encoded image file (JPEG, PNG, PDF up to 2MB) with contentType
+- Returns extracted line items (name, price, quantity) and summary fields (subtotal, tax, tip, total, service_charge)
+
+**Environment Variables** (configured as Firebase secrets):
+
+- `AWS_ACCESS_KEY_ID`: AWS credentials for Textract
+- `AWS_SECRET_ACCESS_KEY`: AWS credentials for Textract
+- `AWS_REGION`: AWS region (defaults to us-east-1)
+
+**Dependencies** (in `functions/requirements.txt`):
+
+- `firebase_functions`: Firebase Functions Python SDK
+- `firebase_admin`: Firebase Admin SDK (>=6.0.0 for App Check support)
+- `boto3`: AWS SDK for Python (Textract integration)
+
+**App Check Security:**
+
+- Uses Firebase App Check with reCAPTCHA v3 to verify requests
+- App Check tokens are automatically attached by `httpsCallable` SDK
+- Backend uses `enforce_app_check=True` on callable function decorator
+- In emulator mode (`FUNCTIONS_EMULATOR=true`), enforcement is disabled
+
 ### Component Organization
 
 - **views/**: Full-page views for each workflow step
 - **components/**: Organized by feature (check-input, people, assignment, summary, shared, layout)
 - **shared/**: Reusable UI primitives (Button, Card, Modal, etc.)
 - **layout/**: App shell components (Header, Footer, Stepper, Container)
+- **functions/**: Python Firebase Functions backend
 
 ### Technology Stack Notes
 
@@ -117,6 +160,26 @@ Assignment view uses `@dnd-kit` library:
 
 - `@/*` maps to `./src/*` (configured in tsconfig and vite.config.ts)
 - Used for cleaner imports across the codebase
+
+**Firebase Functions (Python):**
+
+- Python 3.13 backend in `functions/` directory
+- Uses virtual environment (`functions/venv/`)
+- AWS Textract for receipt OCR processing
+- Deployed as Firebase HTTPS callable functions
+
+**Firebase App Check:**
+
+- Initialized in `src/firebase.ts` with reCAPTCHA v3 provider
+- Called early in `src/main.tsx` before app renders
+- Tokens automatically attached by `httpsCallable` SDK
+- Functions emulator auto-connected in development via `connectFunctionsEmulator`
+- Required environment variables (frontend):
+  - `VITE_FIREBASE_API_KEY`: Firebase API key
+  - `VITE_FIREBASE_APP_ID`: Firebase App ID
+  - `VITE_FIREBASE_MESSAGING_SENDER_ID`: Firebase sender ID
+  - `VITE_RECAPTCHA_SITE_KEY`: reCAPTCHA v3 site key
+  - `VITE_APPCHECK_DEBUG_TOKEN`: Debug token for local development
 
 ## Key Implementation Patterns
 
