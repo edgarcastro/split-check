@@ -10,8 +10,7 @@ name: Deploy to Firebase Hosting on PR
       - package.json
       - '.github/workflows/firebase-hosting-merge.yml'
       - '.github/workflows/firebase-hosting-pull-request.yml'
-    paths-ignore:
-      - 'functions/**'
+
 jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
