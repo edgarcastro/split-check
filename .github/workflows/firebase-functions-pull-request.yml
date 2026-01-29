@@ -3,6 +3,8 @@ name: Validate Firebase Functions on PR
   pull_request:
     paths:
       - 'functions/**'
+      - '.github/workflows/firebase-functions-merge.yml'
+      - '.github/workflows/firebase-functions-pull-request.yml'
 jobs:
   validate_functions:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'

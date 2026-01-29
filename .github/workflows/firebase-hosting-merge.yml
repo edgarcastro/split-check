@@ -6,6 +6,12 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - index.html
+      - package.json
+      - '.github/workflows/firebase-hosting-merge.yml'
+      - '.github/workflows/firebase-hosting-pull-request.yml'
     paths-ignore:
       - 'functions/**'
 jobs:

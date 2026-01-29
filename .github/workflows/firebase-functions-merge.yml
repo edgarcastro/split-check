@@ -19,9 +19,8 @@ jobs:
       - name: Create venv and install dependencies
         run: |
           cd functions
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+          python3.13 -m venv venv
+          . venv/bin/activate && python3.13 -m pip install -r requirements.txt
       - name: Deploy Functions
         uses: w9jds/firebase-action@master
         with:
