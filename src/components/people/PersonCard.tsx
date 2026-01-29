@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next';
 import {Person} from '../../types';
 import {Card} from '../shared/Card';
-import {Badge} from '../shared/Badge';
+import {Badge} from '@/components/ui/badge';
 import {motion} from 'motion/react';
 import {TrashIcon} from '@heroicons/react/24/outline';
 
@@ -32,7 +32,10 @@ export function PersonCard({person, onRemove}: PersonCardProps) {
               <h4 className="font-medium text-gray-900 dark:text-white truncate">
                 {person.name}
               </h4>
-              <Badge color={person.color} className="mt-1">
+              <Badge
+                className="mt-1 text-white"
+                style={{backgroundColor: person.color}}
+              >
                 {person.color}
               </Badge>
             </div>

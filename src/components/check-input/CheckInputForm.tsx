@@ -1,9 +1,10 @@
 import {useState, FormEvent} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useCheckSplit} from '../../context/CheckSplitContext';
-import {Input} from '../shared/Input';
+import {Input} from '@/components/ui/input';
+import {Label} from '@/components/ui/label';
 import {MoneyInput} from '../shared/MoneyInput';
-import {Button} from '../shared/Button';
+import {Button} from '@/components/ui/button';
 import {Card} from '../shared/Card';
 import {NumberStepper} from '../shared/NumberStepper';
 import {validateItemName} from '../../utils/calculations';
@@ -57,19 +58,24 @@ export function CheckInputForm() {
         {t('checkInput.addItemManually')}
       </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          label={t('checkInput.itemName')}
-          type="text"
-          placeholder={t('checkInput.itemNamePlaceholder')}
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            if (errors.name) setErrors({...errors, name: undefined});
-          }}
-          error={errors.name}
-          fullWidth
-          required
-        />
+        <div className="space-y-2">
+          <Label htmlFor="item-name">{t('checkInput.itemName')}</Label>
+          <Input
+            id="item-name"
+            type="text"
+            placeholder={t('checkInput.itemNamePlaceholder')}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (errors.name) setErrors({...errors, name: undefined});
+            }}
+            aria-invalid={!!errors.name}
+            required
+          />
+          {errors.name && (
+            <p className="text-sm text-destructive">{errors.name}</p>
+          )}
+        </div>
 
         <div className="grid grid-cols-2 gap-4">
           <MoneyInput
@@ -97,7 +103,7 @@ export function CheckInputForm() {
           </div>
         </div>
 
-        <Button type="submit" variant="primary" fullWidth>
+        <Button type="submit" className="w-full">
           {t('checkInput.addItem')}
         </Button>
       </form>

@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import {useCheckSplit} from '../../context/CheckSplitContext';
-import {Button} from '../shared/Button';
+import {Button} from '@/components/ui/button';
 import {ThemeToggle} from '../shared/ThemeToggle';
 import {ArrowPathIcon, ReceiptPercentIcon} from '@heroicons/react/24/outline';
 
@@ -33,7 +33,7 @@ export function Header({onReset}: HeaderProps) {
         <div className="flex items-center gap-4">
           <ThemeToggle />
           {(state.items.length > 0 || state.people.length > 0) && (
-            <Button variant="secondary" onClick={handleReset}>
+            <Button variant="outline" onClick={handleReset}>
               <ArrowPathIcon className="size-4" />
               {t('common.startOver')}
             </Button>

@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Container} from '../components/layout/Container';
 import {AssignmentBoard} from '../components/assignment/AssignmentBoard';
-import {Button} from '../components/shared/Button';
+import {Button} from '@/components/ui/button';
 import {useCheckSplit} from '../context/CheckSplitContext';
 import {motion} from 'motion/react';
 
@@ -55,11 +55,10 @@ export function AssignmentView({onNext, onBack}: AssignmentViewProps) {
             ref={nextButtonRef}
             className="flex justify-between pt-6 border-t border-gray-200 dark:border-gray-700"
           >
-            <Button variant="secondary" onClick={onBack}>
+            <Button variant="outline" onClick={onBack}>
               ← {t('common.back')}
             </Button>
             <Button
-              variant="primary"
               onClick={onNext}
               disabled={hasUnassignedUnits}
               className="px-8"

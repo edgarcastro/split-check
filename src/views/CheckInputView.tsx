@@ -4,7 +4,7 @@ import {Container} from '../components/layout/Container';
 import {CheckInputForm} from '../components/check-input/CheckInputForm';
 import {ImageUpload} from '../components/check-input/ImageUpload';
 import {CheckItemsList} from '../components/check-input/CheckItemsList';
-import {Button} from '../components/shared/Button';
+import {Button} from '@/components/ui/button';
 import {useCheckSplit} from '../context/CheckSplitContext';
 import {motion} from 'motion/react';
 
@@ -54,7 +54,7 @@ export function CheckInputView({onNext}: CheckInputViewProps) {
               <CheckItemsList />
 
               <div className="flex justify-end pt-6 border-t border-gray-200 dark:border-gray-700">
-                <Button variant="primary" onClick={onNext} className="px-8">
+                <Button onClick={onNext} className="px-8">
                   {t('checkInput.nextButton')}
                 </Button>
               </div>
