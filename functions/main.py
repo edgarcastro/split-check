@@ -102,12 +102,39 @@ def extract_line_items(expense_documents: list) -> list:
 
 
 def parse_price(value: str) -> float | None:
-    """Parse price string to float."""
+    """
+    Parse price string to float, handling both US and European number formats.
+
+    US format: 6,700.00 (comma = thousands, period = decimal)
+    European format: 6.700,00 (period = thousands, comma = decimal)
+    """
     if not value:
         return None
     try:
         # Remove currency symbols and whitespace
-        cleaned = value.replace("$", "").replace("€", "").replace(",", "").strip()
+        cleaned = value.replace("$", "").replace("€", "").strip()
+
+        # Find positions of last comma and last period
+        last_comma = cleaned.rfind(",")
+        last_period = cleaned.rfind(".")
+
+        if last_comma > last_period:
+            # European format: comma is decimal separator (e.g., "9.300,00")
+            # Remove periods (thousands separator), replace comma with period
+            cleaned = cleaned.replace(".", "").replace(",", ".")
+        elif last_period > last_comma:
+            # US format: period is decimal separator (e.g., "6,700.00")
+            # Just remove commas (thousands separator)
+            cleaned = cleaned.replace(",", "")
+        else:
+            # Only one or neither separator present
+            # Check if comma looks like a decimal (e.g., "9,50" for €9.50)
+            if last_comma != -1 and len(cleaned) - last_comma <= 3:
+                cleaned = cleaned.replace(",", ".")
+            else:
+                # Remove commas as thousands separators
+                cleaned = cleaned.replace(",", "")
+
         return float(cleaned)
     except (ValueError, AttributeError):
         return None
