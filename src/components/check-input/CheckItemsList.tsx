@@ -3,6 +3,7 @@ import {useCheckSplit} from '../../context/CheckSplitContext';
 import {CheckItemCard} from './CheckItemCard';
 import {EmptyState} from '../shared/EmptyState';
 import {AnimatePresence} from 'motion/react';
+import {QueueListIcon} from '@heroicons/react/24/outline';
 
 export function CheckItemsList() {
   const {t} = useTranslation();
@@ -11,7 +12,7 @@ export function CheckItemsList() {
   if (state.items.length === 0) {
     return (
       <EmptyState
-        icon={<div className="text-6xl">🍽️</div>}
+        icon={<QueueListIcon className="size-16 text-gray-400" />}
         title={t('checkInput.noItems')}
         description={t('checkInput.noItemsDescription')}
       />

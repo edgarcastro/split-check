@@ -2,6 +2,13 @@ import {useTranslation} from 'react-i18next';
 import {WorkflowStep} from '../../types';
 import {motion} from 'motion/react';
 import {Progress} from '@/components/ui/progress';
+import {
+  ClipboardDocumentListIcon,
+  UserGroupIcon,
+  CursorArrowRaysIcon,
+  BanknotesIcon,
+  CheckIcon,
+} from '@heroicons/react/24/outline';
 
 interface StepperProps {
   currentStep: WorkflowStep;
@@ -12,10 +19,10 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
   const {t} = useTranslation();
 
   const steps = [
-    {key: WorkflowStep.INPUT, label: t('stepper.addItems'), icon: '📝'},
-    {key: WorkflowStep.PEOPLE, label: t('stepper.addPeople'), icon: '👥'},
-    {key: WorkflowStep.ASSIGN, label: t('stepper.assignItems'), icon: '🎯'},
-    {key: WorkflowStep.SUMMARY, label: t('stepper.summary'), icon: '💰'},
+    {key: WorkflowStep.INPUT, label: t('stepper.addItems'), icon: ClipboardDocumentListIcon},
+    {key: WorkflowStep.PEOPLE, label: t('stepper.addPeople'), icon: UserGroupIcon},
+    {key: WorkflowStep.ASSIGN, label: t('stepper.assignItems'), icon: CursorArrowRaysIcon},
+    {key: WorkflowStep.SUMMARY, label: t('stepper.summary'), icon: BanknotesIcon},
   ];
 
   const currentIndex = steps.findIndex((step) => step.key === currentStep);
@@ -70,7 +77,7 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
                         isCompleted || isActive ? 'text-white' : 'text-gray-400'
                       } shadow-md ${isClickable ? 'cursor-pointer' : 'cursor-default'}`}
                     >
-                      {isCompleted ? '✓' : step.icon}
+                      {isCompleted ? <CheckIcon className="size-6" /> : <step.icon className="size-6" />}
                     </motion.button>
 
                     {/* Label */}

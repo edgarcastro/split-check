@@ -3,6 +3,7 @@ import {useCheckSplit} from '../../context/CheckSplitContext';
 import {PersonCard} from './PersonCard';
 import {EmptyState} from '../shared/EmptyState';
 import {AnimatePresence} from 'motion/react';
+import {UserGroupIcon} from '@heroicons/react/24/outline';
 
 export function PersonList() {
   const {t} = useTranslation();
@@ -11,7 +12,7 @@ export function PersonList() {
   if (state.people.length === 0) {
     return (
       <EmptyState
-        icon={<div className="text-6xl">👥</div>}
+        icon={<UserGroupIcon className="size-16 text-gray-400" />}
         title={t('people.noPeople')}
         description={t('people.noPeopleDescription')}
       />

@@ -3,8 +3,11 @@ import {useTranslation} from 'react-i18next';
 import {useCheckSplit} from '../../context/CheckSplitContext';
 import {Card} from '../shared/Card';
 import {validateImageFile} from '../../utils/mockOCR';
-import {processReceiptImage} from '../../utils/receiptOCR';
+import {processReceiptImage, OCRError} from '../../utils/receiptOCR';
 import {motion} from 'motion/react';
+import {CameraIcon, ArrowPathIcon} from '@heroicons/react/24/outline';
+
+const IS_DEMO = !!import.meta.env.VITE_DEMO;
 
 interface ImageUploadProps {
   onProcessComplete?: () => void;
@@ -17,10 +20,14 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [ocrError, setOcrError] = useState<OCRError | null>(null);
+  const [lastFile, setLastFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = async (file: File) => {
     setError(null);
+    setOcrError(null);
+    setLastFile(file);
 
     const validation = validateImageFile(file);
     if (!validation.valid) {
@@ -47,10 +54,23 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
       });
       setPreview(null);
       onProcessComplete?.();
-    } catch {
-      setError(t('errors.processingFailed'));
+    } catch (err) {
+      // Check if it's a structured OCR error
+      if (err && typeof err === 'object' && 'code' in err) {
+        const ocrErr = err as OCRError;
+        setOcrError(ocrErr);
+        setError(t(`errors.ocr.${ocrErr.code}`));
+      } else {
+        setError(t('errors.processingFailed'));
+      }
     } finally {
       setIsProcessing(false);
+    }
+  };
+
+  const handleRetry = () => {
+    if (lastFile) {
+      handleFile(lastFile);
     }
   };
 
@@ -93,6 +113,11 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
       <p className="text-sm text-gray-600 mb-4">
         {t('checkInput.uploadInstructions')}
       </p>
+      {IS_DEMO && (
+        <p className="text-xs text-amber-600 bg-amber-50 rounded px-2 py-1 mb-4 inline-block">
+          {t('checkInput.demoMode')}
+        </p>
+      )}
 
       <motion.div
         whileHover={{scale: 1.01}}
@@ -111,9 +136,9 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
             <motion.div
               animate={{rotate: 360}}
               transition={{duration: 1, repeat: Infinity, ease: 'linear'}}
-              className="text-4xl mb-2"
+              className="mb-2"
             >
-              ⏳
+              <ArrowPathIcon className="size-10 text-primary-600" />
             </motion.div>
             <p className="text-sm text-gray-600">
               {t('checkInput.processingReceipt')}
@@ -132,7 +157,7 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
           </div>
         ) : (
           <div className="flex flex-col items-center">
-            <div className="text-5xl mb-2">📸</div>
+            <CameraIcon className="size-12 text-gray-400 mb-2" />
             <p className="text-sm font-medium text-gray-900 mb-1">
               {t('checkInput.clickToUpload')}
             </p>
@@ -141,7 +166,19 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
         )}
       </motion.div>
 
-      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+      {error && (
+        <div className="mt-2">
+          <p className="text-sm text-red-600">{error}</p>
+          {ocrError?.retryable && (
+            <button
+              onClick={handleRetry}
+              className="mt-2 text-sm text-primary-600 hover:text-primary-700 underline"
+            >
+              {t('errors.tryAgain')}
+            </button>
+          )}
+        </div>
+      )}
 
       <input
         ref={fileInputRef}

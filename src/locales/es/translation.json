@@ -37,13 +37,14 @@
     "quantity": "Cantidad",
     "addItem": "Agregar Artículo",
     "uploadReceipt": "Subir Recibo",
-    "uploadReceiptImage": "Subir Imagen del Recibo",
+    "uploadReceiptImage": "Escáner de Recibos con IA",
     "uploadDescription": "Arrastra y suelta o haz clic para subir",
-    "uploadInstructions": "Sube una foto de tu recibo y extraeremos los artículos automáticamente (OCR simulado para propósitos de demostración)",
+    "uploadInstructions": "Nuestra IA lee tu recibo al instante y extrae todos los artículos, precios, impuestos y propina automáticamente.",
     "clickToUpload": "Haz clic para subir o arrastra y suelta",
     "fileTypes": "PNG, JPG, o HEIC hasta 10MB",
-    "processingReceipt": "Procesando recibo...",
+    "processingReceipt": "La IA está analizando tu recibo...",
     "processing": "Procesando...",
+    "demoMode": "Modo demo - usando datos simulados",
     "noItems": "No hay artículos aún",
     "noItemsDescription": "Agrega artículos manualmente o sube una imagen del recibo para comenzar",
     "removeItem": "Eliminar artículo"
@@ -112,9 +113,26 @@
     "invalidFile": "Archivo inválido",
     "processingFailed": "Falló el procesamiento de la imagen. Por favor intenta de nuevo.",
     "invalidFileType": "Por favor sube un archivo de imagen válido (JPEG, PNG, HEIC)",
-    "fileTooLarge": "El tamaño de la imagen debe ser menor a 10MB"
+    "fileTooLarge": "El tamaño de la imagen debe ser menor a 10MB",
+    "tryAgain": "Intentar de nuevo",
+    "ocr": {
+      "BAD_DOCUMENT": "La imagen no pudo ser leída como un recibo. Por favor intenta con una foto más clara.",
+      "UNSUPPORTED_FORMAT": "Este formato de archivo no es compatible. Por favor usa JPEG, PNG o PDF.",
+      "DOCUMENT_TOO_LARGE": "El archivo es demasiado grande. Por favor usa una imagen menor a 10MB.",
+      "SERVICE_BUSY": "El servicio está temporalmente ocupado. Por favor intenta de nuevo en un momento.",
+      "RATE_LIMITED": "Demasiadas solicitudes. Por favor espera un momento e intenta de nuevo.",
+      "SERVICE_ERROR": "El servicio de escaneo no está disponible temporalmente. Por favor intenta de nuevo.",
+      "INTERNAL_ERROR": "Algo salió mal. Por favor intenta de nuevo o agrega los artículos manualmente.",
+      "UNKNOWN_ERROR": "Falló el procesamiento del recibo. Por favor intenta de nuevo o agrega los artículos manualmente."
+    }
   },
   "footer": {
-    "builtWith": "Construido con React, TypeScript, Tailwind CSS y Framer Motion"
+    "authorName": "Edgar Castro Villa",
+    "tagDeveloper": "Desarrollador",
+    "tagOpenSource": "Código Abierto",
+    "description": "Una app simple para dividir cuentas de restaurante entre amigos. Construida con React, TypeScript y Tailwind CSS. Backend con Google Cloud Functions, AWS Textract y Python.",
+    "emailLabel": "Enviar correo",
+    "linkedinLabel": "Perfil de LinkedIn",
+    "githubLabel": "Perfil de GitHub"
   }
 }

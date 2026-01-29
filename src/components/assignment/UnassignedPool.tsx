@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {CheckItem} from '../../types';
 import {DraggableItemCard} from './DraggableItemCard';
 import {EmptyState} from '../shared/EmptyState';
+import {ClipboardDocumentListIcon, CheckIcon} from '@heroicons/react/24/outline';
 
 interface UnassignedPoolProps {
   items: CheckItem[];
@@ -38,7 +39,7 @@ export function UnassignedPool({items}: UnassignedPoolProps) {
       }`}
     >
       <div className="flex items-center gap-2 mb-4">
-        <div className="text-2xl">📋</div>
+        <ClipboardDocumentListIcon className="size-6 text-gray-600" />
         <h3 className="text-lg font-semibold text-gray-900">
           {t('assignment.unassignedItems')}
         </h3>
@@ -51,7 +52,7 @@ export function UnassignedPool({items}: UnassignedPoolProps) {
       <div className="space-y-2">
         {groupedByItem.length === 0 ? (
           <EmptyState
-            icon={<div className="text-4xl">✓</div>}
+            icon={<CheckIcon className="size-10 text-green-500" />}
             title={t('assignment.allItemsAssigned')}
             description={t('assignment.allItemsAssignedDescription')}
           />

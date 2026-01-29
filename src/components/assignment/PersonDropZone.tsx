@@ -4,6 +4,7 @@ import {Person, CheckItem} from '../../types';
 import {DraggableUnit} from './DraggableUnit';
 import {formatCurrencyLocale} from '../../utils/formatters';
 import {EmptyState} from '../shared/EmptyState';
+import {UserIcon} from '@heroicons/react/24/outline';
 
 interface PersonDropZoneProps {
   person: Person;
@@ -70,7 +71,7 @@ export function PersonDropZone({person, items, subtotal}: PersonDropZoneProps) {
       <div className="space-y-2">
         {assignedUnits.length === 0 ? (
           <EmptyState
-            icon={<div className="text-4xl">👤</div>}
+            icon={<UserIcon className="size-10 text-gray-400" />}
             title={t('assignment.noItemsYet')}
             description={t('assignment.dragItemsHere')}
           />

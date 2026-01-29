@@ -12,6 +12,31 @@ initialize_app()
 IS_EMULATOR = os.environ.get("FUNCTIONS_EMULATOR") == "true"
 
 
+# Error codes that frontend can interpret
+class OCRErrorCode:
+    BAD_DOCUMENT = "BAD_DOCUMENT"
+    UNSUPPORTED_FORMAT = "UNSUPPORTED_FORMAT"
+    DOCUMENT_TOO_LARGE = "DOCUMENT_TOO_LARGE"
+    SERVICE_BUSY = "SERVICE_BUSY"
+    RATE_LIMITED = "RATE_LIMITED"
+    SERVICE_ERROR = "SERVICE_ERROR"
+    INTERNAL_ERROR = "INTERNAL_ERROR"
+    UNKNOWN_ERROR = "UNKNOWN_ERROR"
+
+
+# Map AWS error codes to app error codes with retryable flag
+AWS_ERROR_MAPPING = {
+    "BadDocumentException": (OCRErrorCode.BAD_DOCUMENT, False),
+    "UnsupportedDocumentException": (OCRErrorCode.UNSUPPORTED_FORMAT, False),
+    "DocumentTooLargeException": (OCRErrorCode.DOCUMENT_TOO_LARGE, False),
+    "ThrottlingException": (OCRErrorCode.SERVICE_BUSY, True),
+    "ProvisionedThroughputExceededException": (OCRErrorCode.RATE_LIMITED, True),
+    "InternalServerError": (OCRErrorCode.SERVICE_ERROR, True),
+    "AccessDeniedException": (OCRErrorCode.INTERNAL_ERROR, False),
+    "InvalidParameterException": (OCRErrorCode.INTERNAL_ERROR, False),
+}
+
+
 def get_textract_client():
     """Create and return a Textract client with credentials from environment."""
     return boto3.client(
@@ -223,14 +248,30 @@ def analyze_receipt(req: https_fn.CallableRequest) -> dict:
         # Re-raise HttpsError as-is
         raise
     except ClientError as e:
-        error_code = e.response.get("Error", {}).get("Code", "Unknown")
-        error_message = e.response.get("Error", {}).get("Message", str(e))
-        raise https_fn.HttpsError(
-            code=https_fn.FunctionsErrorCode.INTERNAL,
-            message=f"AWS Textract error: {error_code} - {error_message}",
+        aws_error_code = e.response.get("Error", {}).get("Code", "Unknown")
+        aws_error_message = e.response.get("Error", {}).get("Message", str(e))
+
+        # Map AWS error to app error code
+        error_info = AWS_ERROR_MAPPING.get(
+            aws_error_code, (OCRErrorCode.UNKNOWN_ERROR, False)
         )
-    except Exception as e:
+        app_error_code, retryable = error_info
+
+        # Use UNAVAILABLE for retryable errors, INTERNAL for non-retryable
+        functions_error_code = (
+            https_fn.FunctionsErrorCode.UNAVAILABLE
+            if retryable
+            else https_fn.FunctionsErrorCode.INTERNAL
+        )
+
+        raise https_fn.HttpsError(
+            code=functions_error_code,
+            message=f"Receipt processing failed: {aws_error_message}",
+            details={"errorCode": app_error_code, "retryable": retryable},
+        )
+    except Exception:
         raise https_fn.HttpsError(
             code=https_fn.FunctionsErrorCode.INTERNAL,
-            message=f"Internal server error: {str(e)}",
+            message="Internal server error",
+            details={"errorCode": OCRErrorCode.INTERNAL_ERROR, "retryable": False},
         )

@@ -37,13 +37,14 @@
     "quantity": "Quantity",
     "addItem": "Add Item",
     "uploadReceipt": "Upload Receipt",
-    "uploadReceiptImage": "Upload Receipt Image",
+    "uploadReceiptImage": "AI-Powered Receipt Scanner",
     "uploadDescription": "Drag and drop or click to upload",
-    "uploadInstructions": "Upload a photo of your receipt and we'll extract the items automatically (mock OCR for demo purposes)",
+    "uploadInstructions": "Our AI instantly reads your receipt and extracts all items, prices, tax, and tip automatically.",
     "clickToUpload": "Click to upload or drag and drop",
     "fileTypes": "PNG, JPG, or HEIC up to 10MB",
-    "processingReceipt": "Processing receipt...",
+    "processingReceipt": "AI is analyzing your receipt...",
     "processing": "Processing...",
+    "demoMode": "Demo mode - using simulated data",
     "noItems": "No items yet",
     "noItemsDescription": "Add items manually or upload a receipt image to get started",
     "removeItem": "Remove item"
@@ -112,9 +113,26 @@
     "invalidFile": "Invalid file",
     "processingFailed": "Failed to process image. Please try again.",
     "invalidFileType": "Please upload a valid image file (JPEG, PNG, HEIC)",
-    "fileTooLarge": "Image size must be less than 10MB"
+    "fileTooLarge": "Image size must be less than 10MB",
+    "tryAgain": "Try again",
+    "ocr": {
+      "BAD_DOCUMENT": "The image couldn't be read as a receipt. Please try a clearer photo.",
+      "UNSUPPORTED_FORMAT": "This file format is not supported. Please use JPEG, PNG, or PDF.",
+      "DOCUMENT_TOO_LARGE": "The file is too large. Please use an image under 10MB.",
+      "SERVICE_BUSY": "The service is temporarily busy. Please try again in a moment.",
+      "RATE_LIMITED": "Too many requests. Please wait a moment and try again.",
+      "SERVICE_ERROR": "The receipt scanning service is temporarily unavailable. Please try again.",
+      "INTERNAL_ERROR": "Something went wrong. Please try again or add items manually.",
+      "UNKNOWN_ERROR": "Failed to process the receipt. Please try again or add items manually."
+    }
   },
   "footer": {
-    "builtWith": "Built with React, TypeScript, Tailwind CSS, and Framer Motion"
+    "authorName": "Edgar Castro Villa",
+    "tagDeveloper": "Developer",
+    "tagOpenSource": "Open Source",
+    "description": "A simple app to split restaurant checks among friends. Built with React, TypeScript, and Tailwind CSS. Backend powered by Google Cloud Functions, AWS Textract, and Python.",
+    "emailLabel": "Send email",
+    "linkedinLabel": "LinkedIn profile",
+    "githubLabel": "GitHub profile"
   }
 }

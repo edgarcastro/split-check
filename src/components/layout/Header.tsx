@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next';
 import {useCheckSplit} from '../../context/CheckSplitContext';
 import {Button} from '../shared/Button';
-import {ArrowPathIcon} from '@heroicons/react/24/outline';
+import {ArrowPathIcon, ReceiptPercentIcon} from '@heroicons/react/24/outline';
 
 interface HeaderProps {
   onReset: () => void;
@@ -24,7 +24,7 @@ export function Header({onReset}: HeaderProps) {
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="text-3xl">🧾</div>
+          <ReceiptPercentIcon className="size-8 text-primary-600" />
           <h1 className="text-2xl font-bold text-gray-900">
             {t('common.appName')}
           </h1>

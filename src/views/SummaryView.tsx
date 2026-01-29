@@ -7,7 +7,7 @@ import {useCheckSplit} from '../context/CheckSplitContext';
 import {useCheckCalculations} from '../hooks/useCheckCalculations';
 import {generateSummaryPdf} from '../utils/generateSummaryPdf';
 import {motion} from 'motion/react';
-import {ArrowPathIcon, ShareIcon} from '@heroicons/react/24/outline';
+import {ArrowPathIcon, ShareIcon, ExclamationTriangleIcon} from '@heroicons/react/24/outline';
 
 interface SummaryViewProps {
   onBack: () => void;
@@ -80,7 +80,7 @@ export function SummaryView({onBack, onReset}: SummaryViewProps) {
           {unassignedUnitCount > 0 && (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
               <div className="flex items-start gap-2">
-                <div className="text-2xl">⚠️</div>
+                <ExclamationTriangleIcon className="size-6 text-amber-600 shrink-0" />
                 <div>
                   <p className="font-medium text-amber-900">
                     {unassignedUnitCount} {t('summary.unassignedWarningTitle')}

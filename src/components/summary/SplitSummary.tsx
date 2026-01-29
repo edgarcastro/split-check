@@ -4,6 +4,7 @@ import {useCheckCalculations} from '../../hooks/useCheckCalculations';
 import {PersonTotal} from './PersonTotal';
 import {TotalBreakdown} from './TotalBreakdown';
 import {EmptyState} from '../shared/EmptyState';
+import {BanknotesIcon} from '@heroicons/react/24/outline';
 
 export function SplitSummary() {
   const {t} = useTranslation();
@@ -13,7 +14,7 @@ export function SplitSummary() {
   if (state.people.length === 0) {
     return (
       <EmptyState
-        icon={<div className="text-6xl">💰</div>}
+        icon={<BanknotesIcon className="size-16 text-gray-400" />}
         title={t('summary.noPeopleToSplit')}
         description={t('summary.noPeopleDescription')}
       />
@@ -24,7 +25,7 @@ export function SplitSummary() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Person totals */}
-        <div className="space-y-4">
+        <div className="space-y-4 order-2 lg:order-1">
           <h2 className="text-2xl font-bold text-gray-900">
             {t('summary.individualTotals')}
           </h2>
@@ -45,7 +46,7 @@ export function SplitSummary() {
         </div>
 
         {/* Overall breakdown */}
-        <div>
+        <div className="order-1 lg:order-2">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             {t('summary.checkDetails')}
           </h2>
