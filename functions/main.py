@@ -1,18 +1,15 @@
 # functions/main.py
-import json
+import base64
 import os
-from firebase_functions import https_fn, options
+from firebase_functions import https_fn
 from firebase_admin import initialize_app
 import boto3
 from botocore.exceptions import ClientError
 
 initialize_app()
 
-# CORS configuration for the frontend
-cors_options = options.CorsOptions(
-    cors_origins=["*"],
-    cors_methods=["POST", "OPTIONS"],
-)
+# Check if running in emulator
+IS_EMULATOR = os.environ.get("FUNCTIONS_EMULATOR") == "true"
 
 
 def get_textract_client():
@@ -146,22 +143,27 @@ SUPPORTED_MIME_TYPES = {
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2 MB
 
 
-def validate_file(file) -> tuple[bytes | None, str | None]:
+def validate_file_data(file_data: str, content_type: str) -> tuple[bytes | None, str | None]:
     """
-    Validate uploaded file type and size.
+    Validate base64-encoded file data and content type.
     Returns (file_bytes, error_message).
     """
-    if not file:
-        return None, "No file provided"
+    if not file_data:
+        return None, "No file data provided"
+
+    if not content_type:
+        return None, "No content type provided"
 
     # Check content type
-    content_type = file.content_type
     if content_type not in SUPPORTED_MIME_TYPES:
         supported = ", ".join(SUPPORTED_MIME_TYPES.values())
         return None, f"Unsupported file type: {content_type}. Supported types: {supported}"
 
-    # Read file bytes
-    file_bytes = file.read()
+    try:
+        # Decode base64 data
+        file_bytes = base64.b64decode(file_data)
+    except Exception:
+        return None, "Invalid base64 file data"
 
     # Check file size
     if len(file_bytes) > MAX_FILE_SIZE:
@@ -174,49 +176,33 @@ def validate_file(file) -> tuple[bytes | None, str | None]:
     return file_bytes, None
 
 
-@https_fn.on_request(
-    cors=cors_options,
+@https_fn.on_call(
     secrets=["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_REGION"],
+    enforce_app_check=not IS_EMULATOR,
 )
-def analyze_receipt(req: https_fn.Request) -> https_fn.Response:
+def analyze_receipt(req: https_fn.CallableRequest) -> dict:
     """
     Analyze a receipt image using AWS Textract AnalyzeExpense.
 
-    Expects a POST request with multipart/form-data containing:
-    - file: image file (JPEG, PNG) or PDF
+    Expects callable request with data containing:
+    - fileData: base64-encoded image file (JPEG, PNG) or PDF
+    - contentType: MIME type of the file
 
-    Returns JSON with:
+    Returns dict with:
     - items: list of {name, price, quantity}
     - summary: {subtotal, tax, tip, total, service_charge}
     """
-    if req.method == "OPTIONS":
-        return https_fn.Response("", status=204)
-
-    if req.method != "POST":
-        return https_fn.Response(
-            json.dumps({"error": "Method not allowed"}),
-            status=405,
-            headers={"Content-Type": "application/json"},
-        )
-
     try:
-        # Get file from request
-        if "file" not in req.files:
-            return https_fn.Response(
-                json.dumps({"error": "No file provided. Send file in 'file' field"}),
-                status=400,
-                headers={"Content-Type": "application/json"},
-            )
+        data = req.data or {}
+        file_data = data.get("fileData")
+        content_type = data.get("contentType")
 
-        file = req.files["file"]
-
-        # Validate file
-        file_bytes, error = validate_file(file)
+        # Validate file data
+        file_bytes, error = validate_file_data(file_data, content_type)
         if error:
-            return https_fn.Response(
-                json.dumps({"error": error}),
-                status=400,
-                headers={"Content-Type": "application/json"},
+            raise https_fn.HttpsError(
+                code=https_fn.FunctionsErrorCode.INVALID_ARGUMENT,
+                message=error,
             )
 
         # Call Textract AnalyzeExpense
@@ -228,34 +214,23 @@ def analyze_receipt(req: https_fn.Request) -> https_fn.Response:
         items = extract_line_items(expense_documents)
         summary = extract_summary_fields(expense_documents)
 
-        return https_fn.Response(
-            json.dumps(
-                {
-                    "success": True,
-                    "items": items,
-                    "summary": summary,
-                }
-            ),
-            status=200,
-            headers={"Content-Type": "application/json"},
-        )
+        return {
+            "items": items,
+            "summary": summary,
+        }
 
+    except https_fn.HttpsError:
+        # Re-raise HttpsError as-is
+        raise
     except ClientError as e:
         error_code = e.response.get("Error", {}).get("Code", "Unknown")
         error_message = e.response.get("Error", {}).get("Message", str(e))
-        return https_fn.Response(
-            json.dumps(
-                {
-                    "error": f"AWS Textract error: {error_code}",
-                    "message": error_message,
-                }
-            ),
-            status=500,
-            headers={"Content-Type": "application/json"},
+        raise https_fn.HttpsError(
+            code=https_fn.FunctionsErrorCode.INTERNAL,
+            message=f"AWS Textract error: {error_code} - {error_message}",
         )
     except Exception as e:
-        return https_fn.Response(
-            json.dumps({"error": "Internal server error", "message": str(e)}),
-            status=500,
-            headers={"Content-Type": "application/json"},
+        raise https_fn.HttpsError(
+            code=https_fn.FunctionsErrorCode.INTERNAL,
+            message=f"Internal server error: {str(e)}",
         )

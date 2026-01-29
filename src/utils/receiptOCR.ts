@@ -1,8 +1,9 @@
-import {OCRApiResponse, MockOCRResult} from '../types';
+import {MockOCRResult} from '../types';
 import {mockReceiptOCR} from './mockOCR';
+import {functions} from '../firebase';
+import {httpsCallable} from 'firebase/functions';
 
-const OCR_API_URL = import.meta.env.VITE_OCR_API_URL;
-const IS_PROD = import.meta.env.VITE_ENV === 'production';
+const IS_DEMO = !!import.meta.env.DEMO;
 
 export interface ReceiptOCRResult {
   items: Array<{
@@ -19,6 +20,38 @@ export interface ReceiptOCRResult {
   };
 }
 
+interface AnalyzeReceiptResponse {
+  items: Array<{
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
+  summary: {
+    subtotal: number | null;
+    tax: number | null;
+    tip: number | null;
+    total: number | null;
+    service_charge: number | null;
+  };
+}
+
+/**
+ * Convert a File to base64 string
+ */
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      // Remove data URL prefix (e.g., "data:image/jpeg;base64,")
+      const base64 = result.split(',')[1];
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 /**
  * Process receipt image using OCR
  * Uses real API in production, mock in development
@@ -26,33 +59,29 @@ export interface ReceiptOCRResult {
 export async function processReceiptImage(
   imageFile: File,
 ): Promise<ReceiptOCRResult> {
-  if (IS_PROD && OCR_API_URL) {
+  if (!IS_DEMO) {
     return callOCRApi(imageFile);
   }
   return callMockOCR(imageFile);
 }
 
 /**
- * Call the real OCR API endpoint
+ * Call the Firebase Function using httpsCallable
  */
 async function callOCRApi(imageFile: File): Promise<ReceiptOCRResult> {
-  const formData = new FormData();
-  formData.append('file', imageFile);
+  const analyzeReceipt = httpsCallable<
+    {fileData: string; contentType: string},
+    AnalyzeReceiptResponse
+  >(functions, 'analyze_receipt');
 
-  const response = await fetch(OCR_API_URL, {
-    method: 'POST',
-    body: formData,
+  const fileData = await fileToBase64(imageFile);
+
+  const result = await analyzeReceipt({
+    fileData,
+    contentType: imageFile.type,
   });
 
-  if (!response.ok) {
-    throw new Error(`OCR API error: ${response.status}`);
-  }
-
-  const data: OCRApiResponse = await response.json();
-
-  if (!data.success) {
-    throw new Error('OCR processing failed');
-  }
+  const data = result.data;
 
   return {
     items: data.items.map((item) => ({

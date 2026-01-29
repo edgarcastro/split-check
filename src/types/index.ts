@@ -106,23 +106,6 @@ export interface MockOCRResult {
   confidence: number;
 }
 
-// OCR API response type
-export interface OCRApiResponse {
-  success: boolean;
-  items: Array<{
-    name: string;
-    price: number;
-    quantity: number;
-  }>;
-  summary: {
-    subtotal: number | null;
-    tax: number | null;
-    tip: number | null;
-    total: number | null;
-    service_charge: number | null;
-  };
-}
-
 // Workflow step enum
 export const WorkflowStep = {
   INPUT: 'input',
