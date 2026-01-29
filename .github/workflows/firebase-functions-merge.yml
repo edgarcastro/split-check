@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -21,10 +25,9 @@ jobs:
           cd functions
           python3.13 -m venv venv
           . venv/bin/activate && python3.13 -m pip install -r requirements.txt
-      - name: Deploy Functions
-        uses: w9jds/firebase-action@master
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          args: deploy --only functions
-        env:
-          GCP_SA_KEY: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPLIT_CHECK_41CB9 }}'
-          PROJECT_ID: split-check-41cb9
+          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPLIT_CHECK_41CB9 }}'
+      - name: Deploy Functions
+        run: npx firebase-tools deploy --only functions --project split-check-41cb9
