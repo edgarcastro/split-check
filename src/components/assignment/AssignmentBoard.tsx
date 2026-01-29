@@ -81,8 +81,10 @@ export function AssignmentBoard() {
       onDragCancel={handleDragCancel}
     >
       <div className="space-y-4">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-          <p className="text-sm text-blue-800">{t('assignment.tipMessage')}</p>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 dark:bg-blue-800">
+          <p className="text-sm text-blue-800 dark:text-blue-50">
+            {t('assignment.tipMessage')}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

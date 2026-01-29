@@ -34,16 +34,16 @@ export function UnassignedPool({items}: UnassignedPoolProps) {
   return (
     <div
       ref={setNodeRef}
-      className={`bg-gray-50 rounded-xl p-4 min-h-[300px] border-2 border-dashed transition-all ${
-        isOver ? 'border-primary-500 bg-primary-50' : 'border-gray-300'
+      className={`bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 min-h-[300px] border-2 border-dashed transition-all ${
+        isOver ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300 dark:border-gray-600'
       }`}
     >
       <div className="flex items-center gap-2 mb-4">
-        <ClipboardDocumentListIcon className="size-6 text-gray-600" />
-        <h3 className="text-lg font-semibold text-gray-900">
+        <ClipboardDocumentListIcon className="size-6 text-gray-600 dark:text-gray-400" />
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           {t('assignment.unassignedItems')}
         </h3>
-        <span className="ml-auto text-sm text-gray-600">
+        <span className="ml-auto text-sm text-gray-600 dark:text-gray-400">
           {totalUnassignedUnits}{' '}
           {totalUnassignedUnits === 1 ? t('common.item') : t('common.items')}
         </span>

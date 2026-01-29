@@ -40,7 +40,7 @@ export function Footer() {
     <footer className="mt-12x w-full">
       <div className="mx-auto w-full">
         <div className="relative overflow-hidden bg-gradient-to-br from-purple-200 via-pink-200 to-orange-200 p-1">
-          <div className="relative rounded-[22px] bg-white">
+          <div className="relative rounded-[22px] bg-white dark:bg-gray-800">
             {/* Gradient header section */}
             <div className="h-20 rounded-t-[22px] bg-gradient-to-r from-purple-300/60 via-pink-300/60 to-orange-300/60" />
 
@@ -51,17 +51,17 @@ export function Footer() {
                 <img
                   src={avatarImage}
                   alt="Edgar Castro"
-                  className="size-20 rounded-full border-4 border-white object-cover shadow-lg"
+                  className="size-20 rounded-full border-4 border-white dark:border-gray-700 object-cover shadow-lg"
                 />
                 <div className="mb-3">
-                  <h3 className="text-xl font-semibold text-gray-900">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                     {t('footer.authorName')}
                   </h3>
                   <div className="mt-1 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-purple-100 px-3 py-0.5 text-xs font-medium text-purple-700">
+                    <span className="rounded-full bg-purple-100 dark:bg-purple-900/50 px-3 py-0.5 text-xs font-medium text-purple-700 dark:text-purple-300">
                       {t('footer.tagDeveloper')}
                     </span>
-                    <span className="rounded-full bg-amber-100 px-3 py-0.5 text-xs font-medium text-amber-700">
+                    <span className="rounded-full bg-amber-100 dark:bg-amber-900/50 px-3 py-0.5 text-xs font-medium text-amber-700 dark:text-amber-300">
                       {t('footer.tagOpenSource')}
                     </span>
                   </div>
@@ -69,7 +69,7 @@ export function Footer() {
               </div>
 
               {/* Description */}
-              <p className="mb-5 text-sm text-gray-600">
+              <p className="mb-5 text-sm text-gray-600 dark:text-gray-300">
                 {t('footer.description')}
               </p>
 

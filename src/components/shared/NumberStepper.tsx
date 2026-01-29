@@ -40,10 +40,10 @@ export function NumberStepper({
       {(label || sublabel) && (
         <div className="flex flex-col">
           {label && (
-            <span className="text-base font-medium text-gray-900">{label}</span>
+            <span className="text-base font-medium text-gray-900 dark:text-white">{label}</span>
           )}
           {sublabel && (
-            <span className="text-sm text-gray-500">{sublabel}</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{sublabel}</span>
           )}
         </div>
       )}
@@ -61,7 +61,7 @@ export function NumberStepper({
           <MinusIcon className="size-5" />
         </Button>
 
-        <span className="text-lg font-medium text-gray-900 min-w-[3rem] text-center tabular-nums">
+        <span className="text-lg font-medium text-gray-900 dark:text-white min-w-[3rem] text-center tabular-nums">
           {value}
           {suffix}
         </span>

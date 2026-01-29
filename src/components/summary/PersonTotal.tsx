@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {PersonTotal as PersonTotalType} from '../../types';
 import {Card} from '../shared/Card';
 import {formatCurrencyLocale} from '../../utils/formatters';
+import {useTheme} from '../../context/ThemeContext';
 import {motion} from 'motion/react';
 import {ChevronDownIcon} from '@heroicons/react/24/outline';
 import {
@@ -19,6 +20,8 @@ interface PersonTotalProps {
 export function PersonTotal({personTotal, color}: PersonTotalProps) {
   const {t, i18n} = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const {resolvedTheme} = useTheme();
+  const isDark = resolvedTheme === 'dark';
 
   return (
     <motion.div
@@ -35,10 +38,10 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
             {personTotal.personName.charAt(0).toUpperCase()}
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {personTotal.personName}
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               {t('summary.totalBreakdown')}
             </p>
           </div>
@@ -46,8 +49,8 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
 
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">{t('common.subtotal')}</span>
-            <span className="font-medium text-gray-900">
+            <span className="text-gray-600 dark:text-gray-400">{t('common.subtotal')}</span>
+            <span className="font-medium text-gray-900 dark:text-white">
               {formatCurrencyLocale(personTotal.subtotal, i18n.language)}
             </span>
           </div>
@@ -64,7 +67,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
                 <span>
                   {isOpen ? t('summary.hideDetails') : t('summary.viewDetails')}
                 </span>
-                <span className="text-gray-500">
+                <span className="text-gray-500 dark:text-gray-400">
                   ({personTotal.items.length}{' '}
                   {personTotal.items.length === 1
                     ? t('common.item')
@@ -73,18 +76,18 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
                 </span>
               </CollapsibleTrigger>
               <CollapsibleContent>
-                <div className="mt-2 ml-1 pl-3 border-l-2 border-gray-200 space-y-1.5">
+                <div className="mt-2 ml-1 pl-3 border-l-2 border-gray-200 dark:border-gray-600 space-y-1.5">
                   {personTotal.items.map((item) => (
                     <div
                       key={item.itemId}
-                      className="flex justify-between text-xs text-gray-600"
+                      className="flex justify-between text-xs text-gray-600 dark:text-gray-400"
                     >
                       <div className="flex items-center gap-1.5">
                         <span className="truncate max-w-[150px]">
                           {item.itemName}
                         </span>
                         {item.unitsAssigned > 1 && (
-                          <span className="text-gray-400">
+                          <span className="text-gray-400 dark:text-gray-500">
                             x{item.unitsAssigned}
                           </span>
                         )}
@@ -94,7 +97,7 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
                           </span>
                         )}
                       </div>
-                      <span className="font-medium text-gray-700">
+                      <span className="font-medium text-gray-700 dark:text-gray-300">
                         {formatCurrencyLocale(item.amount, i18n.language)}
                       </span>
                     </div>
@@ -106,8 +109,8 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
 
           {personTotal.tax > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">{t('summary.tax')}</span>
-              <span className="font-medium text-gray-900">
+              <span className="text-gray-600 dark:text-gray-400">{t('summary.tax')}</span>
+              <span className="font-medium text-gray-900 dark:text-white">
                 {formatCurrencyLocale(personTotal.tax, i18n.language)}
               </span>
             </div>
@@ -115,8 +118,8 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
 
           {personTotal.tip > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">{t('summary.tip')}</span>
-              <span className="font-medium text-gray-900">
+              <span className="text-gray-600 dark:text-gray-400">{t('summary.tip')}</span>
+              <span className="font-medium text-gray-900 dark:text-white">
                 {formatCurrencyLocale(personTotal.tip, i18n.language)}
               </span>
             </div>
@@ -124,25 +127,25 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
 
           {personTotal.serviceCharge > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">
+              <span className="text-gray-600 dark:text-gray-400">
                 {t('summary.serviceCharge')}
               </span>
-              <span className="font-medium text-gray-900">
+              <span className="font-medium text-gray-900 dark:text-white">
                 {formatCurrencyLocale(personTotal.serviceCharge, i18n.language)}
               </span>
             </div>
           )}
 
-          <div className="pt-2 border-t-2 border-gray-200">
+          <div className="pt-2 border-t-2 border-gray-200 dark:border-gray-600">
             <div className="flex justify-between">
-              <span className="font-semibold text-gray-900">
+              <span className="font-semibold text-gray-900 dark:text-white">
                 {t('common.total')}
               </span>
               <motion.span
                 key={personTotal.total}
                 initial={{scale: 1.2, color: color}}
-                animate={{scale: 1, color: '#111827'}}
-                className="font-bold text-xl text-gray-900"
+                animate={{scale: 1, color: isDark ? '#ffffff' : '#111827'}}
+                className="font-bold text-xl text-gray-900 dark:text-white"
               >
                 {formatCurrencyLocale(personTotal.total, i18n.language)}
               </motion.span>

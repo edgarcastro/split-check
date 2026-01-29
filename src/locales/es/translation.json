@@ -15,7 +15,8 @@
     "item": "artículo",
     "items": "artículos",
     "each": "c/u",
-    "shared": "Compartido"
+    "shared": "Compartido",
+    "toggleTheme": "Cambiar modo oscuro"
   },
   "confirmations": {
     "startOver": "¿Estás seguro de que quieres empezar de nuevo? Esto borrará todos tus datos."

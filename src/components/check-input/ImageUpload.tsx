@@ -107,14 +107,14 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
 
   return (
     <Card>
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4 dark:text-white">
         {t('checkInput.uploadReceiptImage')}
       </h3>
-      <p className="text-sm text-gray-600 mb-4">
+      <p className="text-sm text-gray-600 mb-4 dark:text-gray-300">
         {t('checkInput.uploadInstructions')}
       </p>
       {IS_DEMO && (
-        <p className="text-xs text-amber-600 bg-amber-50 rounded px-2 py-1 mb-4 inline-block">
+        <p className="text-xs text-amber-600 bg-amber-50 rounded px-2 py-1 mb-4 inline-block dark:bg-amber-600 dark:text-amber-50">
           {t('checkInput.demoMode')}
         </p>
       )}
@@ -127,8 +127,8 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
         onClick={handleClick}
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
           isDragging
-            ? 'border-primary-500 bg-primary-50'
-            : 'border-gray-300 hover:border-primary-400 hover:bg-gray-50'
+            ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
+            : 'border-gray-300 dark:border-gray-600 hover:border-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
         }`}
       >
         {isProcessing ? (
@@ -140,7 +140,7 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
             >
               <ArrowPathIcon className="size-10 text-primary-600" />
             </motion.div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               {t('checkInput.processingReceipt')}
             </p>
           </div>
@@ -151,17 +151,17 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
               alt="Receipt preview"
               className="max-h-40 rounded mb-2"
             />
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               {t('checkInput.processing')}
             </p>
           </div>
         ) : (
           <div className="flex flex-col items-center">
-            <CameraIcon className="size-12 text-gray-400 mb-2" />
-            <p className="text-sm font-medium text-gray-900 mb-1">
+            <CameraIcon className="size-12 text-gray-400 dark:text-gray-500 mb-2" />
+            <p className="text-sm font-medium text-gray-900 mb-1 dark:text-white">
               {t('checkInput.clickToUpload')}
             </p>
-            <p className="text-xs text-gray-500">{t('checkInput.fileTypes')}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{t('checkInput.fileTypes')}</p>
           </div>
         )}
       </motion.div>

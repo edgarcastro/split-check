@@ -38,10 +38,10 @@ export function CheckInputView({onNext}: CheckInputViewProps) {
       <Container>
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {t('checkInput.title')}
             </h2>
-            <p className="text-gray-600">{t('checkInput.subtitle')}</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('checkInput.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -53,7 +53,7 @@ export function CheckInputView({onNext}: CheckInputViewProps) {
             <div ref={itemsListRef}>
               <CheckItemsList />
 
-              <div className="flex justify-end pt-6 border-t border-gray-200">
+              <div className="flex justify-end pt-6 border-t border-gray-200 dark:border-gray-700">
                 <Button variant="primary" onClick={onNext} className="px-8">
                   {t('checkInput.nextButton')}
                 </Button>

@@ -26,7 +26,7 @@ export function SplitSummary() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Person totals */}
         <div className="space-y-4 order-2 lg:order-1">
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             {t('summary.individualTotals')}
           </h2>
           <div className="space-y-4">
@@ -47,7 +47,7 @@ export function SplitSummary() {
 
         {/* Overall breakdown */}
         <div className="order-1 lg:order-2">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             {t('summary.checkDetails')}
           </h2>
           <TotalBreakdown summary={summary} />

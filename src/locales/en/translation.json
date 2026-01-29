@@ -15,7 +15,8 @@
     "item": "item",
     "items": "items",
     "each": "each",
-    "shared": "Shared"
+    "shared": "Shared",
+    "toggleTheme": "Toggle dark mode"
   },
   "confirmations": {
     "startOver": "Are you sure you want to start over? This will clear all your data."

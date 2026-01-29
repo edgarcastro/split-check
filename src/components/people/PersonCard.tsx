@@ -29,7 +29,7 @@ export function PersonCard({person, onRemove}: PersonCardProps) {
               {person.name.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="font-medium text-gray-900 truncate">
+              <h4 className="font-medium text-gray-900 dark:text-white truncate">
                 {person.name}
               </h4>
               <Badge color={person.color} className="mt-1">
@@ -39,7 +39,7 @@ export function PersonCard({person, onRemove}: PersonCardProps) {
           </div>
           <button
             onClick={() => onRemove(person.id)}
-            className="text-gray-400 hover:text-red-600 transition-colors flex-shrink-0"
+            className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-500 transition-colors flex-shrink-0"
             aria-label={t('people.removePerson')}
           >
             <TrashIcon className="w-5 h-5" />

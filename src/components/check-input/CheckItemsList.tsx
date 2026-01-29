@@ -12,7 +12,9 @@ export function CheckItemsList() {
   if (state.items.length === 0) {
     return (
       <EmptyState
-        icon={<QueueListIcon className="size-16 text-gray-400" />}
+        icon={
+          <QueueListIcon className="size-16 text-gray-400 dark:text-grey-300" />
+        }
         title={t('checkInput.noItems')}
         description={t('checkInput.noItemsDescription')}
       />
@@ -21,7 +23,7 @@ export function CheckItemsList() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
         Items ({state.items.length})
       </h3>
       <AnimatePresence mode="popLayout">

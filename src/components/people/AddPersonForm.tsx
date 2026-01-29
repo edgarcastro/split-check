@@ -36,7 +36,7 @@ export function AddPersonForm() {
 
   return (
     <Card>
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4 dark:text-white">
         {t('people.addPerson')}
       </h3>
       <form onSubmit={handleSubmit} className="space-y-4">

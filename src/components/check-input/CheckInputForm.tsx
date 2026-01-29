@@ -53,7 +53,7 @@ export function CheckInputForm() {
 
   return (
     <Card>
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4 dark:text-white">
         {t('checkInput.addItemManually')}
       </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -85,7 +85,7 @@ export function CheckInputForm() {
           />
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('checkInput.quantity')}
             </label>
             <NumberStepper

@@ -263,20 +263,20 @@ export function MoneyInput({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300"
         >
           {label}
         </label>
       )}
       <div className={`relative ${widthClass}`}>
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none">
           {config.currencySymbol}
         </span>
         <input
           id={inputId}
           type="text"
           inputMode="decimal"
-          className={`pl-7 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${widthClass} ${errorClass} ${className}`}
+          className={`pl-7 pr-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${widthClass} ${errorClass} ${className}`}
           value={displayValue}
           onChange={handleChange}
           onKeyDown={handleKeyDown}

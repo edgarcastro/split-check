@@ -58,7 +58,7 @@ export function DraggableItemCard({
       ref={setNodeRef}
       style={style}
       whileHover={{scale: 1.02}}
-      className={`bg-white rounded-lg shadow-md p-3 transition-all ${
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 transition-all ${
         isDragging ? 'opacity-50 shadow-xl' : ''
       }`}
     >
@@ -70,25 +70,25 @@ export function DraggableItemCard({
           className="flex-1 min-w-0 cursor-grab active:cursor-grabbing"
         >
           <div className="flex items-center gap-2">
-            <Bars2Icon className="w-4 h-4 text-gray-400 shrink-0" />
-            <h4 className="font-medium text-gray-900 text-sm truncate">
+            <Bars2Icon className="w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0" />
+            <h4 className="font-medium text-gray-900 dark:text-white text-sm truncate">
               {item.name}
             </h4>
             {unassignedCount > 1 && (
-              <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700">
+              <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300">
                 x{unassignedCount}
               </span>
             )}
           </div>
-          <div className="flex items-center gap-1.5 mt-1 text-xs text-gray-600 ml-6">
+          <div className="flex items-center gap-1.5 mt-1 text-xs text-gray-600 dark:text-gray-400 ml-6">
             <span>
               {formatCurrencyLocale(item.price, i18n.language)}
               {unassignedCount > 1 && ` ${t('common.each')}`}
             </span>
             {unassignedCount > 1 && (
               <>
-                <span className="text-gray-400">•</span>
-                <span className="font-medium text-gray-900">
+                <span className="text-gray-400 dark:text-gray-500">•</span>
+                <span className="font-medium text-gray-900 dark:text-white">
                   {formatCurrencyLocale(itemTotal, i18n.language)}
                 </span>
               </>

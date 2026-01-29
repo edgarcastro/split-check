@@ -43,17 +43,17 @@ export function AssignmentView({onNext, onBack}: AssignmentViewProps) {
       <Container>
         <div className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {t('assignment.title')}
             </h2>
-            <p className="text-gray-600">{t('assignment.subtitle')}</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('assignment.subtitle')}</p>
           </div>
 
           <AssignmentBoard />
 
           <div
             ref={nextButtonRef}
-            className="flex justify-between pt-6 border-t border-gray-200"
+            className="flex justify-between pt-6 border-t border-gray-200 dark:border-gray-700"
           >
             <Button variant="secondary" onClick={onBack}>
               ← {t('common.back')}

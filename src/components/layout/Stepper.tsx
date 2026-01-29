@@ -35,7 +35,7 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
   };
 
   return (
-    <div className="bg-white border-b border-gray-200">
+    <div className="glass-subtle border-b border-white/20 dark:border-white/10">
       <div className="container mx-auto px-4 py-6">
         <div className="max-w-3xl mx-auto">
           {/* Progress bar background */}
@@ -44,7 +44,7 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
             <div className="absolute top-6 left-0 right-0 px-6 -translate-y-1/2">
               <Progress
                 value={progressValue}
-                className="h-1 bg-gray-200 *:data-[slot=progress-indicator]:bg-green-500"
+                className="h-1 bg-gray-200 dark:bg-gray-700 *:data-[slot=progress-indicator]:bg-primary-400"
               />
             </div>
 
@@ -66,9 +66,9 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
                       animate={{
                         scale: isActive ? 1.1 : 1,
                         backgroundColor: isCompleted
-                          ? '#10b981'
+                          ? '#a78bfa'
                           : isActive
-                            ? '#0ea5e9'
+                            ? '#7c3aed'
                             : '#e5e7eb',
                       }}
                       whileHover={isClickable ? {scale: 1.15} : undefined}
@@ -86,8 +86,8 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
                         isActive
                           ? 'text-primary-600'
                           : isCompleted
-                            ? 'text-green-600'
-                            : 'text-gray-400'
+                            ? 'text-primary-400'
+                            : 'text-gray-400 dark:text-gray-500'
                       } ${isClickable ? 'cursor-pointer hover:underline' : ''}`}
                       onClick={() => handleStepClick(step.key, index)}
                     >

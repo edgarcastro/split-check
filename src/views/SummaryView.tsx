@@ -71,21 +71,21 @@ export function SummaryView({onBack, onReset}: SummaryViewProps) {
       <Container>
         <div className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {t('summary.title')}
             </h2>
-            <p className="text-gray-600">{t('summary.subtitle')}</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('summary.subtitle')}</p>
           </div>
 
           {unassignedUnitCount > 0 && (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-4">
               <div className="flex items-start gap-2">
-                <ExclamationTriangleIcon className="size-6 text-amber-600 shrink-0" />
+                <ExclamationTriangleIcon className="size-6 text-amber-600 dark:text-amber-400 shrink-0" />
                 <div>
-                  <p className="font-medium text-amber-900">
+                  <p className="font-medium text-amber-900 dark:text-amber-200">
                     {unassignedUnitCount} {t('summary.unassignedWarningTitle')}
                   </p>
-                  <p className="text-sm text-amber-800 mt-1">
+                  <p className="text-sm text-amber-800 dark:text-amber-300 mt-1">
                     {t('summary.unassignedWarningMessage')}
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export function SummaryView({onBack, onReset}: SummaryViewProps) {
 
           <SplitSummary />
 
-          <div className="flex flex-col-reverse gap-3 pt-6 border-t border-gray-200 sm:flex-row sm:justify-between sm:gap-2">
+          <div className="flex flex-col-reverse gap-3 pt-6 border-t border-gray-200 dark:border-gray-700 sm:flex-row sm:justify-between sm:gap-2">
             <Button
               variant="secondary"
               onClick={onBack}

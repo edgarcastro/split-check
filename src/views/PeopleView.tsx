@@ -25,23 +25,23 @@ export function PeopleView({onNext, onBack}: PeopleViewProps) {
       <Container>
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {t('people.title')}
             </h2>
-            <p className="text-gray-600">{t('people.subtitle')}</p>
+            <p className="text-gray-600 dark:text-gray-300">{t('people.subtitle')}</p>
           </div>
 
           <PeopleManager />
 
           {!hasPeople && state.people.length > 0 && (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-center">
-              <p className="text-sm text-amber-800">
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-4 text-center">
+              <p className="text-sm text-amber-800 dark:text-amber-300">
                 {t('people.minPeopleWarning')}
               </p>
             </div>
           )}
 
-          <div className="flex justify-between pt-6 border-t border-gray-200">
+          <div className="flex justify-between pt-6 border-t border-gray-200 dark:border-gray-700">
             <Button variant="secondary" onClick={onBack}>
               ← {t('common.back')}
             </Button>

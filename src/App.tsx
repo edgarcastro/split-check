@@ -56,7 +56,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 to-purple-100 dark:from-gray-950 dark:to-gray-900 flex flex-col transition-colors">
       <Header onReset={() => setCurrentStep(WorkflowStep.INPUT)} />
       <Stepper currentStep={currentStep} onStepClick={setCurrentStep} />
 
