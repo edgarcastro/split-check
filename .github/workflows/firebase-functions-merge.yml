@@ -15,10 +15,12 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Install dependencies
+          python-version: '3.13'
+      - name: Create venv and install dependencies
         run: |
           cd functions
+          python -m venv venv
+          source venv/bin/activate
           pip install -r requirements.txt
       - name: Deploy Functions
         uses: w9jds/firebase-action@master
