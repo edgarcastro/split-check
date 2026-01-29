@@ -20,12 +20,21 @@ export interface Person {
   createdAt: Date;
 }
 
+export interface OCRSummary {
+  subtotal: number | null;
+  tax: number | null;
+  tip: number | null;
+  total: number | null;
+  serviceCharge: number | null;
+}
+
 export interface CheckState {
   items: CheckItem[];
   people: Person[];
   taxRate: number; // Percentage (e.g., 8.5 for 8.5%)
   tipRate: number; // Percentage (e.g., 20 for 20%)
   serviceCharges: number; // Fixed amount
+  ocrSummary: OCRSummary | null; // Summary from OCR scan if available
 }
 
 export interface PersonItemDetail {
@@ -92,6 +101,7 @@ export interface CheckSplitContextType {
   setTaxRate: (rate: number) => void;
   setTipRate: (rate: number) => void;
   setServiceCharges: (amount: number) => void;
+  setOcrSummary: (summary: OCRSummary | null) => void;
   getSplitSummary: () => SplitSummary;
   resetCheck: () => void;
 }

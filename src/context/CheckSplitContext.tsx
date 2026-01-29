@@ -5,6 +5,7 @@ import {
   CheckItem,
   Person,
   SplitSummary,
+  OCRSummary,
 } from '../types';
 import {calculateSplit} from '../utils/calculations';
 
@@ -15,6 +16,7 @@ const initialState: CheckState = {
   taxRate: 0,
   tipRate: 15,
   serviceCharges: 0,
+  ocrSummary: null,
 };
 
 // Action types
@@ -42,6 +44,7 @@ type Action =
   | {type: 'SET_TAX_RATE'; payload: number}
   | {type: 'SET_TIP_RATE'; payload: number}
   | {type: 'SET_SERVICE_CHARGES'; payload: number}
+  | {type: 'SET_OCR_SUMMARY'; payload: OCRSummary | null}
   | {type: 'RESET_CHECK'};
 
 // Reducer function with all business logic
@@ -165,6 +168,12 @@ function checkSplitReducer(state: CheckState, action: Action): CheckState {
         serviceCharges: action.payload,
       };
 
+    case 'SET_OCR_SUMMARY':
+      return {
+        ...state,
+        ocrSummary: action.payload,
+      };
+
     case 'RESET_CHECK':
       return initialState;
 
@@ -254,6 +263,10 @@ export function CheckSplitProvider({children}: {children: ReactNode}) {
     dispatch({type: 'SET_SERVICE_CHARGES', payload: amount});
   };
 
+  const setOcrSummary = (summary: OCRSummary | null) => {
+    dispatch({type: 'SET_OCR_SUMMARY', payload: summary});
+  };
+
   const getSplitSummary = (): SplitSummary => {
     return calculateSplit(state);
   };
@@ -275,6 +288,7 @@ export function CheckSplitProvider({children}: {children: ReactNode}) {
     setTaxRate,
     setTipRate,
     setServiceCharges,
+    setOcrSummary,
     getSplitSummary,
     resetCheck,
   };

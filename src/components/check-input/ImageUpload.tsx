@@ -15,7 +15,8 @@ interface ImageUploadProps {
 
 export function ImageUpload({onProcessComplete}: ImageUploadProps) {
   const {t} = useTranslation();
-  const {addItem} = useCheckSplit();
+  const {addItem, setOcrSummary, setTaxRate, setTipRate, setServiceCharges} =
+    useCheckSplit();
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -52,6 +53,33 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
       result.items.forEach((item) => {
         addItem(item);
       });
+      // Store OCR summary and pre-populate rates if available
+      if (result.summary) {
+        setOcrSummary(result.summary);
+
+        // Calculate subtotal from items for rate calculations
+        const subtotal = result.items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
+
+        // Pre-populate tax rate if tax amount was detected
+        if (result.summary.tax !== null && subtotal > 0) {
+          const taxRate = (result.summary.tax / subtotal) * 100;
+          setTaxRate(Math.round(taxRate * 2) / 2); // Round to nearest 0.5
+        }
+
+        // Pre-populate tip rate if tip amount was detected
+        if (result.summary.tip !== null && subtotal > 0) {
+          const tipRate = (result.summary.tip / subtotal) * 100;
+          setTipRate(Math.round(tipRate)); // Round to nearest integer
+        }
+
+        // Pre-populate service charge directly (it's already a fixed amount)
+        if (result.summary.serviceCharge !== null) {
+          setServiceCharges(result.summary.serviceCharge);
+        }
+      }
       setPreview(null);
       onProcessComplete?.();
     } catch (err) {
