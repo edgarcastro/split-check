@@ -58,7 +58,9 @@ export function TotalBreakdown({summary}: TotalBreakdownProps) {
         {/* Totals */}
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600 dark:text-gray-400">{t('common.subtotal')}</span>
+            <span className="text-gray-600 dark:text-gray-400">
+              {t('common.subtotal')}
+            </span>
             <span className="font-medium text-gray-900 dark:text-white">
               {formatCurrencyLocale(
                 summary.totalBeforeTaxAndTip,

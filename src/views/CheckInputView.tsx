@@ -41,7 +41,9 @@ export function CheckInputView({onNext}: CheckInputViewProps) {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {t('checkInput.title')}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300">{t('checkInput.subtitle')}</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              {t('checkInput.subtitle')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -49,7 +49,9 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
 
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600 dark:text-gray-400">{t('common.subtotal')}</span>
+            <span className="text-gray-600 dark:text-gray-400">
+              {t('common.subtotal')}
+            </span>
             <span className="font-medium text-gray-900 dark:text-white">
               {formatCurrencyLocale(personTotal.subtotal, i18n.language)}
             </span>
@@ -109,7 +111,9 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
 
           {personTotal.tax > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">{t('summary.tax')}</span>
+              <span className="text-gray-600 dark:text-gray-400">
+                {t('summary.tax')}
+              </span>
               <span className="font-medium text-gray-900 dark:text-white">
                 {formatCurrencyLocale(personTotal.tax, i18n.language)}
               </span>
@@ -118,7 +122,9 @@ export function PersonTotal({personTotal, color}: PersonTotalProps) {
 
           {personTotal.tip > 0 && (
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">{t('summary.tip')}</span>
+              <span className="text-gray-600 dark:text-gray-400">
+                {t('summary.tip')}
+              </span>
               <span className="font-medium text-gray-900 dark:text-white">
                 {formatCurrencyLocale(personTotal.tip, i18n.language)}
               </span>

@@ -3,7 +3,10 @@ import {useTranslation} from 'react-i18next';
 import {CheckItem} from '../../types';
 import {DraggableItemCard} from './DraggableItemCard';
 import {EmptyState} from '../shared/EmptyState';
-import {ClipboardDocumentListIcon, CheckIcon} from '@heroicons/react/24/outline';
+import {
+  ClipboardDocumentListIcon,
+  CheckIcon,
+} from '@heroicons/react/24/outline';
 
 interface UnassignedPoolProps {
   items: CheckItem[];
@@ -35,7 +38,9 @@ export function UnassignedPool({items}: UnassignedPoolProps) {
     <div
       ref={setNodeRef}
       className={`bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 min-h-[300px] border-2 border-dashed transition-all ${
-        isOver ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300 dark:border-gray-600'
+        isOver
+          ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
+          : 'border-gray-300 dark:border-gray-600'
       }`}
     >
       <div className="flex items-center gap-2 mb-4">

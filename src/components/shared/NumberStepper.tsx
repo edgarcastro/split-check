@@ -40,10 +40,14 @@ export function NumberStepper({
       {(label || sublabel) && (
         <div className="flex flex-col">
           {label && (
-            <span className="text-base font-medium text-gray-900 dark:text-white">{label}</span>
+            <span className="text-base font-medium text-gray-900 dark:text-white">
+              {label}
+            </span>
           )}
           {sublabel && (
-            <span className="text-sm text-gray-500 dark:text-gray-400">{sublabel}</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">
+              {sublabel}
+            </span>
           )}
         </div>
       )}

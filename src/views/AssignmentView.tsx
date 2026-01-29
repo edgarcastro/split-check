@@ -46,7 +46,9 @@ export function AssignmentView({onNext, onBack}: AssignmentViewProps) {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {t('assignment.title')}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300">{t('assignment.subtitle')}</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              {t('assignment.subtitle')}
+            </p>
           </div>
 
           <AssignmentBoard />

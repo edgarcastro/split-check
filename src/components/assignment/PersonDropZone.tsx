@@ -42,7 +42,9 @@ export function PersonDropZone({person, items, subtotal}: PersonDropZoneProps) {
     <div
       ref={setNodeRef}
       className={`bg-white dark:bg-gray-800 rounded-xl p-4 min-h-[300px] border-2 transition-all ${
-        isOver ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-200 dark:border-gray-700'
+        isOver
+          ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
+          : 'border-gray-200 dark:border-gray-700'
       }`}
       style={{
         borderColor: isOver ? undefined : person.color,
@@ -56,7 +58,9 @@ export function PersonDropZone({person, items, subtotal}: PersonDropZoneProps) {
           {person.name.charAt(0).toUpperCase()}
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{person.name}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            {person.name}
+          </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400">
             {t('common.subtotal')}:{' '}
             {formatCurrencyLocale(subtotal, i18n.language)}

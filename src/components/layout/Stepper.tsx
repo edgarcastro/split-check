@@ -19,10 +19,26 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
   const {t} = useTranslation();
 
   const steps = [
-    {key: WorkflowStep.INPUT, label: t('stepper.addItems'), icon: ClipboardDocumentListIcon},
-    {key: WorkflowStep.PEOPLE, label: t('stepper.addPeople'), icon: UserGroupIcon},
-    {key: WorkflowStep.ASSIGN, label: t('stepper.assignItems'), icon: CursorArrowRaysIcon},
-    {key: WorkflowStep.SUMMARY, label: t('stepper.summary'), icon: BanknotesIcon},
+    {
+      key: WorkflowStep.INPUT,
+      label: t('stepper.addItems'),
+      icon: ClipboardDocumentListIcon,
+    },
+    {
+      key: WorkflowStep.PEOPLE,
+      label: t('stepper.addPeople'),
+      icon: UserGroupIcon,
+    },
+    {
+      key: WorkflowStep.ASSIGN,
+      label: t('stepper.assignItems'),
+      icon: CursorArrowRaysIcon,
+    },
+    {
+      key: WorkflowStep.SUMMARY,
+      label: t('stepper.summary'),
+      icon: BanknotesIcon,
+    },
   ];
 
   const currentIndex = steps.findIndex((step) => step.key === currentStep);
@@ -77,7 +93,11 @@ export function Stepper({currentStep, onStepClick}: StepperProps) {
                         isCompleted || isActive ? 'text-white' : 'text-gray-400'
                       } shadow-md ${isClickable ? 'cursor-pointer' : 'cursor-default'}`}
                     >
-                      {isCompleted ? <CheckIcon className="size-6" /> : <step.icon className="size-6" />}
+                      {isCompleted ? (
+                        <CheckIcon className="size-6" />
+                      ) : (
+                        <step.icon className="size-6" />
+                      )}
                     </motion.button>
 
                     {/* Label */}

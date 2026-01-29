@@ -161,7 +161,9 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
             <p className="text-sm font-medium text-gray-900 mb-1 dark:text-white">
               {t('checkInput.clickToUpload')}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">{t('checkInput.fileTypes')}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              {t('checkInput.fileTypes')}
+            </p>
           </div>
         )}
       </motion.div>

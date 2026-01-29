@@ -49,7 +49,6 @@ function App() {
           <SummaryView
             key="summary"
             onBack={() => setCurrentStep(WorkflowStep.ASSIGN)}
-            onReset={() => setCurrentStep(WorkflowStep.INPUT)}
           />
         );
     }

@@ -28,7 +28,9 @@ export function PeopleView({onNext, onBack}: PeopleViewProps) {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {t('people.title')}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300">{t('people.subtitle')}</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              {t('people.subtitle')}
+            </p>
           </div>
 
           <PeopleManager />
@@ -45,11 +47,7 @@ export function PeopleView({onNext, onBack}: PeopleViewProps) {
             <Button variant="outline" onClick={onBack}>
               ← {t('common.back')}
             </Button>
-            <Button
-              onClick={onNext}
-              disabled={!hasPeople}
-              className="px-8"
-            >
+            <Button onClick={onNext} disabled={!hasPeople} className="px-8">
               {t('people.nextButton')}
             </Button>
           </div>
