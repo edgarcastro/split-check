@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently 'bunx --bun vite' 'firebase emulators:start --only functions'",
+    "dev": "VITE_DEMO=true bunx --bun vite",
+    "start": "concurrently 'bunx --bun vite' 'firebase emulators:start --only functions'",
     "build": "tsc -b && bunx --bun vite build",
     "lint": "eslint . && prettier --check .",
     "preview": "vite preview",
