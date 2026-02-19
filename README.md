@@ -1,73 +1,109 @@
-# React + TypeScript + Vite
+# Split Check
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app for splitting restaurant checks among multiple people. Add items, assign people, distribute costs, and view payment summaries — all in a simple 4-step workflow.
 
-Currently, two official plugins are available:
+**[Live Demo](https://split-check-41cb9.web.app/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Split Check Demo](./docs/demo.gif)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Receipt OCR** — Upload a photo of your receipt to auto-extract items (powered by AWS Textract)
+- **Drag & Drop** — Assign items to people with an intuitive drag-and-drop interface
+- **Shared Items** — Split individual items across multiple people
+- **Smart Calculations** — Proportional tax, tip, and service charge distribution
+- **PDF Export** — Generate and share payment summaries
+- **Dark Mode** — Full light/dark theme support
+- **i18n** — English and Spanish translations
+- **Responsive** — Mobile-first design
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Category | Technology |
+|---|---|
+| Framework | React 19 |
+| Language | TypeScript 5.9 |
+| Build Tool | Rolldown-Vite |
+| Styling | Tailwind CSS v4 |
+| UI Components | shadcn/ui + Radix UI |
+| Icons | Heroicons |
+| Animations | Motion (React) |
+| Drag & Drop | @dnd-kit |
+| i18n | react-i18next |
+| Backend | Firebase Functions (Python) |
+| OCR | AWS Textract |
+| Hosting | Firebase Hosting |
+| Runtime | Bun |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+- [Bun](https://bun.sh/) (v1.0+)
+- [Node.js](https://nodejs.org/) (v18+)
+- [Python 3.13](https://www.python.org/) (for Firebase Functions)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/split-check.git
+cd split-check
+
+# Install dependencies
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+Create a `.env` file in the root directory:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```env
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_APP_ID=your_firebase_app_id
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
+VITE_APPCHECK_DEBUG_TOKEN=your_debug_token
 ```
+
+### Run the App
+
+```bash
+# Start development server (demo mode, no backend needed)
+bun dev
+
+# Start with Firebase Functions emulator
+bun start
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `bun dev` | Start dev server in demo mode |
+| `bun start` | Start dev server + Firebase Functions emulator |
+| `bun run build` | TypeScript check + production build |
+| `bun preview` | Preview production build locally |
+| `bun lint` | Run ESLint + Prettier checks |
+| `bun run format` | Auto-format code with Prettier |
+
+## Firebase Functions Setup
+
+```bash
+cd functions
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Run locally
+firebase emulators:start --only functions
+
+# Deploy
+firebase deploy --only functions
+```
+
+## License
+
+MIT
