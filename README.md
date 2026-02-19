@@ -4,8 +4,7 @@ A web app for splitting restaurant checks among multiple people. Add items, assi
 
 **[Live Demo](https://split-check-41cb9.web.app/)**
 
-<!-- Add screenshots or a GIF of the app here -->
-<!-- ![Split Check Demo](./docs/demo.gif) -->
+![Split Check Demo](./docs/demo.gif)
 
 ## Features
 
