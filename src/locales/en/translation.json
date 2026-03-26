@@ -107,6 +107,16 @@
     "shareButton": "Share",
     "sharing": "Sharing..."
   },
+  "adGate": {
+    "title": "Unlock AI Receipt Scanner",
+    "description": "Watch a short ad to use the AI-powered receipt scanner for free.",
+    "watchButton": "Watch Ad",
+    "cancel": "Cancel",
+    "loading": "Loading ad...",
+    "dismissed": "You need to watch the full ad to unlock the scanner.",
+    "tryAgain": "Try Again",
+    "unavailable": "No ads available right now. Please try again later."
+  },
   "errors": {
     "itemNameRequired": "Item name is required (max 100 characters)",
     "invalidPrice": "Please enter a valid price greater than 0",

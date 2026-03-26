@@ -107,6 +107,16 @@
     "shareButton": "Compartir",
     "sharing": "Compartiendo..."
   },
+  "adGate": {
+    "title": "Desbloquear Escáner de Recibos",
+    "description": "Mira un anuncio corto para usar el escáner de recibos con IA de forma gratuita.",
+    "watchButton": "Ver Anuncio",
+    "cancel": "Cancelar",
+    "loading": "Cargando anuncio...",
+    "dismissed": "Debes ver el anuncio completo para desbloquear el escáner.",
+    "tryAgain": "Intentar de Nuevo",
+    "unavailable": "No hay anuncios disponibles ahora. Por favor, inténtalo más tarde."
+  },
   "errors": {
     "itemNameRequired": "El nombre del artículo es requerido (máximo 100 caracteres)",
     "invalidPrice": "Por favor ingresa un precio válido mayor que 0",

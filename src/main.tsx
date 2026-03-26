@@ -10,6 +10,12 @@ import {initializeFirebaseAppCheck} from './firebase';
 // Initialize Firebase App Check before rendering
 initializeFirebaseAppCheck();
 
+// Initialize Google Ad Placement API
+(window as Window & {adConfig?: (o: object) => void}).adConfig?.({
+  preloadAdBreaks: 'auto',
+  sound: 'off',
+});
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>

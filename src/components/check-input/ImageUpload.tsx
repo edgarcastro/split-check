@@ -6,6 +6,7 @@ import {validateImageFile} from '../../utils/mockOCR';
 import {processReceiptImage, OCRError} from '../../utils/receiptOCR';
 import {motion} from 'motion/react';
 import {CameraIcon, ArrowPathIcon} from '@heroicons/react/24/outline';
+import {AdGate} from './AdGate';
 
 const IS_DEMO = !!import.meta.env.VITE_DEMO;
 
@@ -24,6 +25,9 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
   const [ocrError, setOcrError] = useState<OCRError | null>(null);
   const [lastFile, setLastFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [hasWatchedAd, setHasWatchedAd] = useState(false);
+  const [showAdGate, setShowAdGate] = useState(false);
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
 
   const handleFile = async (file: File) => {
     setError(null);
@@ -117,9 +121,13 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
     setIsDragging(false);
 
     const file = e.dataTransfer.files[0];
-    if (file) {
-      handleFile(file);
+    if (!file) return;
+    if (!hasWatchedAd) {
+      setPendingFile(file);
+      setShowAdGate(true);
+      return;
     }
+    handleFile(file);
   };
 
   const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +138,23 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
   };
 
   const handleClick = () => {
+    if (!hasWatchedAd) {
+      setPendingFile(null);
+      setShowAdGate(true);
+      return;
+    }
     fileInputRef.current?.click();
+  };
+
+  const handleAdWatched = () => {
+    setHasWatchedAd(true);
+    setShowAdGate(false);
+    if (pendingFile) {
+      handleFile(pendingFile);
+      setPendingFile(null);
+    } else {
+      fileInputRef.current?.click();
+    }
   };
 
   return (
@@ -217,6 +241,16 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
         onChange={handleFileSelect}
         className="hidden"
       />
+
+      {showAdGate && (
+        <AdGate
+          onAdWatched={handleAdWatched}
+          onClose={() => {
+            setShowAdGate(false);
+            setPendingFile(null);
+          }}
+        />
+      )}
     </Card>
   );
 }
