@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Purple rounded background -->
+  <rect width="512" height="512" rx="112" fill="#7c3aed"/>
+
+  <!-- Receipt shadow/depth -->
+  <rect x="148" y="76" width="224" height="364" rx="14" fill="#5b21b6" opacity="0.35"/>
+
+  <!-- Receipt white body -->
+  <rect x="140" y="68" width="224" height="364" rx="14" fill="white"/>
+
+  <!-- Receipt header strip (light purple tint) -->
+  <rect x="140" y="68" width="224" height="66" rx="14" fill="#ede9fe"/>
+  <rect x="140" y="110" width="224" height="24" fill="#ede9fe"/>
+
+  <!-- Header text placeholders -->
+  <rect x="182" y="80" width="148" height="12" rx="6" fill="#8b5cf6"/>
+  <rect x="202" y="100" width="108" height="9" rx="4.5" fill="#c4b5fd"/>
+
+  <!-- Line items — above split line -->
+  <rect x="162" y="154" width="94" height="9" rx="4.5" fill="#d1d5db"/>
+  <rect x="302" y="154" width="52" height="9" rx="4.5" fill="#d1d5db"/>
+
+  <rect x="162" y="174" width="118" height="9" rx="4.5" fill="#d1d5db"/>
+  <rect x="302" y="174" width="52" height="9" rx="4.5" fill="#d1d5db"/>
+
+  <rect x="162" y="194" width="78" height="9" rx="4.5" fill="#d1d5db"/>
+  <rect x="302" y="194" width="52" height="9" rx="4.5" fill="#d1d5db"/>
+
+  <!-- DASHED SPLIT LINE -->
+  <path d="M124 244 L388 244" stroke="#7c3aed" stroke-width="5" stroke-dasharray="20,10" stroke-linecap="round"/>
+
+  <!-- Scissors icon centred on the split line -->
+  <circle cx="256" cy="244" r="26" fill="#7c3aed"/>
+  <!-- Scissor blades (X) -->
+  <line x1="245" y1="234" x2="267" y2="256" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <line x1="245" y1="256" x2="267" y2="234" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <!-- Scissor handle rings -->
+  <circle cx="242" cy="231" r="6" fill="none" stroke="white" stroke-width="2.5"/>
+  <circle cx="270" cy="259" r="6" fill="none" stroke="white" stroke-width="2.5"/>
+
+  <!-- Line items — below split line (faded) -->
+  <rect x="162" y="264" width="94" height="9" rx="4.5" fill="#d1d5db" opacity="0.5"/>
+  <rect x="302" y="264" width="52" height="9" rx="4.5" fill="#d1d5db" opacity="0.5"/>
+
+  <rect x="162" y="284" width="118" height="9" rx="4.5" fill="#d1d5db" opacity="0.5"/>
+  <rect x="302" y="284" width="52" height="9" rx="4.5" fill="#d1d5db" opacity="0.5"/>
+
+  <!-- Subtotal separator -->
+  <line x1="162" y1="314" x2="354" y2="314" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- Total row -->
+  <rect x="162" y="324" width="108" height="12" rx="6" fill="#7c3aed" opacity="0.2"/>
+  <rect x="302" y="324" width="52" height="12" rx="6" fill="#7c3aed"/>
+
+  <!-- Two person icons — representing the split result -->
+  <!-- Left person -->
+  <circle cx="194" cy="388" r="20" fill="#ede9fe"/>
+  <circle cx="194" cy="379" r="9" fill="#8b5cf6"/>
+  <path d="M176 402 Q194 393 212 402" stroke="#8b5cf6" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Right person -->
+  <circle cx="318" cy="388" r="20" fill="#ede9fe"/>
+  <circle cx="318" cy="379" r="9" fill="#8b5cf6"/>
+  <path d="M300 402 Q318 393 336 402" stroke="#8b5cf6" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- "÷" separator between the two people -->
+  <rect x="248" y="384" width="16" height="6" rx="3" fill="#c4b5fd"/>
+  <circle cx="256" cy="376" r="4" fill="#c4b5fd"/>
+  <circle cx="256" cy="398" r="4" fill="#c4b5fd"/>
+</svg>

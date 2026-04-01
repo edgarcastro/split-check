@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- Solid purple background (iOS clips apple-touch-icon to rounded rect automatically) -->
+  <rect width="180" height="180" fill="#7c3aed"/>
+
+  <!-- Receipt shadow/depth -->
+  <rect x="40" y="22" width="102" height="138" rx="6" fill="#5b21b6" opacity="0.35"/>
+
+  <!-- Receipt white body -->
+  <rect x="36" y="18" width="102" height="138" rx="6" fill="white"/>
+
+  <!-- Receipt header strip -->
+  <rect x="36" y="18" width="102" height="26" rx="6" fill="#ede9fe"/>
+  <rect x="36" y="32" width="102" height="12" fill="#ede9fe"/>
+
+  <!-- Header text -->
+  <rect x="54" y="22" width="64" height="5" rx="2.5" fill="#8b5cf6"/>
+  <rect x="62" y="31" width="48" height="4" rx="2" fill="#c4b5fd"/>
+
+  <!-- Items above split -->
+  <rect x="46" y="54" width="40" height="4" rx="2" fill="#d1d5db"/>
+  <rect x="100" y="54" width="24" height="4" rx="2" fill="#d1d5db"/>
+
+  <rect x="46" y="64" width="52" height="4" rx="2" fill="#d1d5db"/>
+  <rect x="100" y="64" width="24" height="4" rx="2" fill="#d1d5db"/>
+
+  <rect x="46" y="74" width="34" height="4" rx="2" fill="#d1d5db"/>
+  <rect x="100" y="74" width="24" height="4" rx="2" fill="#d1d5db"/>
+
+  <!-- Dashed split line -->
+  <path d="M28 92 L152 92" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="9,4.5" stroke-linecap="round"/>
+
+  <!-- Scissors at center -->
+  <circle cx="90" cy="92" r="11" fill="#7c3aed"/>
+  <line x1="85" y1="87" x2="95" y2="97" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="85" y1="97" x2="95" y2="87" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="83.5" cy="85.5" r="2.5" fill="none" stroke="white" stroke-width="1.5"/>
+  <circle cx="96.5" cy="98.5" r="2.5" fill="none" stroke="white" stroke-width="1.5"/>
+
+  <!-- Items below split (faded) -->
+  <rect x="46" y="104" width="40" height="4" rx="2" fill="#d1d5db" opacity="0.5"/>
+  <rect x="100" y="104" width="24" height="4" rx="2" fill="#d1d5db" opacity="0.5"/>
+
+  <rect x="46" y="114" width="52" height="4" rx="2" fill="#d1d5db" opacity="0.5"/>
+  <rect x="100" y="114" width="24" height="4" rx="2" fill="#d1d5db" opacity="0.5"/>
+
+  <!-- Subtotal line -->
+  <line x1="46" y1="128" x2="124" y2="128" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Total row -->
+  <rect x="46" y="132" width="44" height="5" rx="2.5" fill="#7c3aed" opacity="0.2"/>
+  <rect x="100" y="132" width="24" height="5" rx="2.5" fill="#7c3aed"/>
+
+  <!-- Two person icons at bottom -->
+  <!-- Left person -->
+  <circle cx="63" cy="152" r="9" fill="#ede9fe"/>
+  <circle cx="63" cy="148" r="4" fill="#8b5cf6"/>
+  <path d="M55 158 Q63 154 71 158" stroke="#8b5cf6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Right person -->
+  <circle cx="117" cy="152" r="9" fill="#ede9fe"/>
+  <circle cx="117" cy="148" r="4" fill="#8b5cf6"/>
+  <path d="M109 158 Q117 154 125 158" stroke="#8b5cf6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Divide sign between people -->
+  <rect x="87" y="149" width="6" height="2.5" rx="1.25" fill="#c4b5fd"/>
+  <circle cx="90" cy="145" r="1.75" fill="#c4b5fd"/>
+  <circle cx="90" cy="157" r="1.75" fill="#c4b5fd"/>
+</svg>
