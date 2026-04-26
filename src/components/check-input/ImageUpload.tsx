@@ -122,11 +122,12 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
 
     const file = e.dataTransfer.files[0];
     if (!file) return;
-    if (!hasWatchedAd) {
+    // TODO - Temporal change skip ad gate for review
+    /* if (!hasWatchedAd) {
       setPendingFile(file);
       setShowAdGate(true);
       return;
-    }
+    } */
     handleFile(file);
   };
 
@@ -138,11 +139,12 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
   };
 
   const handleClick = () => {
-    if (!hasWatchedAd) {
+    // TODO - Temporal change skip ad gate for review
+    /* if (!hasWatchedAd) {
       setPendingFile(null);
       setShowAdGate(true);
       return;
-    }
+    } */
     fileInputRef.current?.click();
   };
 
