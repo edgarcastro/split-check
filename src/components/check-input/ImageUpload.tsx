@@ -25,7 +25,7 @@ export function ImageUpload({onProcessComplete}: ImageUploadProps) {
   const [ocrError, setOcrError] = useState<OCRError | null>(null);
   const [lastFile, setLastFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [hasWatchedAd, setHasWatchedAd] = useState(false);
+  const [, setHasWatchedAd] = useState(false);
   const [showAdGate, setShowAdGate] = useState(false);
   const [pendingFile, setPendingFile] = useState<File | null>(null);
 
